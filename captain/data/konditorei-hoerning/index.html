@@ -508,6 +508,10 @@
       aspect-ratio: 1 / 1;
       cursor: pointer;
     }
+    .gallery-item--wide {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
     .gallery-item img {
       background: var(--s-2);
     }
@@ -1191,6 +1195,7 @@
       /* Gallery */
       .gallery-head { flex-direction: column; align-items: flex-start; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item--wide { grid-column: span 2; aspect-ratio: 2 / 1; }
 
       /* Reviews */
       .reviews-top { grid-template-columns: 1fr; gap: 24px; }
@@ -1211,6 +1216,7 @@
 
       /* Gallery: 2 columns on mobile */
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item--wide { grid-column: span 1; aspect-ratio: 1 / 1; }
 
       /* About metrics: 2 columns */
       .about-metrics { grid-template-columns: 1fr 1fr; }
@@ -1487,125 +1493,93 @@
       <p class="gallery-count r d1">24 Einblicke</p>
     </div>
     <div class="gallery-grid" id="gallery-grid">
-      <!-- 1 — TALL -->
-      <div class="gallery-item r" data-image="images/galerie-01.jpg">
+      <!-- Reihe 1: wide + portrait -->
+      <div class="gallery-item gallery-item--wide r" data-image="images/galerie-01.jpg">
         <img class="gallery-item-img" src="images/galerie-01.jpg" alt="Theke" loading="lazy" />
         <span class="gallery-caption">Theke</span>
       </div>
-      <!-- 2 -->
       <div class="gallery-item r d1" data-image="images/galerie-02.jpg">
         <img class="gallery-item-img" src="images/galerie-02.jpg" alt="Marzipan" loading="lazy" />
         <span class="gallery-caption">Marzipan</span>
       </div>
-      <!-- 3 -->
+      <!-- Reihe 2: 3 portrait -->
       <div class="gallery-item r d2" data-image="images/galerie-03.jpg">
         <img class="gallery-item-img" src="images/galerie-03.jpg" alt="Eis" loading="lazy" />
         <span class="gallery-caption">Eis</span>
       </div>
-      <!-- 4 -->
       <div class="gallery-item r d1" data-image="images/galerie-04.jpg">
         <img class="gallery-item-img" src="images/galerie-04.jpg" alt="Eistorten" loading="lazy" />
         <span class="gallery-caption">Eistorten</span>
       </div>
-      <!-- 5 -->
       <div class="gallery-item r d2" data-image="images/galerie-05.jpg">
         <img class="gallery-item-img" src="images/galerie-05.jpg" alt="Eistorten Auswahl" loading="lazy" />
         <span class="gallery-caption">Eistorten Auswahl</span>
       </div>
-      <!-- 6 -->
+      <!-- Reihe 3: portrait + wide -->
       <div class="gallery-item r d1" data-image="images/galerie-06.jpg">
         <img class="gallery-item-img" src="images/galerie-06.jpg" alt="Gebäckpakete" loading="lazy" />
         <span class="gallery-caption">Gebäckpakete</span>
       </div>
-      <!-- 7 — BREIT HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-07.jpg">
-        <img class="gallery-item-img" src="images/galerie-07.jpg" alt="Creme­torten" loading="lazy" />
-        <span class="gallery-caption">Cremetorten</span>
-      </div>
-      <!-- 8 HIDDEN -->
-      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-08.jpg">
+      <div class="gallery-item gallery-item--wide r d2" data-image="images/galerie-08.jpg">
         <img class="gallery-item-img" src="images/galerie-08.jpg" alt="Gebäck" loading="lazy" />
         <span class="gallery-caption">Gebäck</span>
       </div>
-      <!-- 9 HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-09.jpg">
-        <img class="gallery-item-img" src="images/galerie-09.jpg" alt="Blätterteig" loading="lazy" />
-        <span class="gallery-caption">Blätterteig</span>
+      <!-- Reihe 4: 3 portrait — HIDDEN -->
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-07.jpg">
+        <img class="gallery-item-img" src="images/galerie-07.jpg" alt="Cremetorten" loading="lazy" />
+        <span class="gallery-caption">Cremetorten</span>
       </div>
-      <!-- 10 HIDDEN -->
-      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-10.jpg">
-        <img class="gallery-item-img" src="images/galerie-10.jpg" alt="Plätzchen" loading="lazy" />
-        <span class="gallery-caption">Plätzchen</span>
-      </div>
-      <!-- 11 — BREIT HIDDEN -->
       <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-11.jpg">
         <img class="gallery-item-img" src="images/galerie-11.jpg" alt="Tortenauslage" loading="lazy" />
         <span class="gallery-caption">Tortenauslage</span>
       </div>
-      <!-- 12 — TALL HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-12.jpg">
-        <img class="gallery-item-img" src="images/galerie-12.jpg" alt="Baiser" loading="lazy" />
-        <span class="gallery-caption">Baiser</span>
-      </div>
-      <!-- 13 HIDDEN -->
-      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-13.jpg">
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-13.jpg">
         <img class="gallery-item-img" src="images/galerie-13.jpg" alt="Tortenauswahl" loading="lazy" />
         <span class="gallery-caption">Tortenauswahl</span>
       </div>
-      <!-- 14 HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-14.jpg">
-        <img class="gallery-item-img" src="images/galerie-14.jpg" alt="Klassische Torten" loading="lazy" />
-        <span class="gallery-caption">Klassische Torten</span>
+      <!-- Reihe 5: wide + portrait — HIDDEN -->
+      <div class="gallery-item gallery-item--wide r d1 gallery-hidden" data-image="images/galerie-09.jpg">
+        <img class="gallery-item-img" src="images/galerie-09.jpg" alt="Blätterteig" loading="lazy" />
+        <span class="gallery-caption">Blätterteig</span>
       </div>
-      <!-- 15 — HIDDEN (Mehr anzeigen) -->
-      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-15.jpg">
-        <img class="gallery-item-img" src="images/galerie-15.jpg" alt="Hochzeitstorte" loading="lazy" />
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-16.jpeg">
+        <img class="gallery-item-img" src="images/galerie-16.jpeg" alt="Hochzeitstorte" loading="lazy" />
         <span class="gallery-caption">Hochzeitstorte</span>
       </div>
-      <!-- 16 — HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-19.jpeg">
-        <img class="gallery-item-img" src="images/galerie-19.jpeg" alt="Hochzeitstorte" loading="lazy" />
-        <span class="gallery-caption">Hochzeitstorte</span>
+      <!-- Reihe 6: 3 portrait — HIDDEN -->
+      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-19.jpeg">
+        <img class="gallery-item-img" src="images/galerie-19.jpeg" alt="Geburtstagstorte" loading="lazy" />
+        <span class="gallery-caption">Geburtstagstorte</span>
       </div>
-      <!-- 17 — HIDDEN -->
       <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-20.jpeg">
         <img class="gallery-item-img" src="images/galerie-20.jpeg" alt="Geburtstagstorte" loading="lazy" />
         <span class="gallery-caption">Geburtstagstorte</span>
       </div>
-      <!-- 18 — HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-18.jpg">
-        <img class="gallery-item-img" src="images/galerie-18.jpg" alt="Geburtstagstorte" loading="lazy" />
-        <span class="gallery-caption">Geburtstagstorte</span>
-      </div>
-      <!-- 19 -->
-      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-22.jpeg">
-        <img class="gallery-item-img" src="images/galerie-22.jpeg" alt="Designtorte" loading="lazy" />
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-21.jpeg">
+        <img class="gallery-item-img" src="images/galerie-21.jpeg" alt="Designtorte" loading="lazy" />
         <span class="gallery-caption">Designtorte</span>
       </div>
-      <!-- 20 — BREIT -->
-      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-23.jpeg">
-        <img class="gallery-item-img" src="images/galerie-23.jpeg" alt="Kunsttorte" loading="lazy" />
+      <!-- Reihe 7: portrait + wide — HIDDEN -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-22.jpeg">
+        <img class="gallery-item-img" src="images/galerie-22.jpeg" alt="Kunsttorte" loading="lazy" />
         <span class="gallery-caption">Kunsttorte</span>
       </div>
-      <!-- 21 -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-24.jpeg">
-        <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Schokoladentorte" loading="lazy" />
+      <div class="gallery-item gallery-item--wide r d2 gallery-hidden" data-image="images/galerie-12.jpg">
+        <img class="gallery-item-img" src="images/galerie-12.jpg" alt="Baiser" loading="lazy" />
+        <span class="gallery-caption">Baiser</span>
+      </div>
+      <!-- Reihe 8: 3 portrait — HIDDEN -->
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-23.jpeg">
+        <img class="gallery-item-img" src="images/galerie-23.jpeg" alt="Schokoladentorte" loading="lazy" />
         <span class="gallery-caption">Schokoladentorte</span>
       </div>
-      <!-- 22 — HIDDEN -->
-      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-25.jpeg">
-        <img class="gallery-item-img" src="images/galerie-25.jpeg" alt="Obsttorte" loading="lazy" />
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-24.jpeg">
+        <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Obsttorte" loading="lazy" />
         <span class="gallery-caption">Obsttorte</span>
       </div>
-      <!-- 23 — HIDDEN -->
-      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-26.jpeg">
+      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-26.jpeg">
         <img class="gallery-item-img" src="images/galerie-26.jpeg" alt="Törtchen" loading="lazy" />
         <span class="gallery-caption">Törtchen</span>
-      </div>
-      <!-- 24 — HIDDEN -->
-      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-27.jpeg">
-        <img class="gallery-item-img" src="images/galerie-27.jpeg" alt="Petit Fours" loading="lazy" />
-        <span class="gallery-caption">Petit Fours</span>
       </div>
     </div>
     <div class="gallery-show-more">
