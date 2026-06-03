@@ -544,6 +544,18 @@
     .gallery-hidden.visible {
       display: block;
     }
+    .gallery-grid.expanded {
+      grid-template-columns: 2fr 2fr 2fr;
+      grid-auto-rows: 240px;
+    }
+    .gallery-grid.expanded .gallery-item:nth-child(1),
+    .gallery-grid.expanded .gallery-item:nth-child(12) {
+      grid-row: auto;
+    }
+    .gallery-grid.expanded .gallery-item:nth-child(7),
+    .gallery-grid.expanded .gallery-item:nth-child(11) {
+      grid-column: auto;
+    }
     .gallery-show-more {
       grid-column: 1 / -1;
       padding: 20px;
@@ -1618,6 +1630,7 @@
     <div class="gallery-show-more">
       <button class="gallery-btn" onclick="toggleGallery()">Mehr Torten anzeigen</button>
     </div>
+    <div style="height: 20px;"></div>
   </div>
 </section>
 
@@ -2084,6 +2097,7 @@
 
     function toggleGallery() {
       galleryExpanded = !galleryExpanded;
+      galleryGrid.classList.toggle('expanded');
       document.querySelectorAll('.gallery-hidden').forEach(item => {
         item.classList.toggle('visible');
       });
