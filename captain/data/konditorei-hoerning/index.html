@@ -508,11 +508,14 @@
     .gallery-item {
       overflow: hidden;
       position: relative;
-      background: var(--s-2);
+      background: transparent;
       display: flex;
       flex-direction: column;
       height: 240px;
       cursor: pointer;
+    }
+    .gallery-item img {
+      background: var(--s-2);
     }
     .gallery-item:nth-child(1)  { grid-row: span 2; height: 488px; }     /* tall, linke breite Spalte */
     .gallery-item:nth-child(7)  { grid-column: span 2; }  /* breit */
