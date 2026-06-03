@@ -2069,9 +2069,11 @@
     });
 
     function openLightbox() {
-      const item = galleryItems[currentIndex];
+      const allItems = getAllGalleryItems();
+      const item = allItems[currentIndex];
       const src = item.getAttribute('data-image');
       lightboxImg.src = src;
+      lightboxImg.style.display = 'block';
       lightbox.classList.add('active');
       updateCounter();
       document.body.style.overflow = 'hidden';
