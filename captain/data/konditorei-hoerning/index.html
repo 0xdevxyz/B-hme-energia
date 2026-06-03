@@ -517,10 +517,42 @@
     .gallery-item img {
       background: var(--s-2);
     }
-    .gallery-item:nth-child(1)  { grid-row: span 2; height: 488px; }     /* tall, linke breite Spalte */
-    .gallery-item:nth-child(7)  { grid-column: span 2; }  /* breit */
-    .gallery-item:nth-child(11) { grid-column: span 2; }  /* breit */
-    .gallery-item:nth-child(12) { grid-row: span 2; height: 488px; }     /* tall, rechte Spalte */
+    /* HOCHKANT Bilder: doppelt so hoch */
+    .gallery-item[data-image*="galerie-02"],
+    .gallery-item[data-image*="galerie-03"],
+    .gallery-item[data-image*="galerie-04"],
+    .gallery-item[data-image*="galerie-05"],
+    .gallery-item[data-image*="galerie-06"],
+    .gallery-item[data-image*="galerie-07"],
+    .gallery-item[data-image*="galerie-11"],
+    .gallery-item[data-image*="galerie-13"],
+    .gallery-item[data-image*="galerie-15"],
+    .gallery-item[data-image*="galerie-16"],
+    .gallery-item[data-image*="galerie-17"],
+    .gallery-item[data-image*="galerie-18"],
+    .gallery-item[data-image*="galerie-19"],
+    .gallery-item[data-image*="galerie-20"],
+    .gallery-item[data-image*="galerie-21"],
+    .gallery-item[data-image*="galerie-22"],
+    .gallery-item[data-image*="galerie-23"],
+    .gallery-item[data-image*="galerie-24"],
+    .gallery-item[data-image*="galerie-26"],
+    .gallery-item[data-image*="galerie-27"],
+    .gallery-item[data-image*="galerie-28"],
+    .gallery-item[data-image*="galerie-29"],
+    .gallery-item[data-image*="galerie-30"],
+    .gallery-item[data-image*="galerie-32"],
+    .gallery-item[data-image*="galerie-33"],
+    .gallery-item[data-image*="galerie-35"],
+    .gallery-item[data-image*="galerie-36"],
+    .gallery-item[data-image*="galerie-37"],
+    .gallery-item[data-image*="galerie-38"],
+    .gallery-item[data-image*="galerie-39"],
+    .gallery-item[data-image*="galerie-41"],
+    .gallery-item[data-image*="galerie-42"] {
+      grid-row: span 2;
+      height: 488px;
+    }
     .gallery-item-img {
       width: 100%;
       height: 100%;
