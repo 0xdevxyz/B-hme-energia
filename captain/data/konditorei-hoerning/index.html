@@ -498,26 +498,123 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: 3fr 2fr 2fr;
-      grid-auto-rows: 260px;
+      grid-auto-rows: auto;
       grid-auto-flow: row dense;
       gap: 8px;
+    }
+    .gallery-grid .gallery-item img {
+      height: 240px;
     }
     .gallery-item {
       overflow: hidden;
       position: relative;
       background: var(--s-2);
+      display: flex;
+      flex-direction: column;
     }
     .gallery-item:nth-child(1)  { grid-row: span 2; }     /* tall, linke breite Spalte */
     .gallery-item:nth-child(7)  { grid-column: span 2; }  /* breit */
     .gallery-item:nth-child(11) { grid-column: span 2; }  /* breit */
     .gallery-item:nth-child(12) { grid-row: span 2; }     /* tall, rechte Spalte */
-    .gallery-item img {
-      width: 100%; height: 100%;
+    .gallery-item {
+      cursor: pointer;
+    }
+    .gallery-item-img {
+      width: 100%;
+      flex: 1;
       object-fit: cover;
       transition: transform 0.65s var(--ease);
       will-change: transform;
     }
-    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item:hover .gallery-item-img { transform: scale(1.06); }
+    .gallery-item-label {
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--t);
+      background: var(--s-1);
+      border-top: 1px solid var(--b);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* ── LIGHTBOX MODAL ──────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(18, 18, 18, 0.95);
+      z-index: 9000;
+      backdrop-filter: blur(3px);
+    }
+    .lightbox.active { display: flex; }
+    .lightbox {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-nav:hover { background: rgba(255, 255, 255, 0.2); }
+    .lightbox-nav.prev { left: 20px; }
+    .lightbox-nav.next { right: 20px; }
+    .lightbox-info {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
 
     /* ── BEWERTUNGEN ─────────────────────────────────────────── */
     #reviews { background: var(--s-0); }
@@ -1048,7 +1145,10 @@
       .gallery-head { flex-direction: column; align-items: flex-start; }
       .gallery-grid {
         grid-template-columns: 1fr 1fr;
-        grid-auto-rows: 220px;
+        grid-auto-rows: auto;
+      }
+      .gallery-grid .gallery-item img {
+        height: 200px;
       }
       .gallery-item:nth-child(1),
       .gallery-item:nth-child(12) { grid-row: auto; }
@@ -1362,94 +1462,116 @@
       </div>
       <p class="gallery-count r d1">14 Einblicke</p>
     </div>
-    <div class="gallery-grid">
-      <!-- 1 — TALL (linke breite Spalte, 2 Reihen) -->
-      <div class="gallery-item r">
-        <img src="images/galerie-01.jpg" alt="Theke der Konditorei Hörning von außen" loading="lazy" />
+    <div class="gallery-grid" id="gallery">
+      <!-- 1 — TALL -->
+      <div class="gallery-item r" data-image="images/galerie-01.jpg">
+        <img class="gallery-item-img" src="images/galerie-01.jpg" alt="Theke" loading="lazy" />
+        <div class="gallery-item-label">Schaufenster</div>
       </div>
       <!-- 2 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-02.jpg" alt="Marzipanfiguren und Herzwaffel als Mitbringsel" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-02.jpg">
+        <img class="gallery-item-img" src="images/galerie-02.jpg" alt="Marzipan" loading="lazy" />
+        <div class="gallery-item-label">Marzipanfiguren</div>
       </div>
       <!-- 3 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-03.jpg" alt="Eisbecher in vielen Geschmacksrichtungen" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-03.jpg">
+        <img class="gallery-item-img" src="images/galerie-03.jpg" alt="Eis" loading="lazy" />
+        <div class="gallery-item-label">Saisonales Eis</div>
       </div>
       <!-- 4 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-04.jpg" alt="Handgefertigte Eistorten im Kühlregal" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-04.jpg">
+        <img class="gallery-item-img" src="images/galerie-04.jpg" alt="Eistorten" loading="lazy" />
+        <div class="gallery-item-label">Eistorten</div>
       </div>
       <!-- 5 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-05.jpg" alt="Eistorten verschiedener Sorten im Regal" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-05.jpg">
+        <img class="gallery-item-img" src="images/galerie-05.jpg" alt="Eistorten Auswahl" loading="lazy" />
+        <div class="gallery-item-label">Eisauswahl</div>
       </div>
       <!-- 6 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-06.jpg" alt="Feine Gebäckpakete mit Visitenkarte der Konditorei" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-06.jpg">
+        <img class="gallery-item-img" src="images/galerie-06.jpg" alt="Gebäckpakete" loading="lazy" />
+        <div class="gallery-item-label">Gebäckpakete</div>
       </div>
-      <!-- 7 — BREIT (2 Spalten) -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-07.jpg" alt="Sachertorte und Cremetorten in der Vitrine" loading="lazy" />
+      <!-- 7 — BREIT -->
+      <div class="gallery-item r d2" data-image="images/galerie-07.jpg">
+        <img class="gallery-item-img" src="images/galerie-07.jpg" alt="Creme­torten" loading="lazy" />
+        <div class="gallery-item-label">Handwerkliche Torten</div>
       </div>
       <!-- 8 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-08.jpg" alt="Handgemachtes Gebäck in Cellophanverpackung" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-08.jpg">
+        <img class="gallery-item-img" src="images/galerie-08.jpg" alt="Gebäck" loading="lazy" />
+        <div class="gallery-item-label">Frisches Gebäck</div>
       </div>
       <!-- 9 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-09.jpg" alt="Schweinsohrn und Palmblätter aus Blätterteig" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-09.jpg">
+        <img class="gallery-item-img" src="images/galerie-09.jpg" alt="Blätterteig" loading="lazy" />
+        <div class="gallery-item-label">Blätterteigspezialitäten</div>
       </div>
       <!-- 10 -->
-      <div class="gallery-item r d3">
-        <img src="images/galerie-10.jpg" alt="Florentiner und Mandelplätzchen in der Auslage" loading="lazy" />
+      <div class="gallery-item r d3" data-image="images/galerie-10.jpg">
+        <img class="gallery-item-img" src="images/galerie-10.jpg" alt="Plätzchen" loading="lazy" />
+        <div class="gallery-item-label">Feines Gebäck</div>
       </div>
-      <!-- 11 — BREIT (2 Spalten) -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-11.jpg" alt="Die volle Tortenauslage der Konditorei Hörning" loading="lazy" />
+      <!-- 11 — BREIT -->
+      <div class="gallery-item r d1" data-image="images/galerie-11.jpg">
+        <img class="gallery-item-img" src="images/galerie-11.jpg" alt="Tortenauslage" loading="lazy" />
+        <div class="gallery-item-label">Tortenvielfalt</div>
       </div>
-      <!-- 12 — TALL (rechte Spalte, 2 Reihen) -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-12.jpg" alt="Baiser-Gebäck frisch aus der Konditorei" loading="lazy" />
+      <!-- 12 — TALL -->
+      <div class="gallery-item r d2" data-image="images/galerie-12.jpg">
+        <img class="gallery-item-img" src="images/galerie-12.jpg" alt="Baiser" loading="lazy" />
+        <div class="gallery-item-label">Baiser-Spezialitäten</div>
       </div>
       <!-- 13 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-13.jpg" alt="Torten- und Gebäckauswahl hinter Glas" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-13.jpg">
+        <img class="gallery-item-img" src="images/galerie-13.jpg" alt="Tortenauswahl" loading="lazy" />
+        <div class="gallery-item-label">Tortenauswahl</div>
       </div>
       <!-- 14 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-14.jpg" alt="Schwarzwälder Kirschtorte und Quarksahnetorte in der Auslage" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-14.jpg">
+        <img class="gallery-item-img" src="images/galerie-14.jpg" alt="Klassische Torten" loading="lazy" />
+        <div class="gallery-item-label">Klassische Torten</div>
       </div>
-      <!-- 15 — Neue Torte -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-18.jpeg" alt="Handwerklich gefertigte Torte" loading="lazy" />
+      <!-- 15 -->
+      <div class="gallery-item r d1" data-image="images/galerie-18.jpeg">
+        <img class="gallery-item-img" src="images/galerie-18.jpeg" alt="Tortenkreation" loading="lazy" />
+        <div class="gallery-item-label">Premium-Torte</div>
       </div>
       <!-- 16 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-19.jpeg" alt="Elegante Hochzeitstorte" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-19.jpeg">
+        <img class="gallery-item-img" src="images/galerie-19.jpeg" alt="Hochzeitstorte" loading="lazy" />
+        <div class="gallery-item-label">Hochzeitstorten</div>
       </div>
       <!-- 17 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-20.jpeg" alt="Bunte Geburtstagstorte" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-20.jpeg">
+        <img class="gallery-item-img" src="images/galerie-20.jpeg" alt="Geburtstagstorte" loading="lazy" />
+        <div class="gallery-item-label">Geburtstagstorten</div>
       </div>
       <!-- 18 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-21.jpeg" alt="Moderne Firmeneventtorte" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-21.jpeg">
+        <img class="gallery-item-img" src="images/galerie-21.jpeg" alt="Eventorte" loading="lazy" />
+        <div class="gallery-item-label">Firmen­torten</div>
       </div>
       <!-- 19 -->
-      <div class="gallery-item r d3">
-        <img src="images/galerie-22.jpeg" alt="Exquisite Tortenkreation" loading="lazy" />
+      <div class="gallery-item r d3" data-image="images/galerie-22.jpeg">
+        <img class="gallery-item-img" src="images/galerie-22.jpeg" alt="Design­torte" loading="lazy" />
+        <div class="gallery-item-label">Designer-Torte</div>
       </div>
-      <!-- 20 — BREIT (2 Spalten) -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-23.jpeg" alt="Künstlerisch gestaltete Torte" loading="lazy" />
+      <!-- 20 — BREIT -->
+      <div class="gallery-item r d1" data-image="images/galerie-23.jpeg">
+        <img class="gallery-item-img" src="images/galerie-23.jpeg" alt="Kunsttorte" loading="lazy" />
+        <div class="gallery-item-label">Kunstvolles Design</div>
       </div>
       <!-- 21 -->
-      <div class="gallery-item r d2">
-        <img src="images/galerie-24.jpeg" alt="Raffinierte Schokoladentorte" loading="lazy" />
+      <div class="gallery-item r d2" data-image="images/galerie-24.jpeg">
+        <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Schokoladen­torte" loading="lazy" />
+        <div class="gallery-item-label">Schokoladentorte</div>
       </div>
       <!-- 22 -->
-      <div class="gallery-item r d1">
-        <img src="images/galerie-25.jpeg" alt="Frische Obsttorte" loading="lazy" />
+      <div class="gallery-item r d1" data-image="images/galerie-25.jpeg">
+        <img class="gallery-item-img" src="images/galerie-25.jpeg" alt="Obsttorte" loading="lazy" />
+        <div class="gallery-item-label">Frische Obsttorte</div>
       </div>
     </div>
   </div>
@@ -1897,5 +2019,69 @@
     }
   });
 </script>
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-content">
+      <button class="lightbox-nav prev" onclick="prevImage()">‹</button>
+      <img id="lightbox-img" src="" alt="" />
+      <button class="lightbox-nav next" onclick="nextImage()">›</button>
+    </div>
+    <div class="lightbox-info"><span id="lightbox-counter"></span></div>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const galleryItems = document.querySelectorAll('#gallery .gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const counter = document.getElementById('lightbox-counter');
+
+    galleryItems.forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        currentIndex = idx;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      const item = galleryItems[currentIndex];
+      const src = item.getAttribute('data-image');
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+      updateCounter();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      openLightbox();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      openLightbox();
+    }
+
+    function updateCounter() {
+      counter.textContent = (currentIndex + 1) + ' / ' + galleryItems.length;
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </body>
 </html>
