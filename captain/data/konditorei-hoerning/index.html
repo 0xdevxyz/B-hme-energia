@@ -477,6 +477,7 @@
 
     /* ── GALERIE ─────────────────────────────────────────────── */
     #gallery { background: var(--s-1); }
+    .gallery-grid { background: var(--s-1); }
     .gallery-head {
       display: flex;
       justify-content: space-between;
@@ -494,18 +495,17 @@
       text-align: right;
     }
 
-    /* Sauberes 2-Spalten Bento Grid */
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
     .gallery-item {
       overflow: hidden;
       position: relative;
-      background: transparent;
+      background: var(--s-2);
       display: block;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1 / 1;
       cursor: pointer;
     }
     .gallery-item img {
@@ -1190,7 +1190,7 @@
 
       /* Gallery */
       .gallery-head { flex-direction: column; align-items: flex-start; }
-      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 
       /* Reviews */
       .reviews-top { grid-template-columns: 1fr; gap: 24px; }
@@ -1209,8 +1209,8 @@
       .spec-bento { grid-template-columns: 1fr 1fr; }
       .spec-card--hero { min-height: 240px; }
 
-      /* Gallery: single column */
-      .gallery-grid { grid-template-columns: 1fr; }
+      /* Gallery: 2 columns on mobile */
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 
       /* About metrics: 2 columns */
       .about-metrics { grid-template-columns: 1fr 1fr; }
@@ -1486,7 +1486,7 @@
       </div>
       <p class="gallery-count r d1">22 Einblicke</p>
     </div>
-    <div class="gallery-grid" id="gallery">
+    <div class="gallery-grid" id="gallery-grid">
       <!-- 1 — TALL -->
       <div class="gallery-item r" data-image="images/galerie-01.jpg">
         <img class="gallery-item-img" src="images/galerie-01.jpg" alt="Theke" loading="lazy" />
@@ -1578,17 +1578,17 @@
         <span class="gallery-caption">Geburtstagstorte</span>
       </div>
       <!-- 19 -->
-      <div class="gallery-item r d3" data-image="images/galerie-22.jpeg">
+      <div class="gallery-item r d3 gallery-hidden" data-image="images/galerie-22.jpeg">
         <img class="gallery-item-img" src="images/galerie-22.jpeg" alt="Designtorte" loading="lazy" />
         <span class="gallery-caption">Designtorte</span>
       </div>
       <!-- 20 — BREIT -->
-      <div class="gallery-item r d1" data-image="images/galerie-23.jpeg">
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-23.jpeg">
         <img class="gallery-item-img" src="images/galerie-23.jpeg" alt="Kunsttorte" loading="lazy" />
         <span class="gallery-caption">Kunsttorte</span>
       </div>
       <!-- 21 -->
-      <div class="gallery-item r d2" data-image="images/galerie-24.jpeg">
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-24.jpeg">
         <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Schokoladentorte" loading="lazy" />
         <span class="gallery-caption">Schokoladentorte</span>
       </div>
@@ -1599,7 +1599,7 @@
       </div>
     </div>
     <div class="gallery-show-more">
-      <button class="btn btn--dark" onclick="toggleGallery()">Mehr Torten anzeigen</button>
+      <button class="btn btn--dark gallery-btn" onclick="toggleGallery()">Mehr Torten anzeigen</button>
     </div>
     <div style="height: 20px;"></div>
   </div>
@@ -2059,78 +2059,78 @@
   </div>
 
   <script>
-    let currentIndex = 0;
-    let galleryExpanded = false;
-    const galleryGrid = document.getElementById('gallery');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const counter = document.getElementById('lightbox-counter');
-
-    function toggleGallery() {
-      galleryExpanded = !galleryExpanded;
-      galleryGrid.classList.toggle('expanded');
-      document.querySelectorAll('.gallery-hidden').forEach(item => {
-        item.classList.toggle('visible');
-      });
-      document.querySelector('.gallery-btn').textContent = galleryExpanded ? 'Weniger anzeigen' : 'Mehr Torten anzeigen';
-    }
-
-    function getAllGalleryItems() {
-      return Array.from(document.querySelectorAll('#gallery .gallery-item'));
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('#gallery .gallery-item').forEach((item, idx) => {
+      let currentIndex = 0;
+      let galleryExpanded = false;
+      const galleryGrid = document.getElementById('gallery-grid');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+
+      function getAllGalleryItems() {
+        return Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
+      }
+
+      window.toggleGallery = function() {
+        galleryExpanded = !galleryExpanded;
+        galleryGrid.classList.toggle('expanded');
+        document.querySelectorAll('.gallery-hidden').forEach(item => {
+          item.classList.toggle('visible');
+        });
+        document.querySelector('.gallery-btn').textContent = galleryExpanded ? 'Weniger anzeigen' : 'Mehr Torten anzeigen';
+      };
+
+      document.querySelectorAll('#gallery-grid .gallery-item').forEach((item) => {
         item.addEventListener('click', () => {
           const allItems = getAllGalleryItems();
           currentIndex = allItems.indexOf(item);
           openLightbox();
         });
       });
-    });
 
-    function openLightbox() {
-      const allItems = getAllGalleryItems();
-      const item = allItems[currentIndex];
-      const src = item.getAttribute('data-image');
-      lightboxImg.src = src;
-      lightboxImg.style.display = 'block';
-      lightbox.classList.add('active');
-      updateCounter();
-      document.body.style.overflow = 'hidden';
-    }
+      function openLightbox() {
+        const allItems = getAllGalleryItems();
+        const item = allItems[currentIndex];
+        const src = item.getAttribute('data-image');
+        lightboxImg.src = src;
+        lightboxImg.style.display = 'block';
+        lightbox.classList.add('active');
+        updateCounter();
+        document.body.style.overflow = 'hidden';
+      }
 
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+      window.closeLightbox = function() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      };
 
-    function nextImage() {
-      const allItems = getAllGalleryItems();
-      currentIndex = (currentIndex + 1) % allItems.length;
-      openLightbox();
-    }
+      window.nextImage = function() {
+        const allItems = getAllGalleryItems();
+        currentIndex = (currentIndex + 1) % allItems.length;
+        openLightbox();
+      };
 
-    function prevImage() {
-      const allItems = getAllGalleryItems();
-      currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
-      openLightbox();
-    }
+      window.prevImage = function() {
+        const allItems = getAllGalleryItems();
+        currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+        openLightbox();
+      };
 
-    function updateCounter() {
-      const allItems = getAllGalleryItems();
-      counter.textContent = (currentIndex + 1) + ' / ' + allItems.length;
-    }
+      function updateCounter() {
+        const allItems = getAllGalleryItems();
+        counter.textContent = (currentIndex + 1) + ' / ' + allItems.length;
+      }
 
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
 
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
-      if (e.key === 'Escape') closeLightbox();
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape') closeLightbox();
+      });
     });
   </script>
 </body>
