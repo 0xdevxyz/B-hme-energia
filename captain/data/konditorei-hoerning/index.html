@@ -538,6 +538,32 @@
       white-space: nowrap;
       overflow: hidden;
     }
+    .gallery-hidden {
+      display: none;
+    }
+    .gallery-hidden.visible {
+      display: block;
+    }
+    .gallery-show-more {
+      grid-column: 1 / -1;
+      padding: 20px;
+      text-align: center;
+    }
+    .gallery-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--a);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .gallery-btn:hover {
+      background: var(--a-2);
+    }
 
     /* ── LIGHTBOX MODAL ──────────────────────────────────────── */
     .lightbox {
@@ -1384,7 +1410,7 @@
       <!-- Grosse Featured Card: Hochzeitstorten -->
       <div class="spec-card spec-card--hero r">
         <img class="spec-bg"
-          src="images/galerie-19.jpeg"
+          src="images/galerie-26.jpeg"
           alt="" loading="lazy" aria-hidden="true"
         />
         <div class="spec-content">
@@ -1399,7 +1425,7 @@
 
       <!-- Kleine Card: Geburtstagstorten -->
       <div class="spec-card r d1">
-        <img class="spec-bg" src="images/galerie-20.jpeg" alt="" loading="lazy" aria-hidden="true" />
+        <img class="spec-bg" src="images/galerie-27.jpeg" alt="" loading="lazy" aria-hidden="true" />
         <div class="spec-content">
           <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -1412,7 +1438,7 @@
 
       <!-- Kleine Card: Firmen- & Eventtorten -->
       <div class="spec-card r d2">
-        <img class="spec-bg" src="images/galerie-21.jpeg" alt="" loading="lazy" aria-hidden="true" />
+        <img class="spec-bg" src="images/galerie-28.jpeg" alt="" loading="lazy" aria-hidden="true" />
         <div class="spec-content">
           <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
@@ -1425,7 +1451,7 @@
 
       <!-- Kleine Card: Bunte Teller & Gebäck -->
       <div class="spec-card r d3">
-        <img class="spec-bg" src="images/galerie-22.jpeg" alt="" loading="lazy" aria-hidden="true" />
+        <img class="spec-bg" src="images/galerie-29.jpeg" alt="" loading="lazy" aria-hidden="true" />
         <div class="spec-content">
           <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="3"/><path d="M2 20c0-4 3.6-7 8-7h4c4.4 0 8 3 8 7"/><path d="M6 13c-1.5 1-2 2.5-2 4"/><path d="M18 13c1.5 1 2 2.5 2 4"/>
@@ -1437,7 +1463,7 @@
 
       <!-- Kleine Card: Saisonales Eis -->
       <div class="spec-card r d4">
-        <img class="spec-bg" src="images/galerie-23.jpeg" alt="" loading="lazy" aria-hidden="true" />
+        <img class="spec-bg" src="images/galerie-30.jpeg" alt="" loading="lazy" aria-hidden="true" />
         <div class="spec-content">
           <svg class="spec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -1533,25 +1559,25 @@
         <img class="gallery-item-img" src="images/galerie-14.jpg" alt="Klassische Torten" loading="lazy" />
         <div class="gallery-item-label">Klassische Torten</div>
       </div>
-      <!-- 15 -->
-      <div class="gallery-item r d1" data-image="images/galerie-18.jpeg">
-        <img class="gallery-item-img" src="images/galerie-18.jpeg" alt="Tortenkreation" loading="lazy" />
-        <div class="gallery-item-label">Premium-Torte</div>
+      <!-- 15 — HIDDEN (Mehr anzeigen) -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-21.jpeg">
+        <img class="gallery-item-img" src="images/galerie-21.jpeg" alt="Eventorte" loading="lazy" />
+        <div class="gallery-item-label">Firmen­torten</div>
       </div>
-      <!-- 16 -->
-      <div class="gallery-item r d2" data-image="images/galerie-19.jpeg">
+      <!-- 16 — HIDDEN -->
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-19.jpeg">
         <img class="gallery-item-img" src="images/galerie-19.jpeg" alt="Hochzeitstorte" loading="lazy" />
         <div class="gallery-item-label">Hochzeitstorten</div>
       </div>
-      <!-- 17 -->
-      <div class="gallery-item r d1" data-image="images/galerie-20.jpeg">
+      <!-- 17 — HIDDEN -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-20.jpeg">
         <img class="gallery-item-img" src="images/galerie-20.jpeg" alt="Geburtstagstorte" loading="lazy" />
         <div class="gallery-item-label">Geburtstagstorten</div>
       </div>
-      <!-- 18 -->
-      <div class="gallery-item r d2" data-image="images/galerie-21.jpeg">
-        <img class="gallery-item-img" src="images/galerie-21.jpeg" alt="Eventorte" loading="lazy" />
-        <div class="gallery-item-label">Firmen­torten</div>
+      <!-- 18 — HIDDEN -->
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-18.jpeg">
+        <img class="gallery-item-img" src="images/galerie-18.jpeg" alt="Tortenkreation" loading="lazy" />
+        <div class="gallery-item-label">Premium-Torte</div>
       </div>
       <!-- 19 -->
       <div class="gallery-item r d3" data-image="images/galerie-22.jpeg">
@@ -1568,11 +1594,29 @@
         <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Schokoladen­torte" loading="lazy" />
         <div class="gallery-item-label">Schokoladentorte</div>
       </div>
-      <!-- 22 -->
-      <div class="gallery-item r d1" data-image="images/galerie-25.jpeg">
+      <!-- 22 — HIDDEN -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-22.jpeg">
+        <img class="gallery-item-img" src="images/galerie-22.jpeg" alt="Design­torte" loading="lazy" />
+        <div class="gallery-item-label">Designer-Torte</div>
+      </div>
+      <!-- 23 — HIDDEN -->
+      <div class="gallery-item r d2 gallery-hidden" data-image="images/galerie-23.jpeg">
+        <img class="gallery-item-img" src="images/galerie-23.jpeg" alt="Kunsttorte" loading="lazy" />
+        <div class="gallery-item-label">Kunstvolles Design</div>
+      </div>
+      <!-- 24 — HIDDEN -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-24.jpeg">
+        <img class="gallery-item-img" src="images/galerie-24.jpeg" alt="Schokoladen­torte" loading="lazy" />
+        <div class="gallery-item-label">Schokoladentorte</div>
+      </div>
+      <!-- 25 — HIDDEN -->
+      <div class="gallery-item r d1 gallery-hidden" data-image="images/galerie-25.jpeg">
         <img class="gallery-item-img" src="images/galerie-25.jpeg" alt="Obsttorte" loading="lazy" />
         <div class="gallery-item-label">Frische Obsttorte</div>
       </div>
+    </div>
+    <div class="gallery-show-more">
+      <button class="gallery-btn" onclick="toggleGallery()">Mehr Torten anzeigen</button>
     </div>
   </div>
 </section>
@@ -2032,15 +2076,31 @@
 
   <script>
     let currentIndex = 0;
-    const galleryItems = document.querySelectorAll('#gallery .gallery-item');
+    let galleryExpanded = false;
+    const galleryGrid = document.getElementById('gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const counter = document.getElementById('lightbox-counter');
 
-    galleryItems.forEach((item, idx) => {
-      item.addEventListener('click', () => {
-        currentIndex = idx;
-        openLightbox();
+    function toggleGallery() {
+      galleryExpanded = !galleryExpanded;
+      document.querySelectorAll('.gallery-hidden').forEach(item => {
+        item.classList.toggle('visible');
+      });
+      document.querySelector('.gallery-btn').textContent = galleryExpanded ? 'Weniger anzeigen' : 'Mehr Torten anzeigen';
+    }
+
+    function getAllGalleryItems() {
+      return Array.from(document.querySelectorAll('#gallery .gallery-item'));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('#gallery .gallery-item').forEach((item, idx) => {
+        item.addEventListener('click', () => {
+          const allItems = getAllGalleryItems();
+          currentIndex = allItems.indexOf(item);
+          openLightbox();
+        });
       });
     });
 
@@ -2059,17 +2119,20 @@
     }
 
     function nextImage() {
-      currentIndex = (currentIndex + 1) % galleryItems.length;
+      const allItems = getAllGalleryItems();
+      currentIndex = (currentIndex + 1) % allItems.length;
       openLightbox();
     }
 
     function prevImage() {
-      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      const allItems = getAllGalleryItems();
+      currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
       openLightbox();
     }
 
     function updateCounter() {
-      counter.textContent = (currentIndex + 1) + ' / ' + galleryItems.length;
+      const allItems = getAllGalleryItems();
+      counter.textContent = (currentIndex + 1) + ' / ' + allItems.length;
     }
 
     lightbox.addEventListener('click', (e) => {
