@@ -195,9 +195,17 @@
     }
     .nav-brand {
       display: flex;
-      flex-direction: column;
-      gap: 1px;
+      align-items: center;
       flex-shrink: 0;
+      height: 50px;
+    }
+    .nav-logo {
+      height: 50px;
+      width: auto;
+      transition: opacity 0.3s;
+    }
+    .nav-logo:hover {
+      opacity: 0.8;
     }
     .nav-brand-name {
       font-family: 'Sephora Hayden', cursive;
@@ -1245,8 +1253,7 @@
 <!-- ─── NAV ──────────────────────────────────────────────── -->
 <nav id="mainNav">
   <a href="#hero" class="nav-brand">
-    <span class="nav-brand-name">Konditorei Hörning</span>
-    <span class="nav-brand-sub">Limbach-Oberfrohna</span>
+    <img src="images/Logo_Konditorei_Hoerning.png" alt="Konditorei Hörning" class="nav-logo">
   </a>
   <ul class="nav-links">
     <li><a href="#about">Über uns</a></li>
