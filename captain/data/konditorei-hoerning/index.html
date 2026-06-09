@@ -1090,6 +1090,15 @@
       flex-wrap: wrap;
       gap: 12px;
     }
+    .footer-logo {
+      height: 35px;
+      width: auto;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .footer-logo:hover {
+      opacity: 0.9;
+    }
     .footer-name {
       font-family: 'Sephora Hayden', cursive;
       font-optical-sizing: auto;
@@ -1840,7 +1849,7 @@
 
 <!-- ─── FOOTER ─────────────────────────────────────────────── -->
 <footer>
-  <span class="footer-name">Konditorei Hörning</span>
+  <img src="images/Logo_Konditorei_Hoerning.png" alt="Konditorei Hörning" class="footer-logo">
   <span class="footer-copy">© 2025–<span id="currentYear"></span> · Albertstraße 12, 09212 Limbach-Oberfrohna</span>
   <div class="footer-legal">
     <button onclick="openLegal('impressumModal')">Impressum</button>
