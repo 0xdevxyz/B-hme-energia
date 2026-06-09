@@ -1258,7 +1258,46 @@
       .h2 { font-size: 1.8rem; }
       .review-card { width: 90vw; }
     }
+
+    /* ── GALLERY ANIMATIONS ──────────────────────────────────── */
+    .gallery-item-img {
+      opacity: 0;
+      filter: blur(8px);
+    }
+
+    .gallery-item-img.loading {
+      opacity: 0.5;
+      filter: blur(12px);
+      background: linear-gradient(90deg, var(--s-2) 0%, var(--s-1) 50%, var(--s-2) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: -200% 0; }
+      50% { background-position: 200% 0; }
+    }
+
+    .gallery-item-img.loaded {
+      opacity: 1;
+      filter: blur(0);
+      transition: opacity 0.6s var(--ease), filter 0.6s var(--ease);
+    }
+
+    .gallery-item.scroll-animated {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .gallery-item.scroll-animated.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
+
+  <!-- GSAP Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -2003,6 +2042,112 @@
         if (e.key === 'Escape') closeLightbox();
       });
     });
+  </script>
+
+  <!-- Gallery Animations with GSAP -->
+  <script>
+    // Initialize GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    const GalleryAnimations = {
+      // Initialization called on DOMContentLoaded
+      init() {
+        this.setupLoadingStates();
+        this.setupScrollTriggers();
+        this.setupStagger();
+      },
+
+      setupLoadingStates() {
+        // Add loading class to all gallery images
+        document.querySelectorAll('.gallery-item-img').forEach(img => {
+          img.classList.add('loading');
+
+          // When image loads, remove loading state
+          const handleLoad = () => {
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+          };
+
+          img.addEventListener('load', handleLoad);
+          img.addEventListener('error', handleLoad);
+
+          // Fallback for cached images already loaded
+          if (img.complete) {
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+          }
+        });
+      },
+
+      setupScrollTriggers() {
+        // Register scroll triggers for visible gallery items
+        const easeValue = 'cubic-bezier(0.23, 1, 0.32, 1)'; // Emil Kowalski ease
+
+        document.querySelectorAll('#gallery-grid .gallery-item:not(.gallery-hidden)').forEach((item, index) => {
+          gsap.from(item, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: easeValue,
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 85%',
+              end: 'top 55%',
+              scrub: false,
+              markers: false,
+              onEnter: () => item.classList.add('in-view'),
+              onLeaveBack: () => item.classList.remove('in-view'),
+            }
+          });
+        });
+      },
+
+      setupStagger() {
+        // Enhance existing toggleGallery function with stagger animation
+        const originalToggle = window.toggleGallery;
+
+        window.toggleGallery = function() {
+          // Get currently hidden items
+          const hiddenItems = document.querySelectorAll('#gallery-grid .gallery-item.gallery-hidden:not(.visible)');
+          const willExpand = hiddenItems.length > 0;
+
+          // Call original toggle
+          originalToggle.call(this);
+
+          // If we just expanded, animate new visible items with stagger
+          if (willExpand) {
+            const newVisibleItems = document.querySelectorAll('#gallery-grid .gallery-item.gallery-hidden.visible');
+
+            if (newVisibleItems.length > 0) {
+              const easeValue = 'cubic-bezier(0.23, 1, 0.32, 1)';
+
+              // Stagger entrance animation
+              gsap.from(newVisibleItems, {
+                opacity: 0,
+                y: 40,
+                duration: 0.7,
+                ease: easeValue,
+                stagger: 0.08,
+                clearProps: 'all'
+              });
+
+              // Refresh ScrollTrigger to account for new items
+              ScrollTrigger.refresh();
+            }
+          }
+        };
+      }
+    };
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        GalleryAnimations.init();
+      });
+    } else {
+      // Already loaded
+      GalleryAnimations.init();
+    }
   </script>
 </body>
 </html>
