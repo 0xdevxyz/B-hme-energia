@@ -276,14 +276,17 @@ module.exports = function generate(clientname, options = {}) {
   fs.writeFileSync(path.join(clientDir, '.env.example'), envExample, 'utf8');
   fs.writeFileSync(path.join(clientDir, 'reputation-checklist.md'), reputationChecklist, 'utf8');
 
+  // Only copy CSS if they don't exist (preserve custom CSS)
   const baseCssSrc = path.join(templatesDir, 'styles', 'base.css');
   const overlayCssSrc = path.join(templatesDir, 'styles', 'overlay.css');
+  const baseTargetPath = path.join(assetsDir, 'base.css');
+  const overlayTargetPath = path.join(assetsDir, 'overlay.css');
 
-  if (fs.existsSync(baseCssSrc)) {
-    fs.copyFileSync(baseCssSrc, path.join(assetsDir, 'base.css'));
+  if (fs.existsSync(baseCssSrc) && !fs.existsSync(baseTargetPath)) {
+    fs.copyFileSync(baseCssSrc, baseTargetPath);
   }
-  if (fs.existsSync(overlayCssSrc)) {
-    fs.copyFileSync(overlayCssSrc, path.join(assetsDir, 'overlay.css'));
+  if (fs.existsSync(overlayCssSrc) && !fs.existsSync(overlayTargetPath)) {
+    fs.copyFileSync(overlayCssSrc, overlayTargetPath);
   }
 
   return { clientDir, content, config };
