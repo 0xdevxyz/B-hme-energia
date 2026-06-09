@@ -102,19 +102,21 @@
       font-family: 'Sephora Hayden', cursive;
       font-optical-sizing: auto;
       font-weight: 300;
-      font-size: clamp(3.6rem, 8vw, 6.8rem);
-      line-height: 1.04;
-      letter-spacing: 0.01em;
+      font-size: clamp(4.2rem, 10vw, 7.8rem);
+      line-height: 1.02;
+      letter-spacing: 0.02em;
       color: var(--t);
+      font-variation-settings: "wght" 250;
     }
     .h2 {
       font-family: 'Sephora Hayden', cursive;
       font-optical-sizing: auto;
       font-weight: 300;
-      font-size: clamp(2.6rem, 5vw, 4.4rem);
-      line-height: 1.1;
-      letter-spacing: 0.01em;
+      font-size: clamp(3rem, 6vw, 5.2rem);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
       color: var(--t);
+      font-variation-settings: "wght" 250;
     }
     .h2--inv { color: var(--t-i); }
     .h2--contact {
@@ -1276,7 +1278,6 @@
   <a href="#gallery"     onclick="closeNav()">Galerie</a>
   <a href="#reviews"     onclick="closeNav()">Bewertungen</a>
   <a href="#hours"       onclick="closeNav()">Öffnungszeiten</a>
-  <a href="https://wa.me/4917672729037" target="_blank" rel="noopener" onclick="closeNav()">WhatsApp</a>
 </div>
 
 <!-- ─── HERO ──────────────────────────────────────────────── -->
@@ -1696,63 +1697,21 @@
   <div class="wrap">
     <div class="anfrage-inner">
       <div class="anfrage-head">
-        <div class="label label--inv label--center r">Kontakt</div>
-        <h2 class="h2 h2--contact r d1">Traumtorte<br><em>anfragen</em></h2>
-        <p class="contact-sub r d2">Füllen Sie das Formular aus – wir melden uns innerhalb von 24 Stunden.</p>
+        <div class="label label--inv label--center r">Bestellung</div>
+        <h2 class="h2 h2--contact r d1">Ihre Traumtorte<br><em>jetzt bestellen</em></h2>
+        <p class="contact-sub r d2">Kontaktieren Sie uns telefonisch oder besuchen Sie uns direkt in unserer Filiale.</p>
       </div>
 
-      <form id="anfrageForm" class="anfrage-form r d2" novalidate>
-        <div class="form-group form-group--full">
-          <label for="f-name">Name *</label>
-          <input type="text" id="f-name" name="name" placeholder="Ihr vollständiger Name" required />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-tel">Telefon *</label>
-            <input type="tel" id="f-tel" name="telefon" placeholder="+49 …" required />
-          </div>
-          <div class="form-group">
-            <label for="f-datum">Datum der Abholung</label>
-            <input type="date" id="f-datum" name="datum" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-anlass">Anlass *</label>
-            <select id="f-anlass" name="anlass" required>
-              <option value="" disabled selected>Bitte wählen</option>
-              <option value="Hochzeit">Hochzeit</option>
-              <option value="Geburtstag">Geburtstag</option>
-              <option value="Jubiläum">Jubiläum</option>
-              <option value="Firmenfeier">Firmenfeier</option>
-              <option value="Sonstiges">Sonstiges</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="f-budget">Ihr Budget</label>
-            <input type="text" id="f-budget" name="budget" placeholder="z. B. 150 €" />
-          </div>
-        </div>
-        <div class="form-group form-group--full">
-          <label for="f-beschreibung">Beschreibung Ihrer Traumtorte</label>
-          <textarea id="f-beschreibung" name="beschreibung" rows="4" placeholder="Farben, Thema, besondere Wünsche …"></textarea>
-        </div>
-        <div class="form-group form-group--full">
-          <label for="f-bild">Referenzbild <span class="form-optional">(optional – zeigt uns die gewünschte Richtung)</span></label>
-          <label class="file-drop" for="f-bild" id="fileDropLabel">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <span id="fileDropText">JPG oder PNG hochladen</span>
-          </label>
-          <input type="file" id="f-bild" name="bild" accept=".jpg,.jpeg,.png" class="file-input" />
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn--wa">
-            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.924 1.395 5.591L0 24l6.545-1.363A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.032-1.386l-.36-.214-3.885.809.824-3.786-.234-.376A9.818 9.818 0 1112 21.818z"/></svg>
-            Anfrage über WhatsApp senden
-          </button>
-          <p class="form-note">Sie werden zu WhatsApp weitergeleitet. Ihr Referenzbild bitte direkt in WhatsApp anhängen.</p>
-        </div>
-      </form>
+      <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: clamp(32px, 5vw, 56px); max-width: 500px; margin-left: auto; margin-right: auto;">
+        <a href="tel:+4937229256" class="btn btn--dark" style="font-size: 1rem; padding: 1rem 2rem; text-align: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Jetzt anrufen: +49 3722 92561
+        </a>
+        <a href="#hours" class="btn btn--ghost" style="font-size: 0.95rem; padding: 0.85rem 1.6rem; text-align: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Besuchen Sie uns
+        </a>
+      </div>
 
       <div class="contact-details r d4">
         <div>
@@ -1826,15 +1785,8 @@
     </ul>
     <p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse besteht in der technisch fehlerfreien Bereitstellung und Sicherheit der Website.</p>
 
-    <h3>3. Kontaktaufnahme über WhatsApp</h3>
-    <p>Auf unserer Website besteht die Möglichkeit, über ein Kontaktformular eine Anfrage zu senden, die anschließend über WhatsApp weitergeleitet wird. Bei Nutzung dieser Funktion können personenbezogene Daten verarbeitet werden, insbesondere:</p>
-    <ul class="legal-list">
-      <li>Name</li>
-      <li>Telefonnummer</li>
-      <li>Nachrichteninhalt</li>
-      <li>Kommunikationsdaten</li>
-    </ul>
-    <p>Die Verarbeitung erfolgt zur Bearbeitung Ihrer Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Bitte beachten Sie, dass bei Nutzung von WhatsApp Daten durch die WhatsApp Ireland Limited verarbeitet werden können. Weitere Informationen: <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">https://www.whatsapp.com/legal/privacy-policy-eea</a></p>
+    <h3>3. Telefonische Kontaktaufnahme</h3>
+    <p>Sie können uns telefonisch oder persönlich in unserer Filiale kontaktieren. Für telefonische Anfragen werden keine persönlichen Daten über diese Website verarbeitet.</p>
 
     <h3>4. Kontaktformular</h3>
     <p>Wenn Sie uns über das Kontaktformular kontaktieren, werden die von Ihnen eingegebenen Daten ausschließlich zur Bearbeitung Ihrer Anfrage verarbeitet. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO oder Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald die Bearbeitung abgeschlossen ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
@@ -1927,88 +1879,6 @@
     });
   });
 
-  // WhatsApp-Formular
-  const anfrageForm = document.getElementById('anfrageForm');
-  if (anfrageForm) {
-    // Dateiname im Upload-Label anzeigen
-    const fileInput = document.getElementById('f-bild');
-    const fileLabel = document.getElementById('fileDropLabel');
-    const fileText  = document.getElementById('fileDropText');
-    fileInput.addEventListener('change', function() {
-      if (fileInput.files.length > 0) {
-        fileText.textContent = fileInput.files[0].name;
-        fileLabel.classList.add('has-file');
-      } else {
-        fileText.textContent = 'JPG oder PNG hochladen';
-        fileLabel.classList.remove('has-file');
-      }
-    });
-
-    anfrageForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name         = document.getElementById('f-name').value.trim();
-      const tel          = document.getElementById('f-tel').value.trim();
-      const datum        = document.getElementById('f-datum').value;
-      const anlass       = document.getElementById('f-anlass').value;
-      const budget       = document.getElementById('f-budget').value.trim();
-      const beschreibung = document.getElementById('f-beschreibung').value.trim();
-      const hasBild      = fileInput.files.length > 0;
-
-      if (!name || !tel || !anlass) {
-        document.getElementById('f-name').reportValidity();
-        document.getElementById('f-tel').reportValidity();
-        document.getElementById('f-anlass').reportValidity();
-        return;
-      }
-
-      let msg = 'Hallo, ich möchte eine Torte anfragen:\n\n';
-      msg += 'Name: ' + name + '\n';
-      msg += 'Telefon: ' + tel + '\n';
-      if (datum) {
-        const d = new Date(datum + 'T00:00:00');
-        const dd = String(d.getDate()).padStart(2,'0');
-        const mm = String(d.getMonth()+1).padStart(2,'0');
-        const jj = String(d.getFullYear()).slice(-2);
-        msg += 'Abholung: ' + dd + '.' + mm + '.' + jj + '\n';
-      }
-      msg += 'Anlass: ' + anlass + '\n';
-      if (budget) {
-        const budgetStr = /€/.test(budget) ? budget : budget + ' €';
-        msg += 'Budget: ' + budgetStr + '\n';
-      }
-      if (beschreibung) msg += 'Beschreibung: ' + beschreibung + '\n';
-      if (hasBild)      msg += '\n📎 Referenzbild folgt als Anhang in dieser Unterhaltung.';
-
-      const submitBtn = anfrageForm.querySelector('button[type="submit"]');
-
-      const sendToWhatsApp = (extraMsg) => {
-        if (extraMsg) msg += extraMsg;
-        window.open('https://wa.me/4917672729037?text=' + encodeURIComponent(msg), '_blank');
-        anfrageForm.innerHTML = '<p style="text-align:center;color:var(--a-3);font-size:1rem;line-height:1.8;padding:2rem 0;">Vielen Dank!<br>Sie werden zu WhatsApp weitergeleitet.<br><span style="color:var(--t-i2);font-size:.85rem;">Wir melden uns innerhalb von 24 Stunden.</span></p>';
-      };
-
-      if (hasBild) {
-        submitBtn.textContent = 'Bild wird hochgeladen …';
-        submitBtn.disabled = true;
-        const fd = new FormData();
-        fd.append('bild', fileInput.files[0]);
-        fetch('upload.php', { method: 'POST', body: fd })
-          .then(r => r.json())
-          .then(data => {
-            if (data.url) {
-              sendToWhatsApp('\n\n📷 Referenzbild: ' + data.url);
-            } else {
-              sendToWhatsApp('\n\n(Bildupload fehlgeschlagen – bitte direkt in WhatsApp anhängen)');
-            }
-          })
-          .catch(() => {
-            sendToWhatsApp('\n\n(Bildupload fehlgeschlagen – bitte direkt in WhatsApp anhängen)');
-          });
-      } else {
-        sendToWhatsApp('');
-      }
-    });
-  }
 
   // Mobile nav
   const hamburger = document.getElementById('hamburger');
