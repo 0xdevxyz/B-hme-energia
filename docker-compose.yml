@@ -1,19 +1,20 @@
 version: '3.8'
 
 services:
-  mongo:
-    image: mongo:7
-    container_name: boehme-mongo
-    restart: unless-stopped
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-    volumes:
-      - mongo_data:/data/db
-    ports:
-      - "27017:27017"
-    networks:
-      - boehme-network
+  # Für lokale Entwicklung nur — Production nutzt MongoDB Atlas!
+  # mongo:
+  #   image: mongo:7
+  #   container_name: boehme-mongo
+  #   restart: unless-stopped
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin
+  #     MONGO_INITDB_ROOT_PASSWORD: password
+  #   volumes:
+  #     - mongo_data:/data/db
+  #   ports:
+  #     - "27017:27017"
+  #   networks:
+  #     - boehme-network
 
   cms:
     build:
@@ -22,15 +23,13 @@ services:
     container_name: boehme-cms
     restart: unless-stopped
     environment:
-      DATABASE_URI: mongodb://admin:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/boehme?authSource=admin
+      DATABASE_URI: ${DATABASE_URI}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-      NODE_ENV: production
+      PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+      NODE_ENV: ${NODE_ENV}
       PORT: 3000
-      PAYLOAD_PUBLIC_SERVER_URL: ${CMS_URL}
     ports:
       - "3000:3000"
-    depends_on:
-      - mongo
     networks:
       - boehme-network
     volumes:
@@ -43,11 +42,9 @@ services:
     container_name: boehme-web
     restart: unless-stopped
     environment:
-      PUBLIC_CMS_URL: ${CMS_URL}
+      PUBLIC_CMS_URL: ${PUBLIC_CMS_URL}
     ports:
       - "3001:3000"
-    depends_on:
-      - cms
     networks:
       - boehme-network
 
