@@ -1,11 +1,6 @@
 {
   "schemaVersion": 2,
-  "dockerfilePath": "./apps/web/Dockerfile",
-  "imageName": "boehme-energia-web",
-  "ports": ["3000"],
-  "volumes": [],
-  "environment": {
-    "NODE_ENV": "production",
-    "PUBLIC_CMS_URL": "https://cms-boehme.boehme-energie.com"
-  }
+  "dockerfilePath": "./Dockerfile.prod",
+  "imageName": "boehme-energia",
+  "ports": ["3000"]
 }
