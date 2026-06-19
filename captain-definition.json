@@ -1,6 +1,5 @@
 {
   "schemaVersion": 2,
   "dockerfilePath": "./Dockerfile.prod",
-  "imageName": "boehme-energia",
   "ports": ["3000"]
 }
