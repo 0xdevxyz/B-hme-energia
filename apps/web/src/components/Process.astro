@@ -1,0 +1,43 @@
+---
+// apps/web/src/components/Process.astro
+export interface Props {
+  steps?: Array<{
+    step: number;
+    title: string;
+  }>;
+}
+
+const { steps = [] } = Astro.props;
+
+const defaultSteps = [
+  { step: 1, title: 'Bedarf analysieren' },
+  { step: 2, title: 'Konzept entwickeln' },
+  { step: 3, title: 'Angebot erhalten' },
+  { step: 4, title: 'Anlage errichten' },
+  { step: 5, title: 'Service & Wartung' },
+];
+
+const displaySteps = steps.length > 0 ? steps : defaultSteps;
+---
+
+<section class="bg-white py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4 text-center">
+      So funktioniert es
+    </h2>
+    <p class="text-xl text-gray-600 mb-16 text-center max-w-2xl mx-auto">
+      5 einfache Schritte bis zu Ihrer neuen Heizung
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+      {displaySteps.map((item) => (
+        <div class="text-center group">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange-600 text-white text-3xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+            {item.step}
+          </div>
+          <p class="font-semibold text-gray-900">{item.title}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

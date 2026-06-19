@@ -1,0 +1,61 @@
+---
+// apps/web/src/components/Testimonials.astro
+export interface Props {
+  testimonials?: Array<{
+    quote: string;
+    author: string;
+    role: string;
+    rating?: number;
+  }>;
+}
+
+const { testimonials = [] } = Astro.props;
+
+const defaultTestimonials = [
+  {
+    quote: 'Endlich eine Heizung ohne hohe Investitionskosten. Die Raten sind planbar und die Technik läuft perfekt.',
+    author: 'Thomas Müller',
+    role: 'Hausbesitzer, Mittweida',
+    rating: 5,
+  },
+  {
+    quote: 'Mit dem Wärmecontracting sparen wir über 30% unserer Energiekosten. Einfach und zuverlässig.',
+    author: 'Sandra Klein',
+    role: 'Betriebsleiterin, Gewerbe',
+    rating: 5,
+  },
+  {
+    quote: 'Ideal für kommunale Gebäude. Weniger Investitionsaufwand, mehr Planungssicherheit.',
+    author: 'Frank Weber',
+    role: 'Gemeinderat, Sachsen',
+    rating: 5,
+  },
+];
+
+const displayTestimonials = testimonials.length > 0 ? testimonials : defaultTestimonials;
+---
+
+<section class="bg-amber-50 py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4 text-center">
+      Das sagen unsere Kunden
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      {displayTestimonials.map((testimonial) => (
+        <div class="bg-white p-8 rounded-2xl shadow-lg">
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
+              <span key={i} class="text-2xl text-orange-600">★</span>
+            ))}
+          </div>
+          <p class="text-gray-900 mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
+          <div>
+            <p class="font-bold text-gray-900">{testimonial.author}</p>
+            <p class="text-sm text-gray-600">{testimonial.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: boehme-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - boehme-network
+
+  cms:
+    build:
+      context: ./apps/cms
+      dockerfile: Dockerfile
+    container_name: boehme-cms
+    restart: unless-stopped
+    environment:
+      DATABASE_URI: mongodb://admin:password@mongo:27017/boehme?authSource=admin
+      PAYLOAD_SECRET: your-secret-key-change-in-production
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - boehme-network
+    volumes:
+      - ./apps/cms/src:/app/src
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: boehme-web
+    restart: unless-stopped
+    environment:
+      PUBLIC_CMS_URL: http://cms:3000
+    ports:
+      - "3001:3000"
+    depends_on:
+      - cms
+    networks:
+      - boehme-network
+
+volumes:
+  mongo_data:
+
+networks:
+  boehme-network:
+    driver: bridge

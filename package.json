@@ -1,0 +1,12 @@
+{
+  "name": "boehme-energia",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install-all": "npm install --workspaces"
+  },
+  "workspaces": [
+    "apps/cms",
+    "apps/web"
+  ]
+}
