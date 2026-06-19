@@ -1,9 +1,4 @@
 {
   "schemaVersion": 2,
-  "dockerfilePath": "./apps/web/Dockerfile",
-  "imageName": "boehme-energia",
-  "ports": ["3000"],
-  "environment": {
-    "PUBLIC_CMS_URL": "https://cms-boehme.domain.com"
-  }
+  "dockerComposeFile": "./docker-compose.yml"
 }

@@ -13,13 +13,12 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
-COPY package*.json ./
+RUN npm install -g http-server
 
-RUN npm install --production
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD ["npm", "run", "preview"]
+CMD ["http-server", "dist", "-p", "3000", "-c-1"]

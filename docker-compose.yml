@@ -22,10 +22,11 @@ services:
     container_name: boehme-cms
     restart: unless-stopped
     environment:
-      DATABASE_URI: mongodb://admin:password@mongo:27017/boehme?authSource=admin
-      PAYLOAD_SECRET: your-secret-key-change-in-production
-      NODE_ENV: development
+      DATABASE_URI: mongodb://admin:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/boehme?authSource=admin
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      NODE_ENV: production
       PORT: 3000
+      PAYLOAD_PUBLIC_SERVER_URL: ${CMS_URL}
     ports:
       - "3000:3000"
     depends_on:
@@ -33,7 +34,7 @@ services:
     networks:
       - boehme-network
     volumes:
-      - ./apps/cms/src:/app/src
+      - ./apps/cms/media:/app/media
 
   web:
     build:
@@ -42,7 +43,7 @@ services:
     container_name: boehme-web
     restart: unless-stopped
     environment:
-      PUBLIC_CMS_URL: http://cms:3000
+      PUBLIC_CMS_URL: ${CMS_URL}
     ports:
       - "3001:3000"
     depends_on:
