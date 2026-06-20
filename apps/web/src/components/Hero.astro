@@ -1,5 +1,4 @@
 ---
-// apps/web/src/components/Hero.astro
 export interface Props {
   title: string;
   subtitle: string;
@@ -7,37 +6,40 @@ export interface Props {
   ctaText?: string;
 }
 
-const { title, subtitle, backgroundImage = 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg', ctaText = 'Kostenlos Angebot erhalten' } = Astro.props;
+const {
+  title,
+  subtitle,
+  backgroundImage = 'https://picsum.photos/seed/heatpump-modern-home/1600/900',
+  ctaText = 'Unverbindliches Wärmeangebot anfragen'
+} = Astro.props;
 ---
 
-<section
-  class="hero min-h-screen flex items-center justify-center relative overflow-hidden"
-  style={`background-image: linear-gradient(135deg, rgba(19,78,72,0.7) 0%, rgba(33,28,24,0.85) 100%), url('${backgroundImage}'); background-size: cover; background-position: center; background-attachment: fixed;`}
->
-  <div class="hero-content text-center px-6 max-w-3xl mx-auto z-10">
-    <h1 class="text-7xl md:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-      {title}
-    </h1>
-    <p class="text-xl md:text-2xl text-gray-100 mb-12 leading-relaxed font-light drop-shadow-md max-w-2xl mx-auto">
-      {subtitle}
-    </p>
-    <button
-      class="px-12 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-      onclick="document.querySelector('[data-section=cta]').scrollIntoView({behavior: 'smooth'})"
-    >
-      {ctaText}
-    </button>
+<section class="hero min-h-[100dvh] pt-24 flex items-center justify-center relative overflow-hidden">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 px-6 md:px-8 items-center py-20 md:py-0 w-full">
+    <!-- Text Content (Left) -->
+    <div class="z-10">
+      <h1 class="text-5xl md:text-6xl font-serif font-bold text-text leading-tight mb-6">
+        Wärme, um die Sie sich<br /><span class="text-petrol">nicht kümmern</span> müssen
+      </h1>
+      <p class="text-lg text-text-leise leading-relaxed max-w-sm mb-8">
+        Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung. Sie zahlen nur die Wärme, die Sie nutzen.
+      </p>
+      <a
+        href="#kontakt"
+        class="inline-block bg-glut hover:bg-glut-hell text-weiss px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-lg active:scale-95"
+      >
+        {ctaText}
+      </a>
+    </div>
+
+    <!-- Image (Right) -->
+    <div class="relative hidden md:block">
+      <img
+        src={backgroundImage}
+        alt="Moderne Wärmepumpe Installation"
+        class="w-full h-auto rounded-2xl shadow-xl object-cover max-h-[600px]"
+      />
+      <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-anthrazit/10 to-transparent pointer-events-none" />
+    </div>
   </div>
 </section>
-
-<style>
-  .hero {
-    background-attachment: fixed;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero {
-      background-attachment: scroll;
-    }
-  }
-</style>

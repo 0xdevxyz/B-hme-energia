@@ -1,8 +1,6 @@
 ---
-// apps/web/src/components/Values.astro
 export interface Props {
   values?: Array<{
-    icon: string;
     title: string;
     description: string;
   }>;
@@ -12,40 +10,41 @@ const { values = [] } = Astro.props;
 
 const defaultValues = [
   {
-    icon: '✓',
-    title: 'Ausgereifte Technik',
-    description: 'Bewährte Anlagen, regelmäßige Wartung, 24/7-Service. Zuverlässig seit Jahrzehnten.',
+    title: 'Ausgereifte, bewährte Technik',
+    description: 'Geprüfte Anlagen, regelmäßige Wartung, 24/7-Entstördienst.',
   },
   {
-    icon: '✓',
-    title: '0 Euro Investition',
-    description: 'Wir finanzieren komplett. Sie zahlen planbare monatliche Raten für Wärmemengen.',
+    title: 'Nachhaltig & effizient',
+    description: 'Moderne Wärmeerzeugung, hohe Nutzungsgrade, optionaler Ökostrom-/Biogasanteil.',
   },
   {
-    icon: '✓',
-    title: 'Nachhaltig & Modern',
-    description: 'Weniger CO₂, höhere Nutzungsgrade, erneuerbare Optionen. Zukunftssicher.',
+    title: 'CO₂ reduzieren',
+    description: 'Weniger Emissionen pro Kilowattstunde, transparente CO₂-Bilanz für Ihr Objekt.',
   },
 ];
 
 const displayValues = values.length > 0 ? values : defaultValues;
 ---
 
-<section class="bg-amber-50 py-20 px-6">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-      Drei Gründe für Wärmecontracting
+<section class="py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-serif font-bold text-text mb-6 leading-tight">
+      Ihre Vorteile auf einen Blick
     </h2>
-    <p class="text-xl text-gray-600 mb-16">
-      Moderne Wärmeversorung — bewährt, nachhaltig, investitionsfrei.
-    </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      {displayValues.map((value) => (
-        <div class="animate-fade-in">
-          <div class="text-6xl text-orange-600 mb-6">{value.icon}</div>
-          <h3 class="text-2xl font-bold text-teal-700 mb-4">{value.title}</h3>
-          <p class="text-gray-600 leading-relaxed">{value.description}</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {displayValues.map((value, i) => (
+        <div
+          class="bg-weiss border border-leinen rounded-2xl p-8 hover:shadow-md transition-shadow"
+          style={`animation: fadeIn 0.6s ease-out ${i * 0.1}s forwards; opacity: 0;`}
+        >
+          <div class="flex items-start gap-4 mb-6">
+            <svg class="w-6 h-6 text-salbei flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <h3 class="text-lg font-semibold text-text">{value.title}</h3>
+          </div>
+          <p class="text-text-leise leading-relaxed text-sm">{value.description}</p>
         </div>
       ))}
     </div>
@@ -56,7 +55,7 @@ const displayValues = values.length > 0 ? values : defaultValues;
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -64,15 +63,10 @@ const displayValues = values.length > 0 ? values : defaultValues;
     }
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .animate-fade-in:nth-child(3) {
-    animation-delay: 0.2s;
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      opacity: 1 !important;
+    }
   }
 </style>

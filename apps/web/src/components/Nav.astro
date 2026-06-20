@@ -1,0 +1,73 @@
+---
+---
+
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+  <div class="bg-weiss/95 backdrop-blur-md border border-leinen rounded-full px-6 py-3 flex items-center justify-between gap-8 shadow-sm max-w-max">
+    <a href="#" class="font-serif font-bold text-sm text-anthrazit hover:text-petrol transition-colors">
+      Böhme Energia
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#privat" class="text-sm text-text hover:text-petrol transition-colors">Privat</a>
+      <a href="#gewerbe" class="text-sm text-text hover:text-petrol transition-colors">Gewerbe</a>
+      <a href="#ablauf" class="text-sm text-text hover:text-petrol transition-colors">Ablauf</a>
+      <a href="#faq" class="text-sm text-text hover:text-petrol transition-colors">FAQ</a>
+      <a href="#kontakt" class="text-sm text-text hover:text-petrol transition-colors">Kontakt</a>
+    </div>
+
+    <!-- CTA Button -->
+    <a
+      href="#kontakt"
+      class="bg-glut hover:bg-glut-hell text-weiss px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+    >
+      Angebot anfragen
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden text-anthrazit hover:text-petrol transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-anthrazit/90 backdrop-blur-md z-40 md:hidden flex flex-col justify-center items-center">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-weiss hover:text-glut transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="flex flex-col gap-8 text-center">
+      <a href="#privat" class="text-2xl text-weiss hover:text-glut transition-colors">Privat</a>
+      <a href="#gewerbe" class="text-2xl text-weiss hover:text-glut transition-colors">Gewerbe</a>
+      <a href="#ablauf" class="text-2xl text-weiss hover:text-glut transition-colors">Ablauf</a>
+      <a href="#faq" class="text-2xl text-weiss hover:text-glut transition-colors">FAQ</a>
+      <a href="#kontakt" class="text-2xl text-weiss hover:text-glut transition-colors">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+  if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+
+    // Close menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+</script>

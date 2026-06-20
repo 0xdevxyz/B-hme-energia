@@ -1,20 +1,128 @@
 ---
-// apps/web/src/components/CTA.astro
 ---
 
-<section data-section="cta" class="bg-gradient-to-r from-teal-900 to-gray-900 text-white py-24 px-6">
-  <div class="max-w-2xl mx-auto text-center">
-    <h2 class="text-5xl md:text-6xl font-bold mb-6">
-      Bereit für nachhaltige Wärme?
+<section id="kontakt" class="py-24 md:py-32 px-6 bg-petrol/5">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-serif font-bold text-text mb-6 leading-tight">
+      Ihr unverbindliches Wärmeangebot
     </h2>
-    <p class="text-xl text-gray-200 mb-12">
-      Kostenlos, transparent, unverbindlich. Wir erstellen Ihr Angebot in 48 Stunden.
+    <p class="text-text-leise mb-16 text-lg max-w-2xl">
+      Kostenlos, transparent, unverbindlich. Wir erstellen Ihr personalisiertes Angebot.
     </p>
-    <button
-      class="px-16 py-5 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-      onclick="window.location.href = '#kontakt'"
-    >
-      Jetzt Angebot anfordern
-    </button>
+
+    <div class="grid md:grid-cols-2 gap-16">
+      <!-- Kontaktformular -->
+      <div>
+        <form class="space-y-6" action="mailto:info@boehme-energie.com" method="POST" enctype="text/plain">
+          <div>
+            <label class="block text-text font-semibold mb-2">Name</label>
+            <input
+              type="text"
+              name="Name"
+              required
+              class="w-full px-4 py-3 border border-leinen rounded-lg bg-weiss text-text focus:outline-none focus:ring-2 focus:ring-petrol focus:border-transparent"
+              placeholder="Ihr Name"
+            />
+          </div>
+
+          <div>
+            <label class="block text-text font-semibold mb-2">E-Mail</label>
+            <input
+              type="email"
+              name="Email"
+              required
+              class="w-full px-4 py-3 border border-leinen rounded-lg bg-weiss text-text focus:outline-none focus:ring-2 focus:ring-petrol focus:border-transparent"
+              placeholder="ihre@email.de"
+            />
+          </div>
+
+          <div>
+            <label class="block text-text font-semibold mb-2">Telefon</label>
+            <input
+              type="tel"
+              name="Telefon"
+              class="w-full px-4 py-3 border border-leinen rounded-lg bg-weiss text-text focus:outline-none focus:ring-2 focus:ring-petrol focus:border-transparent"
+              placeholder="+49 3722 60030"
+            />
+          </div>
+
+          <div>
+            <label class="block text-text font-semibold mb-2">Nachricht</label>
+            <textarea
+              name="Nachricht"
+              rows="5"
+              class="w-full px-4 py-3 border border-leinen rounded-lg bg-weiss text-text focus:outline-none focus:ring-2 focus:ring-petrol focus:border-transparent resize-none"
+              placeholder="Erzählen Sie uns von Ihrem Heizbedarf..."
+            />
+          </div>
+
+          <div class="flex items-start">
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy"
+              required
+              class="mt-1 w-4 h-4 accent-petrol cursor-pointer"
+            />
+            <label for="privacy" class="ml-3 text-text-leise text-sm leading-relaxed">
+              Ich akzeptiere die Datenschutzerklärung und stimme zu, dass Böhme Energia GmbH mich kontaktieren darf.
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-glut hover:bg-glut-hell text-weiss font-semibold py-3 rounded-lg transition-colors duration-300 active:scale-95"
+          >
+            Angebot anfragen
+          </button>
+        </form>
+      </div>
+
+      <!-- Kontaktinformationen -->
+      <div>
+        <div class="bg-weiss border border-leinen rounded-2xl p-10">
+          <h3 class="text-2xl font-serif font-bold text-text mb-8">Kontaktieren Sie uns direkt</h3>
+
+          <div class="space-y-8">
+            <!-- Adresse -->
+            <div>
+              <p class="text-text-leise text-sm uppercase tracking-wide font-semibold mb-2">Adresse</p>
+              <p class="text-text leading-relaxed">
+                Böhme Energia GmbH<br />
+                Ringstr. 11<br />
+                09241 Mühlau, Sachsen
+              </p>
+            </div>
+
+            <!-- Telefon -->
+            <div>
+              <p class="text-text-leise text-sm uppercase tracking-wide font-semibold mb-2">Telefon</p>
+              <a href="tel:+493722060030" class="text-petrol hover:text-petrol-hell font-semibold text-lg transition-colors">
+                +49 3722 60030
+              </a>
+            </div>
+
+            <!-- E-Mail -->
+            <div>
+              <p class="text-text-leise text-sm uppercase tracking-wide font-semibold mb-2">E-Mail</p>
+              <a href="mailto:info@boehme-energie.com" class="text-petrol hover:text-petrol-hell font-semibold text-lg transition-colors">
+                info@boehme-energie.com
+              </a>
+            </div>
+
+            <!-- Service -->
+            <div class="pt-8 border-t border-leinen">
+              <p class="text-text-leise text-sm uppercase tracking-wide font-semibold mb-4">Service</p>
+              <p class="text-text-leise text-sm leading-relaxed mb-3">
+                Entstördienst 24/7 für Notfälle
+              </p>
+              <p class="text-text-leise text-sm">
+                Antwort auf Anfragen innerhalb von 24 Stunden garantiert.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

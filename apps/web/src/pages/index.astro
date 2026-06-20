@@ -1,60 +1,35 @@
 ---
-// apps/web/src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Values from '../components/Values.astro';
-import Calculator from '../components/Calculator.tsx';
+import Audience from '../components/Audience.astro';
 import Process from '../components/Process.astro';
-import Comparison from '../components/Comparison.astro';
-import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
-
-const cmsUrl = import.meta.env.PUBLIC_CMS_URL;
-
-let pageContent = {
-  hero: {
-    title: 'Wärme ohne Sorgen',
-    subtitle: 'Wir finanzieren, bauen und betreiben. Sie zahlen nur die Wärme, die Sie nutzen.',
-    backgroundImage: 'https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg',
-  },
-  values: [],
-  process: [],
-  testimonials: [],
-};
-
-try {
-  const response = await fetch(`${cmsUrl}/api/pages?where[slug][equals]=onepager`);
-  const data = await response.json();
-  if (data.docs && data.docs.length > 0) {
-    pageContent = {
-      hero: data.docs[0].hero || pageContent.hero,
-      values: data.docs[0].values || pageContent.values,
-      process: data.docs[0].process || pageContent.process,
-      testimonials: data.docs[0].testimonials || pageContent.testimonials,
-    };
-  }
-} catch (error) {
-  console.error('Failed to fetch page content:', error);
-}
 ---
 
-<Layout title="Böhme Energia - Wärmecontracting ohne Investitionskosten">
-  <Hero
-    title={pageContent.hero.title}
-    subtitle={pageContent.hero.subtitle}
-    backgroundImage={pageContent.hero.backgroundImage}
-    ctaText={pageContent.hero.ctaText || 'Kostenlos Angebot erhalten'}
-  />
+<Layout
+  title="Wärmecontracting Sachsen | Böhme Energia GmbH Mühlau"
+  description="Moderne Wärme ohne Investitionskosten — für Privat & Gewerbe in Sachsen. Wärmepumpe, Fernwärme, BHKW im Contracting. Jetzt anfragen."
+  canonical="https://boehme-energia.com/"
+>
+  <Nav />
 
-  <Values values={pageContent.values} />
+  <main class="w-full overflow-x-hidden">
+    <Hero
+      title="Wärme, um die Sie sich nicht kümmern müssen"
+      subtitle="Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie zahlen nur die Wärme, die Sie nutzen."
+    />
 
-  <Calculator client:load />
+    <Values />
 
-  <Process steps={pageContent.process} />
+    <Audience />
 
-  <Comparison />
+    <Process />
 
-  <Testimonials testimonials={pageContent.testimonials} />
+    <FAQ />
 
-  <CTA />
+    <CTA />
+  </main>
 </Layout>

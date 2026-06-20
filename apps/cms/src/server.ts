@@ -7,8 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 const start = async () => {
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.DATABASE_URI,
+    secret: process.env.PAYLOAD_SECRET || 'CHANGE_ME',
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload admin URL: ${payload.getAdminURL()}`);

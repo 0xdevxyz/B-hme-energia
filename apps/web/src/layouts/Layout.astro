@@ -1,46 +1,107 @@
 ---
-// apps/web/src/layouts/Layout.astro
 export interface Props {
   title: string;
+  description?: string;
+  canonical?: string;
+  schema?: object;
 }
 
-const { title } = Astro.props;
+const {
+  title = 'Böhme Energia GmbH - Wärmecontracting Sachsen',
+  description = 'Moderne Wärme ohne Investitionskosten — für Privat & Gewerbe in Sachsen. Wärmepumpe, Fernwärme, BHKW im Contracting. Jetzt anfragen.',
+  canonical = 'https://boehme-energia.com/',
+  schema = null
+} = Astro.props;
+
+const today = new Date().toLocaleDateString('de-DE', { year: 'numeric', month: 'long' });
+
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  'name': 'Böhme Energia GmbH',
+  'telephone': '+493722060030',
+  'email': 'info@boehme-energia.com',
+  'url': 'https://boehme-energia.com',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'Ringstr. 11',
+    'postalCode': '09241',
+    'addressLocality': 'Mühlau',
+    'addressCountry': 'DE'
+  },
+  'areaServed': 'Sachsen, Deutschland',
+  'description': 'Wärmecontracting und Wärmeversorgung für Privat- und Gewerbekunden ohne Investitionskosten'
+};
 ---
 
 <!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Böhme Energia - Wärmecontracting ohne Investitionskosten" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#211C18" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OG Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema || defaultSchema)} />
+
     <title>{title}</title>
   </head>
-  <body class="bg-white text-gray-900 font-sans">
+  <body class="bg-sand text-text font-grotesk antialiased">
     <slot />
-    <footer class="bg-gray-900 text-white py-12 px-6">
-      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <footer class="bg-anthrazit text-weiss py-16 px-6 md:py-24 mt-24">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         <div>
-          <h3 class="font-bold text-lg mb-4">Böhme Energia</h3>
-          <p class="text-gray-400">Wärmecontracting ohne Investitionskosten</p>
+          <h3 class="text-lg font-serif font-bold mb-2">Böhme Energia</h3>
+          <p class="text-weiss/80 text-sm">Wärmecontracting ohne Investitionskosten</p>
         </div>
         <div>
-          <h4 class="font-semibold mb-4">Links</h4>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="/" class="hover:text-white">Home</a></li>
-            <li><a href="/blog" class="hover:text-white">Blog</a></li>
-            <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
+          <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-3 text-weiss/70 text-sm">
+            <li><a href="#privat" class="hover:text-weiss transition-colors">Für Privatkunden</a></li>
+            <li><a href="#gewerbe" class="hover:text-weiss transition-colors">Für Gewerbe</a></li>
+            <li><a href="#ablauf" class="hover:text-weiss transition-colors">Ablauf</a></li>
+            <li><a href="#faq" class="hover:text-weiss transition-colors">FAQ</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold mb-4">Kontakt</h4>
-          <p class="text-gray-400">
-            Email: info@boehme-energia.de<br />
-            Tel: +49 (0) 371 ...
+          <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider">Kontakt</h4>
+          <p class="text-weiss/70 text-sm space-y-2">
+            <div>Ringstr. 11</div>
+            <div>09241 Mühlau</div>
+            <div class="pt-2">
+              <a href="tel:+493722060030" class="hover:text-weiss transition-colors">+49 3722 60030</a>
+            </div>
+            <div>
+              <a href="mailto:info@boehme-energie.com" class="hover:text-weiss transition-colors">info@boehme-energie.com</a>
+            </div>
           </p>
         </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-sm uppercase tracking-wider">Rechtliches</h4>
+          <ul class="space-y-3 text-weiss/70 text-sm">
+            <li><a href="#" class="hover:text-weiss transition-colors">Datenschutz</a></li>
+            <li><a href="#" class="hover:text-weiss transition-colors">Impressum</a></li>
+            <li><a href="#" class="hover:text-weiss transition-colors">AGB</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="max-w-5xl mx-auto mt-8 pt-8 border-t border-gray-800 text-gray-400 text-sm">
-        <p>&copy; 2024 Böhme Energia. Alle Rechte vorbehalten.</p>
+      <div class="max-w-6xl mx-auto pt-8 border-t border-weiss/10 flex flex-col md:flex-row justify-between items-center text-weiss/60 text-xs">
+        <p>&copy; 2024 Böhme Energia GmbH. Alle Rechte vorbehalten.</p>
+        <p>Stand: {today}</p>
       </div>
     </footer>
   </body>
@@ -58,12 +119,15 @@ const { title } = Astro.props;
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
+  }
+
+  h4, h5, h6 {
+    font-weight: 600;
   }
 </style>

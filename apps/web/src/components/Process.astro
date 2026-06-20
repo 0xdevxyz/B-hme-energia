@@ -1,5 +1,4 @@
 ---
-// apps/web/src/components/Process.astro
 export interface Props {
   steps?: Array<{
     step: number;
@@ -14,30 +13,62 @@ const defaultSteps = [
   { step: 2, title: 'Konzept entwickeln' },
   { step: 3, title: 'Angebot erhalten' },
   { step: 4, title: 'Anlage errichten' },
-  { step: 5, title: 'Service & Wartung' },
+  { step: 5, title: 'Service & Wartung durch uns' },
 ];
 
 const displaySteps = steps.length > 0 ? steps : defaultSteps;
 ---
 
-<section class="bg-white py-20 px-6">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-4 text-center">
-      So funktioniert es
+<section id="ablauf" class="py-24 md:py-32 px-6 bg-sand">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-serif font-bold text-text mb-6 leading-tight">
+      In 5 Schritten zur neuen Wärme
     </h2>
-    <p class="text-xl text-gray-600 mb-16 text-center max-w-2xl mx-auto">
-      5 einfache Schritte bis zu Ihrer neuen Heizung
+    <p class="text-text-leise mb-16 max-w-2xl text-lg">
+      Ein bewährter Prozess, der sicherstellt, dass Ihre neue Wärmeversorgung perfect passt.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-      {displaySteps.map((item) => (
-        <div class="text-center group">
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange-600 text-white text-3xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
+      {displaySteps.map((item, i) => (
+        <div class="relative">
+          <!-- Connector Line -->
+          {i < displaySteps.length - 1 && (
+            <div class="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-petrol/20" />
+          )}
+
+          <!-- Step Circle -->
+          <div
+            class="relative z-10 flex items-center justify-center w-24 h-24 rounded-full bg-weiss border-2 border-petrol text-petrol font-serif font-bold text-3xl mb-6 hover:bg-petrol hover:text-weiss transition-all duration-300"
+            style={`animation: scaleIn 0.5s ease-out ${i * 0.1}s forwards; opacity: 0; transform-origin: center;`}
+          >
             {item.step}
           </div>
-          <p class="font-semibold text-gray-900">{item.title}</p>
+
+          <!-- Step Title -->
+          <p class="font-semibold text-text text-center md:text-left leading-tight">{item.title}</p>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
