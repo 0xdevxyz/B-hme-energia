@@ -1,35 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Values from '../components/Values.astro';
-import Audience from '../components/Audience.astro';
-import Process from '../components/Process.astro';
+import Marquee from '../components/Marquee.astro';
+import Definition from '../components/Definition.astro';
+import Solutions from '../components/Solutions.astro';
+import Technologies from '../components/Technologies.astro';
+import Models from '../components/Models.astro';
+import Advantages from '../components/Advantages.astro';
+import Calculator from '../components/Calculator.astro';
+import Showcase from '../components/Showcase.astro';
 import FAQ from '../components/FAQ.astro';
-import CTA from '../components/CTA.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
 ---
 
-<Layout
-  title="Wärmecontracting Sachsen | Böhme Energia GmbH Mühlau"
-  description="Moderne Wärme ohne Investitionskosten — für Privat & Gewerbe in Sachsen. Wärmepumpe, Fernwärme, BHKW im Contracting. Jetzt anfragen."
-  canonical="https://boehme-energia.com/"
->
-  <Nav />
-
-  <main class="w-full overflow-x-hidden">
-    <Hero
-      title="Wärme, um die Sie sich nicht kümmern müssen"
-      subtitle="Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie zahlen nur die Wärme, die Sie nutzen."
-    />
-
-    <Values />
-
-    <Audience />
-
-    <Process />
-
-    <FAQ />
-
-    <CTA />
-  </main>
+<Layout title="Wärmewerk — Wärme als Rundum-Service">
+  <Hero />
+  <Marquee />
+  <Definition />
+  <Solutions />
+  <Technologies />
+  <Models />
+  <Advantages />
+  <Calculator />
+  <Showcase />
+  <FAQ />
+  <ClosingCTA />
 </Layout>
