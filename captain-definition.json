@@ -1,5 +1,5 @@
 {
   "schemaVersion": 2,
-  "dockerfilePath": "./apps/web/Dockerfile",
+  "dockerfilePath": "./Dockerfile",
   "ports": ["3000"]
 }
