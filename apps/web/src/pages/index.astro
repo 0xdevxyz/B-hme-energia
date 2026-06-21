@@ -1,24 +1,14 @@
----
-import { getPageData, getPosts, getCMSImageUrl } from '../lib/cms';
-
-const pageData = await getPageData();
-const posts = await getPosts();
-
-const heroTitle = pageData?.hero?.title || 'Wärme, die einfach da ist';
-const heroSubtitle = pageData?.hero?.subtitle || 'Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis.';
-const heroImage = getCMSImageUrl(pageData?.hero?.backgroundImage?.url);
----
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wärmecontracting für Privat und Gewerbe — geplant, finanziert, betrieben.">
-  <title>Böhme Energia — Wärmecontracting Sachsen</title>
+  <meta name="description" content="Wärme, die einfach da ist. Wärmecontracting für Privat und Gewerbe — geplant, finanziert, betrieben. Jetzt Rate berechnen.">
+  <title>Wärmewerk — Wärme als Rundum-Service</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --cream: #F4F2EC;
@@ -29,7 +19,7 @@ const heroImage = getCMSImageUrl(pageData?.hero?.backgroundImage?.url);
       --muted: #6E7B70;
       --ink: #1B2620;
       --line: rgba(43, 60, 49, 0.12);
-      --sans: 'Hanken Grotesk', system-ui, sans-serif;
+      --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
     }
 
     * {
@@ -67,23 +57,7 @@ const heroImage = getCMSImageUrl(pageData?.hero?.backgroundImage?.url);
       padding: 0 22px;
     }
 
-    section {
-      padding: 80px 22px;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--forest);
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-    }
-
+    /* Buttons */
     .pill {
       display: inline-flex;
       align-items: center;
@@ -125,6 +99,10 @@ const heroImage = getCMSImageUrl(pageData?.hero?.backgroundImage?.url);
       box-shadow: 0 14px 30px -14px rgba(60, 104, 77, 0.7);
     }
 
+    .btn-primary .circ {
+      background: linear-gradient(59deg, #567A5E, #78A873);
+    }
+
     .btn-primary:hover {
       transform: translateY(-2px);
     }
@@ -134,161 +112,1547 @@ const heroImage = getCMSImageUrl(pageData?.hero?.backgroundImage?.url);
       color: var(--forest);
     }
 
+    .btn-light .circ {
+      background: linear-gradient(59deg, #EEE, #CBCBCB);
+    }
+
     .btn-light:hover {
       background: #fff;
       transform: translateY(-2px);
     }
 
+    .btn-out {
+      background: transparent;
+      color: var(--forest);
+      border-color: var(--line);
+      padding: 13px 24px;
+    }
+
     /* Hero */
+    .hero-pad {
+      padding: 14px;
+    }
+
     .hero {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 28px);
+      min-height: 600px;
+      border-radius: 34px;
+      overflow: hidden;
+      position: relative;
+      background: var(--forest);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, #2A3A2F, #1F2D24);
+    }
+
+    .hero-bg .ph {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(120% 80% at 50% 42%, rgba(16, 24, 19, 0.32), rgba(16, 24, 19, 0) 70%),
+        linear-gradient(180deg, rgba(16, 24, 19, 0.62) 0%, rgba(16, 24, 19, 0.36) 30%, rgba(16, 24, 19, 0.38) 56%, rgba(16, 24, 19, 0.76) 100%);
+    }
+
+    .nav {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 26px;
+    }
+
+    .navpill {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background: rgba(18, 26, 21, 0.42);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 8px 18px;
+      color: #fff;
+      font-size: 0.92rem;
+    }
+
+    .navpill .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .navpill .brand svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green);
+    }
+
+    .navpill .links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.88rem;
+    }
+
+    .navpill .links a {
+      color: #fff;
+      transition: 0.28s;
+    }
+
+    .navpill .links a:hover {
+      color: var(--green);
+    }
+
+    .nav .btn-light {
+      display: none;
+    }
+
+    .hero-center {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      height: 100vh;
-      min-height: 600px;
-      background: linear-gradient(135deg, var(--forest), var(--forest-2));
+      padding: 0 20px 96px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero-center .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #fff;
-      padding: 40px 20px;
-      position: relative;
-      overflow: hidden;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      margin-bottom: 24px;
     }
 
-    .hero h1 {
+    #heroTitle {
+      color: #fff;
       font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 700;
+      font-weight: 800;
+      line-height: 1.1;
+      text-shadow: 0 2px 34px rgba(0, 0, 0, 0.5);
       margin-bottom: 20px;
-      font-family: 'Cormorant Garamond', serif;
     }
 
-    .hero p {
+    #heroTitle .ch {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: chIn 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+
+    @keyframes chIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-center > p {
+      color: rgba(255, 255, 255, 0.85);
       font-size: 1.12rem;
       max-width: 640px;
-      margin: 0 auto 32px;
-      opacity: 0.9;
+      margin-bottom: 32px;
+      line-height: 1.6;
     }
 
-    .hero .cta-row {
+    .hero-center .cta-row {
       display: flex;
       gap: 12px;
       justify-content: center;
-      flex-wrap: wrap;
     }
 
-    /* Grid Layouts */
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      padding: 0 26px 30px;
+      margin-top: auto;
+    }
+
+    .fcard {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 26px;
+      padding: 22px;
+      color: #fff;
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .fcard.left h3 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .fcard.left p {
+      font-size: 0.88rem;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .fcard.left .pill {
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+    }
+
+    .fcard.right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fcard.right .avatars {
+      display: flex;
+      gap: -6px;
+    }
+
+    .fcard.right .avatars img {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      margin-left: -6px;
+    }
+
+    .fcard.right .avatars img:first-child {
+      margin-left: 0;
+    }
+
+    .fcard.right div {
+      font-size: 0.92rem;
+    }
+
+    .fcard.right strong {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Marquee */
+    .marquee {
+      background: var(--cream);
+      padding: 18px 0;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 24px;
+      animation: scroll 30s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-inner span {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--forest);
+    }
+
+    .marquee-inner i {
+      color: var(--green);
+      font-style: normal;
+    }
+
+    @keyframes scroll {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Section Base */
+    section {
+      padding: 80px 22px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--forest);
+    }
+
+    section > .wrap > p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    /* Definition */
+    .definition {
+      background: #fff;
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      background: #fff;
+      border-radius: 26px;
+      padding: 46px;
+      align-items: center;
+    }
+
+    .definition-grid .pill {
+      margin-bottom: 20px;
+    }
+
+    .definition-grid h2 {
+      margin-bottom: 20px;
+    }
+
+    .definition-grid .stamp {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .definition-grid svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Solutions Grid */
     .grid3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
-      margin-top: 40px;
     }
 
-    .card {
+    .pcard {
       background: #fff;
       border-radius: 20px;
       overflow: hidden;
-      transition: 0.28s;
+      cursor: pointer;
+      transition: 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
 
-    .card:hover {
+    .pcard:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     }
 
-    .card img {
+    .pcard:hover img {
+      transform: scale(1.08);
+    }
+
+    .pcard img {
       width: 100%;
       height: 240px;
       object-fit: cover;
+      transition: 0.6s;
     }
 
-    .card .content {
-      padding: 20px;
+    .pcard .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .card h3 {
+    .pcard .pills .tag {
+      background: rgba(60, 104, 77, 0.1);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .pcard .pills .tag.bold {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .pcard .content {
+      padding: 18px;
+    }
+
+    .pcard h3 {
       font-size: 1.28rem;
+      font-weight: 700;
       margin-bottom: 10px;
     }
 
-    .card p {
-      color: var(--muted);
+    .pcard .subtitle {
       font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 14px;
     }
 
-    footer {
-      text-align: center;
-      padding: 32px 22px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--line);
+    .pcard .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--forest);
+    }
+
+    .pcard .stats strong {
+      display: block;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    /* Technology */
+    .tech {
       background: #fff;
     }
 
+    .tgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tcard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 28px;
+      background: var(--cream);
+      border-radius: 18px;
+      transition: 0.28s;
+    }
+
+    .tcard:hover {
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .tcard svg {
+      width: 48px;
+      height: 48px;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .tcard h3 {
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .tcard p {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* Models */
+    .mgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .mcard {
+      background: var(--cream);
+      border-radius: 18px;
+      padding: 28px;
+      border-top: 3px solid var(--green-2);
+    }
+
+    .mcard .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green-2);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .mcard h3 {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mcard p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .mcard .note {
+      font-size: 0.78rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* Advantages */
+    .vgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .vcard {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 22px;
+      background: var(--cream);
+      border-radius: 16px;
+      transition: 0.28s;
+    }
+
+    .vcard:hover {
+      background: linear-gradient(135deg, rgba(60, 104, 77, 0.08), rgba(79, 119, 71, 0.08));
+    }
+
+    .vcard svg {
+      width: 36px;
+      height: 36px;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    .vcard h3 {
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .vcard p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Calculator */
+    .calc {
+      background: linear-gradient(160deg, #EDF1EA, #E4EBE2);
+    }
+
+    .calc > .wrap > h2 {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .calc > .wrap > p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 40px;
+    }
+
+    .frame {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      background: #fff;
+      border-radius: 28px;
+      padding: 42px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .frame .label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+      color: var(--forest);
+    }
+
+    .seg {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .seg button {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: 0.28s;
+    }
+
+    .seg button.on {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .seg button:hover:not(.on) {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .slider-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-group .label-val {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--green) 0%, var(--green) calc(var(--p, 50%)), var(--line) calc(var(--p, 50%)), var(--line) 100%);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--green);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(60, 104, 77, 0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--green);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(60, 104, 77, 0.3);
+    }
+
+    .result {
+      background: linear-gradient(160deg, var(--green), var(--forest-2));
+      color: #fff;
+      border-radius: 18px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .result-item .big {
+      font-size: 2.4rem;
+      font-weight: 800;
+    }
+
+    .result-item small {
+      font-size: 0.88rem;
+      opacity: 0.9;
+      flex: 1;
+    }
+
+    .result .boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .result .box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .result .box .big {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .result .check {
+      font-size: 0.88rem;
+      opacity: 0.9;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result .check span {
+      display: block;
+    }
+
+    .result .disclaimer {
+      font-size: 0.78rem;
+      opacity: 0.75;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Showcase */
+    .showcase {
+      background: #fff;
+    }
+
+    .showcase .inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      min-height: 540px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background-image: url('https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225343_f066b07a-f4a8-4890-a6e3-390f2fa87561.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .showcase .ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(16, 24, 19, 0.6), rgba(16, 24, 19, 0.3));
+    }
+
+    .showcase .content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      max-width: 640px;
+      padding: 40px;
+    }
+
+    .showcase .content .pill {
+      margin-bottom: 18px;
+    }
+
+    .showcase .content h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .showcase .content > p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .flist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .flist-item {
+      display: flex;
+      gap: 12px;
+    }
+
+    .flist-item svg {
+      width: 32px;
+      height: 32px;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .flist-item h4 {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .flist-item small {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--cream);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .faq-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: 0.28s;
+    }
+
+    .faq-head:hover {
+      background: rgba(60, 104, 77, 0.04);
+    }
+
+    .faq-head strong {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .faq-head .icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--green);
+      transition: 0.28s;
+    }
+
+    .faq-item.open .icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.28s;
+      background: #fff;
+    }
+
+    .faq-item.open .faq-body {
+      max-height: 400px;
+    }
+
+    .faq-body > div {
+      padding: 0 22px 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* Closing CTA */
+    .close {
+      background: linear-gradient(135deg, var(--green) 0%, var(--forest-2) 100%);
+    }
+
+    .close-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      background: transparent;
+      padding: 0;
+      align-items: center;
+    }
+
+    .close h2 {
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .close > .wrap > p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .close .side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .close .side p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .close .side strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .navpill .links {
+        display: none;
+      }
+
+      .nav .btn-light {
+        display: flex !important;
+      }
+
+      .fcard.right {
+        display: none;
+      }
+
+      .grid3, .tgrid, .mgrid {
+        grid-template-columns: 1fr;
+      }
+
+      .definition-grid, .frame, .close-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flist {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 22px;
+      }
+    }
+
     @media (max-width: 560px) {
+      .hero {
+        border-radius: 24px;
+        height: calc(100vh - 20px);
+      }
+
+      .hero-pad {
+        padding: 10px;
+      }
+
+      .hero-center {
+        padding: 0 18px 60px;
+      }
+
+      #heroTitle {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+      }
+
+      .hero-bottom {
+        padding: 0 18px 20px;
+      }
+
       section {
         padding: 50px 18px;
       }
 
-      .hero h1 {
-        font-size: clamp(1.8rem, 5vw, 2.8rem);
+      .definition-grid, .frame, .close-grid {
+        padding: 24px;
+        border-radius: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
       }
 
-      .hero .cta-row {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
+      #heroTitle .ch {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 <body>
   <!-- Hero -->
-  <section class="hero">
+  <div class="hero-pad">
+    <div class="hero">
+      <div class="hero-bg">
+        <video class="ph" id="heroVid" autoplay muted loop playsinline preload="auto"
+          poster="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_224252_bb2c09b1-b1c6-4d4c-9792-c42ba0b2e76c.png">
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_230626_be00dece-261b-416a-9241-bea49b160701.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-scrim"></div>
+
+      <nav class="nav">
+        <div class="navpill">
+          <div class="brand">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M6 8l6 6 6-6M6 16l6 6 6-6"/>
+            </svg>
+            Wärmewerk
+          </div>
+          <div class="links">
+            <a href="#loesungen">Lösungen</a>
+            <a href="#technik">Technologien</a>
+            <a href="#ablauf">Ablauf</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <button class="btn btn-light">Rate berechnen ↗</button>
+        </div>
+      </nav>
+
+      <div class="hero-center">
+        <div class="badge">✦ Wärmecontracting · Privat & Gewerbe</div>
+        <h1 id="heroTitle">Wärme, die einfach da ist</h1>
+        <p>Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis. Ausgereift, nachhaltig, mit weniger CO₂.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="document.getElementById('rechner').scrollIntoView({behavior:'smooth'})">Rate berechnen ▶<span class="circ">→</span></button>
+          <button class="btn btn-light" onclick="document.getElementById('was').scrollIntoView({behavior:'smooth'})">So funktioniert's →<span class="circ">→</span></button>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="fcard left">
+          <h3>0 €</h3>
+          <p>INVESTITIONSKOSTEN</p>
+          <div class="pill">Förderung inklusive ✓</div>
+        </div>
+        <div class="fcard right">
+          <div class="avatars">
+            <img src="https://i.pravatar.cc/40?img=1" alt="Team">
+            <img src="https://i.pravatar.cc/40?img=2" alt="Team">
+            <img src="https://i.pravatar.cc/40?img=3" alt="Team">
+          </div>
+          <div>
+            <strong>Ihr Team vor Ort</strong>
+            Persönliche Beratung in Sachsen
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-inner">
+      <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+      <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+    </div>
+  </div>
+
+  <!-- Definition -->
+  <section id="was">
     <div class="wrap">
-      <div class="pill">✦ Wärmecontracting · Privat & Gewerbe</div>
-      <h1>{heroTitle}</h1>
-      <p>{heroSubtitle}</p>
-      <div class="cta-row">
-        <button class="btn btn-primary">Rate berechnen ▶<span class="circ">→</span></button>
-        <button class="btn btn-light">So funktioniert's →<span class="circ">→</span></button>
+      <div class="definition-grid">
+        <div>
+          <div class="pill">Was ist Wärmecontracting?</div>
+          <h2>Wärmecontracting bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme.</h2>
+          <p>Sie sparen Investition und Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</p>
+          <p class="stamp">Stand: Juni 2026</p>
+        </div>
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"/>
+          <circle cx="100" cy="100" r="40" fill="none" stroke="currentColor" stroke-width="3" opacity="0.6"/>
+          <rect x="75" y="60" width="50" height="60" fill="currentColor" opacity="0.6" rx="4"/>
+          <polygon points="100,50 85,65 115,65" fill="currentColor" opacity="0.8"/>
+          <style>
+            svg { color: var(--green); }
+          </style>
+        </svg>
       </div>
     </div>
   </section>
 
-  <!-- Solutions from CMS -->
-  <section>
+  <!-- Solutions -->
+  <section id="loesungen">
     <div class="wrap">
       <div class="pill">Unsere Lösungen</div>
       <h2>Maßgeschneidert für Ihr Objekt</h2>
+      <p>Wir finden die perfekte Kombination aus Technik, Finanzierung und Service — für jede Gebäudeart.</p>
 
       <div class="grid3">
-        {pageData?.values?.map((val: any) => (
-          <div class="card">
-            {val.backgroundImage && (
-              <img src={getCMSImageUrl(val.backgroundImage.url)} alt={val.title} />
-            )}
-            <div class="content">
-              <h3>{val.title}</h3>
-              <p>{val.description}</p>
+        <div class="pcard">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225324_fa82fa9d-721c-493a-b0fa-7691ce2e45cc.png" alt="Einfamilienhaus">
+          <div class="pills">
+            <span class="tag">Privat</span>
+            <span class="tag bold">Einfamilienhaus</span>
+          </div>
+          <div class="content">
+            <p class="subtitle">Wärmepumpe / Fernwärme</p>
+            <h3>Wohnhaus 140 m²</h3>
+            <div class="stats">
+              <div><strong>~140 m²</strong><br>Heizfläche</div>
+              <div><strong>1 Einheit</strong><br>Wohneinheiten</div>
+              <div><strong>−60 %*</strong><br>CO₂-Ersparnis</div>
             </div>
           </div>
-        ))}
+        </div>
+
+        <div class="pcard">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225332_865ea2e2-650b-47f6-b284-2b4c910b6390.png" alt="Mehrfamilienhaus">
+          <div class="pills">
+            <span class="tag">Privat, WEG</span>
+            <span class="tag bold">Mehrfamilienhaus</span>
+          </div>
+          <div class="content">
+            <p class="subtitle">BHKW + Brennwert</p>
+            <h3>Gebäude 900 m²</h3>
+            <div class="stats">
+              <div><strong>~900 m²</strong><br>Heizfläche</div>
+              <div><strong>12 Einheiten</strong><br>Wohneinheiten</div>
+              <div><strong>−55 %*</strong><br>CO₂-Ersparnis</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225339_b36dc6bb-8c20-40fe-9c0d-bc2171f13ec9.png" alt="Gewerbe">
+          <div class="pills">
+            <span class="tag">Gewerbe, Kommune</span>
+            <span class="tag bold">Gewerbe & Liegenschaft</span>
+          </div>
+          <div class="content">
+            <p class="subtitle">Contracting / Nahwärme</p>
+            <h3>Gewerbeimmobilie 3.500+ m²</h3>
+            <div class="stats">
+              <div><strong>3.500 m²+</strong><br>Heizfläche</div>
+              <div><strong>Wärme+Kälte</strong><br>Versorgung</div>
+              <div><strong>−50 %*</strong><br>CO₂-Ersparnis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies -->
+  <section id="technik" class="tech">
+    <div class="wrap">
+      <div class="pill">Technologien</div>
+      <h2>Bewährte Systeme, moderne Effizienz</h2>
+      <p>Wir kombinieren das Beste aus verschiedenen Wärmequellen — immer individuell auf Ihr Objekt abgestimmt.</p>
+
+      <div class="tgrid">
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M2 10h20M6 6h12M6 18h12M4 14h16"/>
+          </svg>
+          <h3>Wärmepumpe</h3>
+          <p>Erneuerbare Wärme aus Luft, Wasser oder Erde — ideal bei niedrigen Vorlauftemperaturen.</p>
+        </div>
+
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <h3>Fernwärme</h3>
+          <p>Gebrauchsfertige Lieferung aus dem Netz — umweltfreundlich, effizient, wartungsarm.</p>
+        </div>
+
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L22 8v8c0 7-10 6-10 6s-10 1-10-6V8l10-6z"/>
+          </svg>
+          <h3>BHKW</h3>
+          <p>Erzeugt Strom und Wärme zugleich — hoher Wirkungsgrad durch Kraft-Wärme-Kopplung.</p>
+        </div>
+
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z"/>
+          </svg>
+          <h3>Solarthermie</h3>
+          <p>Sonnenwärme mit Pufferspeicher — clever kombinierbar mit weiteren Quellen.</p>
+        </div>
+
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M9 9h6v4H9z"/>
+          </svg>
+          <h3>Pelletkessel</h3>
+          <p>Nachwachsende Rohstoffe, gut förderfähig im Bestand — nachhaltig und stabil.</p>
+        </div>
+
+        <div class="tcard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1118 0A9 9 0 013 12z"/>
+            <path d="M9 9l3 3 3-3"/>
+          </svg>
+          <h3>Brennwerttechnik</h3>
+          <p>Effiziente Gas-Brennwertsysteme, optional mit Biomethan — solide kombinierbar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contract Models -->
+  <section id="modelle">
+    <div class="wrap">
+      <div class="pill">Vertragsmodelle</div>
+      <h2>Die richtige Form für Ihr Projekt</h2>
+
+      <div class="mgrid">
+        <div class="mcard">
+          <div class="label">Modell 01</div>
+          <h3>Wärmeservice</h3>
+          <p>Wir investieren in die Anlage, sichern die Brennstoffversorgung und führen den Betrieb. Abrechnung nach Verbrauch zu vereinbarten Preisen.</p>
+          <div class="note">Wir investieren · wir betreiben</div>
+        </div>
+
+        <div class="mcard">
+          <div class="label">Modell 02</div>
+          <h3>Anlagenpacht</h3>
+          <p>Sie bleiben Eigentümer der Anlage, wir pachten sie und übernehmen die professionelle Betriebsführung samt Wärmelieferung.</p>
+          <div class="note">Sie besitzen · wir betreiben</div>
+        </div>
+
+        <div class="mcard">
+          <div class="label">Modell 03</div>
+          <h3>Energieanlagen-Contracting</h3>
+          <p>Wir übernehmen die Betriebsführung und optimieren Ihre Anlage energetisch — für dauerhaft niedrigere Kosten, ohne Ihren Aufwand.</p>
+          <div class="note">Sie besitzen · wir optimieren</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages -->
+  <section class="tech">
+    <div class="wrap">
+      <div class="pill">Ihre Vorteile</div>
+      <h2>Wärmecontracting rechnet sich</h2>
+
+      <div class="vgrid">
+        <div class="vcard">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <h3>Nachhaltigkeit</h3>
+          <p>Moderne Technik und Abwärmenutzung senken den CO₂-Ausstoß spürbar und schonen die Umwelt.</p>
+        </div>
+
+        <div class="vcard">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.29-2.29-1.41 1.41L10.5 17l4.29-5.5z"/>
+          </svg>
+          <h3>Effizienz</h3>
+          <p>Hohe Nutzungsgrade und optimierte Anlagen sparen große Mengen Energie ein.</p>
+        </div>
+
+        <div class="vcard">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/>
+          </svg>
+          <h3>Komfort</h3>
+          <p>Keine Sorge um Wartung oder Brennstoff — stets zuverlässige, konstante Wärme.</p>
+        </div>
+
+        <div class="vcard">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+          </svg>
+          <h3>Vielseitigkeit</h3>
+          <p>Ob Einfamilienhaus, Mehrfamilienhaus, Wohnung oder Altbau — überall einsetzbar.</p>
+        </div>
+
+        <div class="vcard">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          <h3>Kostenersparnis</h3>
+          <p>Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, ganz ohne Investition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section id="rechner" class="calc">
+    <div class="wrap">
+      <div class="pill" style="justify-content:center;margin:0 auto 16px;display:flex">Wärme-Rechner</div>
+      <h2>In 60 Sekunden zur unverbindlichen Schätzung</h2>
+      <p>Geben Sie ein paar Eckdaten ein — Sie erhalten sofort eine grobe Orientierung für Ihre monatliche Wärme-Rate und die CO₂-Einsparung.</p>
+
+      <div class="frame">
+        <div class="inputs">
+          <label class="label">Objekttyp</label>
+          <div class="seg">
+            <button class="on" onclick="setState('typ','efh')">Einfamilienhaus</button>
+            <button onclick="setState('typ','mfh')">Mehrfamilienhaus</button>
+            <button onclick="setState('typ','gew')">Gewerbe</button>
+          </div>
+
+          <div class="slider-group">
+            <div class="label-val">
+              <label class="label">Beheizte Fläche</label>
+              <span id="flaecheVal">140 m²</span>
+            </div>
+            <input type="range" id="flaeche" min="50" max="2000" step="10" value="140"
+              style="--p:calc((140-50)/(2000-50)*100%)" oninput="handleRange(this)">
+          </div>
+
+          <label class="label">Dämmstandard</label>
+          <div class="seg">
+            <button onclick="setState('daemm',150)">Altbau</button>
+            <button class="on" onclick="setState('daemm',95)">Saniert</button>
+            <button onclick="setState('daemm',55)">Neubau</button>
+          </div>
+
+          <label class="label">Aktuelles Heizsystem</label>
+          <div class="seg">
+            <button class="on" onclick="setState('alt',0.32)">Ölheizung</button>
+            <button onclick="setState('alt',0.20)">Gasheizung</button>
+          </div>
+        </div>
+
+        <div class="result">
+          <div class="result-item">
+            <span class="big" id="rate">ca. 165 – 210</span>
+            <small>€ / Monat<br><strong>Geschätzte Wärme-Rate*</strong></small>
+          </div>
+
+          <div class="boxes">
+            <div class="box">
+              <span class="big" id="co2">−60 %</span>
+              <small>CO₂ pro Jahr*</small>
+            </div>
+            <div class="box">
+              <span class="big" id="kg">3,1 t</span>
+              <small>CO₂-Einsparung / Jahr*</small>
+            </div>
+          </div>
+
+          <div class="check">
+            <span>✓ 0 € Investition</span>
+            <span>✓ Wartung & Förderung inklusive</span>
+          </div>
+
+          <button class="btn btn-light" style="width:100%;justify-content:center">Unverbindliches Angebot anfragen ↗<span class="circ">→</span></button>
+
+          <div class="disclaimer">
+            * Unverbindliche Beispielrechnung auf Basis typischer Richtwerte. Kein verbindliches Angebot. Ihr konkreter Preis hängt von Objekt, Technik und Laufzeit ab und wird individuell ermittelt.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section id="ablauf" class="showcase">
+    <div class="wrap">
+      <div class="inner">
+        <div class="ov"></div>
+        <div class="content">
+          <div class="pill" style="background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff">So funktioniert Wärmecontracting</div>
+          <h2>Ein Ansprechpartner. Von der Analyse bis zum Betrieb.</h2>
+          <p>Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, errichtet und betrieben.</p>
+
+          <div class="flist">
+            <div class="flist-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+              <div>
+                <h4>Bedarfsanalyse</h4>
+                <small>Objekt, Verbrauch & Ziele vor Ort</small>
+              </div>
+            </div>
+
+            <div class="flist-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+              <div>
+                <h4>Konzept & Finanzierung</h4>
+                <small>Technik + Förderung optimal ausgelegt</small>
+              </div>
+            </div>
+
+            <div class="flist-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+              <div>
+                <h4>Umsetzung & Bau</h4>
+                <small>Koordiniert, termintreu, sauber</small>
+              </div>
+            </div>
+
+            <div class="flist-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+              <div>
+                <h4>Service & Betrieb</h4>
+                <small>24/7 über die ganze Laufzeit</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap" style="max-width:600px;margin:0 auto">
+      <div class="pill" style="justify-content:center;margin:0 auto 16px;display:flex">FAQ</div>
+      <h2 style="text-align:center;margin-bottom:14px">Häufige Fragen zum Wärmecontracting</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-head" onclick="toggleFAQ(this)">
+            <strong>Was kostet Wärmecontracting?</strong>
+            <div class="icon">+</div>
+          </div>
+          <div class="faq-body">
+            <div>Der Preis besteht meist aus einem Grundpreis für Anlage und Bereitstellung sowie einem verbrauchsabhängigen Arbeitspreis. Die genaue Höhe hängt von Objekt, Technik und Laufzeit ab und wird individuell berechnet — der Rechner oben gibt eine erste Orientierung.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-head" onclick="toggleFAQ(this)">
+            <strong>Wem gehört die Heizungsanlage?</strong>
+            <div class="icon">+</div>
+          </div>
+          <div class="faq-body">
+            <div>Das hängt vom Modell ab. Beim Wärmeservice gehört die Anlage uns. Bei der Anlagenpacht bleiben Sie Eigentümer, und wir übernehmen nur den Betrieb.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-head" onclick="toggleFAQ(this)">
+            <strong>Lohnt sich das für ein Einfamilienhaus?</strong>
+            <div class="icon">+</div>
+          </div>
+          <div class="faq-body">
+            <div>Ja, besonders wenn Sie eine moderne Heizung ohne hohe Einmalinvestition möchten. Statt der Anschaffung zahlen Sie eine planbare Rate inklusive Wartung und Service; Fördermittel werden berücksichtigt.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-head" onclick="toggleFAQ(this)">
+            <strong>Welche Vertragslaufzeiten sind üblich?</strong>
+            <div class="icon">+</div>
+          </div>
+          <div class="faq-body">
+            <div>Contracting-Verträge laufen typischerweise über mehrere Jahre, häufig 10 bis 15 Jahre, damit sich die Investition in die Anlage über die Laufzeit verteilt. Die konkrete Laufzeit wird vertraglich vereinbart.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="close">
+    <div class="wrap">
+      <div class="close-grid">
+        <div>
+          <h2>Bereit für sorgenfreie Wärme?</h2>
+          <p>Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
+          <div class="side">
+            <button class="btn btn-light">Beratung buchen ↗<span class="circ">→</span></button>
+            <p><strong>☎ +49 (0) 371 XXXXXX</strong></p>
+            <p><strong>info@waermewerk.de</strong></p>
+          </div>
+        </div>
+        <div></div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2024 Böhme Energia GmbH. Alle Rechte vorbehalten. | <a href="/datenschutz">Datenschutz</a> | <a href="/impressum">Impressum</a></p>
+  <footer style="text-align:center;padding:32px 22px;color:var(--muted);font-size:0.85rem;border-top:1px solid var(--line)">
+    <p>* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen. Markenname & Kontakt sind Platzhalter.</p>
   </footer>
 
   <script>
-    // Hier können später Calculator + weitere Interaktionen kommen
-    console.log('Website geladen');
+    const state = { typ: 'efh', flaeche: 140, daemm: 95, alt: 0.32 };
+    const grund = { efh: 28, mfh: 120, gew: 240 };
+
+    function setState(key, val) {
+      state[key] = val;
+      updateSegments();
+      calc();
+    }
+
+    function handleRange(el) {
+      state.flaeche = parseInt(el.value);
+      const p = ((state.flaeche - 50) / (2000 - 50)) * 100;
+      el.style.setProperty('--p', p + '%');
+      document.getElementById('flaecheVal').textContent = state.flaeche + ' m²';
+      calc();
+    }
+
+    function updateSegments() {
+      document.querySelectorAll('.seg button').forEach(btn => {
+        btn.classList.remove('on');
+      });
+      document.querySelectorAll('.seg button').forEach(btn => {
+        const val = btn.getAttribute('onclick');
+        if (val.includes(state.typ) || val.includes(state.daemm) || val.includes(state.alt)) {
+          btn.classList.add('on');
+        }
+      });
+    }
+
+    function calc() {
+      const bedarf = state.flaeche * state.daemm;
+      const arbeit = 0.11;
+      const monat = (bedarf * arbeit) / 12 + grund[state.typ];
+      const fmtE = n => Math.round(n / 5) * 5;
+      const lo = fmtE(monat * 0.88);
+      const hi = fmtE(monat * 1.12);
+      document.getElementById('rate').textContent = 'ca. ' + lo.toLocaleString('de-DE') + ' – ' + hi.toLocaleString('de-DE');
+
+      const contract = 0.08;
+      const saved = (bedarf * (state.alt - contract)) / 1000;
+      const pct = Math.round(((state.alt - contract) / state.alt) * 100);
+      document.getElementById('co2').textContent = '−' + pct + ' %';
+      document.getElementById('kg').textContent = saved.toFixed(1).replace('.', ',') + ' t';
+    }
+
+    function toggleFAQ(head) {
+      const item = head.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Init
+    calc();
+    charSplit();
+
+    function charSplit() {
+      const h1 = document.getElementById('heroTitle');
+      const text = h1.textContent;
+      h1.innerHTML = '';
+      for (let char of text) {
+        const sp = document.createElement('span');
+        sp.className = 'ch';
+        sp.textContent = char;
+        h1.appendChild(sp);
+      }
+    }
   </script>
 </body>
 </html>
