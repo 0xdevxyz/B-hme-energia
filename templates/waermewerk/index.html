@@ -110,6 +110,14 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 .stamp{font-size:.82rem;color:var(--muted);font-weight:600}
 .def-ill{display:grid;place-items:center}
 
+/* ---------- NUTZEN-SÄULEN (dena ELC) ---------- */
+.pillars{padding:0 0 90px}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcell{background:rgba(60,104,77,.06);border:1px solid var(--line);border-radius:20px;padding:28px}
+.pcell h3{font-size:1.1rem;margin:14px 0 7px}
+.pcell p{color:var(--muted);font-size:.93rem}
+@media(max-width:900px){.pillar-grid{grid-template-columns:1fr}}
+
 /* ---------- LÖSUNGEN ---------- */
 .sol{padding:90px 0}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -185,9 +193,10 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 .showcase .content{position:relative;z-index:2;max-width:640px;color:#fff;padding:46px}
 .showcase .content h2{color:#fff;font-size:clamp(1.7rem,3vw,2.5rem);margin:16px 0 12px}
 .showcase .content>p{opacity:.9;margin-bottom:28px}
-.flist{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.flist{display:flex;flex-direction:column;gap:13px}
 .fstep{display:flex;gap:14px;align-items:flex-start}
 .fstep .icon-tile{margin-bottom:0;flex:none;width:44px;height:44px}
+.fnum{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,var(--green),var(--green-2));color:#fff;font-weight:800;font-size:.95rem;flex:none}
 .fstep h4{font-size:1rem;font-weight:700}
 .fstep small{opacity:.82}
 .badge-light{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.26);color:#fff;border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:600}
@@ -374,6 +383,17 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   </div>
 </section>
 
+<!-- ============ NUTZEN-SÄULEN (dena ELC) ============ -->
+<section class="pillars">
+  <div class="wrap">
+    <div class="pillar-grid">
+      <div class="pcell reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3C9 7 7 9 7 13a5 5 0 0 0 10 0c0-2-1-3-2-5"/><path d="M12 21v-3M9 19l3 2 3-2"/></svg></div><h3 data-editable="text" data-key="pillar_1_title">Reduzierung Energieverbrauch &amp; CO₂</h3><p data-editable="text" data-key="pillar_1_text">Moderne Technik und Abwärmenutzung senken Verbrauch und Emissionen spürbar.</p></div>
+      <div class="pcell reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M8 12l3 3 5-5M3 12l4-4 4 3M21 12l-4 4-3-2"/></svg></div><h3 data-editable="text" data-key="pillar_2_title">Alles aus einer Hand</h3><p data-editable="text" data-key="pillar_2_text">Planung, Finanzierung, Bau, Betrieb und Wartung – ein einziger Ansprechpartner.</p></div>
+      <div class="pcell reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></div><h3 data-editable="text" data-key="pillar_3_title">Planbare Kosten</h3><p data-editable="text" data-key="pillar_3_text">Verbrauchsabhängige Vergütung statt hoher Investition – kalkulierbar über die Laufzeit.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LÖSUNGEN ============ -->
 <section class="sol" id="loesungen">
   <div class="wrap">
@@ -548,12 +568,13 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
       <div class="content">
         <span class="badge-light" data-editable="text" data-key="showcase_badge">So funktioniert Wärmecontracting</span>
         <h2 data-editable="text" data-key="showcase_headline">Ein Ansprechpartner. Von der Analyse bis zum Betrieb.</h2>
-        <p data-editable="text" data-key="showcase_text">Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, errichtet und betrieben.</p>
+        <p data-editable="text" data-key="showcase_text">Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, gebaut, betrieben und gewartet.</p>
         <div class="flist">
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_1_title">Bedarfsanalyse</h4><small data-editable="text" data-key="showcase_step_1_text">Objekt, Verbrauch &amp; Ziele vor Ort</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M8 20h8M9 16v4M15 16v4"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_2_title">Konzept &amp; Finanzierung</h4><small data-editable="text" data-key="showcase_step_2_text">Technik + Förderung optimal ausgelegt</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7l3 3M3 21l3-1 11-11-2-2L4 18z"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_3_title">Umsetzung &amp; Bau</h4><small data-editable="text" data-key="showcase_step_3_text">Koordiniert, termintreu, sauber</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 2h-5l-.4 2.6a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.6h5l.4-2.6a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_4_title">Service &amp; Betrieb</h4><small data-editable="text" data-key="showcase_step_4_text">24/7 über die ganze Laufzeit</small></div></div>
+          <div class="fstep"><div class="fnum">01</div><div><h4 data-editable="text" data-key="showcase_step_1_title">Planung</h4><small data-editable="text" data-key="showcase_step_1_text">Bedarfsanalyse, Konzept &amp; Auslegung – passend zum Objekt</small></div></div>
+          <div class="fstep"><div class="fnum">02</div><div><h4 data-editable="text" data-key="showcase_step_2_title">Finanzierung</h4><small data-editable="text" data-key="showcase_step_2_text">Wir investieren – Sie zahlen 0 €, Förderung inklusive</small></div></div>
+          <div class="fstep"><div class="fnum">03</div><div><h4 data-editable="text" data-key="showcase_step_3_title">Umsetzung</h4><small data-editable="text" data-key="showcase_step_3_text">Bau &amp; Installation, koordiniert und termintreu</small></div></div>
+          <div class="fstep"><div class="fnum">04</div><div><h4 data-editable="text" data-key="showcase_step_4_title">Betrieb</h4><small data-editable="text" data-key="showcase_step_4_text">Zuverlässige Wärmelieferung, 24/7 über die Laufzeit</small></div></div>
+          <div class="fstep"><div class="fnum">05</div><div><h4 data-editable="text" data-key="showcase_step_5_title">Wartung</h4><small data-editable="text" data-key="showcase_step_5_text">Wartung, Reparatur &amp; Brennstoff – alles inklusive</small></div></div>
         </div>
       </div>
     </div>
