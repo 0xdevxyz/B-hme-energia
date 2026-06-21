@@ -26,19 +26,17 @@ function estimateReadingTime(text) {
 }
 
 function buildBlogCard(post, siteUrl) {
+  const url = `${siteUrl}/blog/${post.slug}.html`;
   const imageTag = post.image
-    ? `<img src="${post.image}" alt="${post.title}" loading="lazy">`
-    : `<div style="width:100%;height:100%;background:#dbeafe;display:flex;align-items:center;justify-content:center;color:#1e3a8a;font-size:2rem;">📝</div>`;
-  return `    <article class="blog-card" data-post-slug="${post.slug}">
-      <a href="${siteUrl}/blog/${post.slug}.html" class="blog-card-image">${imageTag}</a>
-      <div class="blog-card-body">
-        <div class="blog-card-meta">
-          <time datetime="${post.dateIso}">${post.date}</time>
-          <span>· ${post.author}</span>
-        </div>
-        <h2 class="blog-card-title"><a href="${siteUrl}/blog/${post.slug}.html">${post.title}</a></h2>
-        <p class="blog-card-teaser">${post.teaser}</p>
-        <a href="${siteUrl}/blog/${post.slug}.html" class="blog-card-cta">Weiterlesen →</a>
+    ? `<img src="/${post.image}" alt="${post.title}" loading="lazy" onerror="this.style.display='none'">`
+    : '';
+  return `    <article class="bcard" data-post-slug="${post.slug}">
+      <a href="${url}" class="bcard-img">${imageTag}</a>
+      <div class="bcard-body">
+        <div class="bcard-meta"><span class="bcard-cat">Ratgeber</span><time datetime="${post.dateIso}">${post.date}</time></div>
+        <h3><a href="${url}">${post.title}</a></h3>
+        <p>${post.teaser}</p>
+        <a href="${url}" class="bcard-more">Weiterlesen →</a>
       </div>
     </article>`;
 }
@@ -129,10 +127,10 @@ module.exports = function addBlogPost(clientname, options = {}) {
   const readingTime = estimateReadingTime(intro + ' ' + body.replace(/<[^>]+>/g, ''));
   const canonicalUrl = `${config.siteUrl}/blog/${slug}.html`;
 
-  const faqItems = [
+  const faqItems = options.faqItems || [
     {
       q: `Was ist ${keyword}?`,
-      a: `${keyword} ist ein wichtiges Thema für Patienten und Kunden in ${config.city}. ${config.businessName} informiert und berät Sie persönlich – rufen Sie uns an: ${config.phone}`,
+      a: `${keyword} ist ein wichtiges Thema für Eigentümer und Kunden in ${config.city} und Umgebung. ${config.businessName} informiert und berät Sie persönlich – rufen Sie uns an: ${config.phone}`,
     },
     {
       q: `Was kostet ${keyword} in ${config.city}?`,

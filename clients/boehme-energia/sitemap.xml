@@ -6,4 +6,28 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://boehme.boehme-energie.com/blog/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://boehme.boehme-energie.com/blog/was-ist-waermecontracting-modelle-kosten-ablauf-im-ueberblick.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://boehme.boehme-energie.com/blog/waermecontracting-oder-heizung-kaufen-der-ehrliche-vergleich.html</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://boehme.boehme-energie.com/blog/beg-foerderung-waermecontracting-was-2026-moeglich-ist.html</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

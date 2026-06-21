@@ -120,5 +120,43 @@
   "pillar_2_title": "Alles aus einer Hand",
   "pillar_2_text": "Planung, Finanzierung, Bau, Betrieb und Wartung – ein einziger Ansprechpartner.",
   "pillar_3_title": "Planbare Kosten",
-  "pillar_3_text": "Verbrauchsabhängige Vergütung statt hoher Investition – kalkulierbar über die Laufzeit."
+  "pillar_3_text": "Verbrauchsabhängige Vergütung statt hoher Investition – kalkulierbar über die Laufzeit.",
+  "blog_posts": [
+    {
+      "slug": "beg-foerderung-waermecontracting-was-2026-moeglich-ist",
+      "title": "BEG-Förderung & Wärmecontracting: Was 2026 möglich ist",
+      "keyword": "BEG-Förderung Wärmecontracting",
+      "intro": "Effiziente Wärme wird gefördert – auch im Contracting. Dieser Ratgeber gibt einen verständlichen Überblick, wie die BEG-Förderung mit Wärmecontracting zusammenspielt, wer profitiert und worauf Sie achten sollten. Hinweis: Förderbedingungen ändern sich, eine individuelle Prüfung ist immer ratsam.",
+      "teaser": "Effiziente Wärme wird gefördert – auch im Contracting. Dieser Ratgeber gibt einen verständlichen Überblick, wie die BEG-Förderung mit Wär...",
+      "author": "Böhme Energie Team",
+      "date": "20. Juni 2026",
+      "dateIso": "2026-06-20",
+      "image": "assets/images/blog-default.jpg",
+      "url": "/blog/beg-foerderung-waermecontracting-was-2026-moeglich-ist.html"
+    },
+    {
+      "slug": "waermecontracting-oder-heizung-kaufen-der-ehrliche-vergleich",
+      "title": "Wärmecontracting oder Heizung kaufen? Der ehrliche Vergleich",
+      "keyword": "Wärmecontracting vs. Heizung kaufen",
+      "intro": "Neue Heizung selbst kaufen oder die Wärme als Service beziehen? Beide Wege haben ihre Berechtigung. Dieser Vergleich zeigt die Unterschiede bei Investition, Risiko, Wartung und Kosten über die Laufzeit – damit Sie die richtige Entscheidung für Ihr Objekt treffen.",
+      "teaser": "Neue Heizung selbst kaufen oder die Wärme als Service beziehen? Beide Wege haben ihre Berechtigung. Dieser Vergleich zeigt die Unterschie...",
+      "author": "Böhme Energie Team",
+      "date": "18. Juni 2026",
+      "dateIso": "2026-06-18",
+      "image": "assets/images/blog-default.jpg",
+      "url": "/blog/waermecontracting-oder-heizung-kaufen-der-ehrliche-vergleich.html"
+    },
+    {
+      "slug": "was-ist-waermecontracting-modelle-kosten-ablauf-im-ueberblick",
+      "title": "Was ist Wärmecontracting? Modelle, Kosten & Ablauf im Überblick",
+      "keyword": "Wärmecontracting",
+      "intro": "Wärmecontracting bedeutet: Ein Dienstleister plant, finanziert, baut und betreibt Ihre Wärmeversorgung – Sie zahlen nur die gelieferte Wärme. Dieser Ratgeber erklärt die gängigen Modelle, wie sich die Kosten zusammensetzen und wie ein Projekt typischerweise abläuft.",
+      "teaser": "Wärmecontracting bedeutet: Ein Dienstleister plant, finanziert, baut und betreibt Ihre Wärmeversorgung – Sie zahlen nur die gelieferte Wä...",
+      "author": "Böhme Energie Team",
+      "date": "15. Juni 2026",
+      "dateIso": "2026-06-15",
+      "image": "assets/images/blog-default.jpg",
+      "url": "/blog/was-ist-waermecontracting-modelle-kosten-ablauf-im-ueberblick.html"
+    }
+  ]
 }

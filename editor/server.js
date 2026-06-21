@@ -404,13 +404,37 @@ function hydrateContent(html, data) {
   return html;
 }
 
+// Inject the newest blog posts into the homepage teaser (marker <!--BLOG_TEASER-->),
+// built from content.blog_posts so it stays current as the customer adds/removes posts.
+function injectBlogTeaser(html, data) {
+  if (html.indexOf('<!--BLOG_TEASER-->') === -1) return html;
+  const posts = Array.isArray(data.blog_posts) ? data.blog_posts : [];
+  let cards;
+  if (posts.length === 0) {
+    cards = '<p style="grid-column:1/-1;text-align:center;color:var(--muted)">Bald finden Sie hier Ratgeber-Artikel.</p>';
+  } else {
+    cards = posts.slice(0, 3).map((p) => {
+      const url = `/blog/${p.slug}.html`;
+      return `<article class="pcard reveal"><div class="pcard-body">`
+        + `<div class="ptype">Ratgeber · ${escapeHtml(p.date || '')}</div>`
+        + `<h3 style="font-size:1.18rem;margin-bottom:8px"><a href="${url}" style="color:inherit">${escapeHtml(p.title || '')}</a></h3>`
+        + `<p>${escapeHtml(p.teaser || '')}</p>`
+        + `<a href="${url}" class="ptype" style="margin-top:14px;font-weight:700">Weiterlesen →</a>`
+        + `</div></article>`;
+    }).join('\n');
+  }
+  return html.replace('<!--BLOG_TEASER-->', cards);
+}
+
 function serveHtmlWithOverlay(req, res, htmlPath) {
   if (req.query.edit !== undefined && !hasValidSession(req)) {
     return res.send(loginPageHtml());
   }
   if (!fs.existsSync(htmlPath)) return res.status(404).send('Seite nicht gefunden');
   let html = fs.readFileSync(htmlPath, 'utf8');
-  html = hydrateContent(html, readLiveContent());
+  const live = readLiveContent();
+  html = hydrateContent(html, live);
+  html = injectBlogTeaser(html, live);
   if (hasValidSession(req)) {
     const overlayScript = fs.readFileSync(path.join(__dirname, 'overlay.js'), 'utf8');
     html = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);
@@ -426,6 +450,45 @@ app.get('/:page.html', (req, res) => {
   const safeName = path.basename(req.params.page).replace(/[^a-z0-9\-_]/gi, '');
   serveHtmlWithOverlay(req, res, path.join(CLIENT_DIR, `${safeName}.html`));
 });
+
+// ---- Blog: served with editor overlay (when authenticated). No global hydration —
+// each post is a self-contained file, so per-post edits are written back into the file.
+function serveBlogPage(req, res, htmlPath) {
+  if (req.query.edit !== undefined && !hasValidSession(req)) return res.send(loginPageHtml());
+  if (!fs.existsSync(htmlPath)) return res.status(404).send('Seite nicht gefunden');
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  if (hasValidSession(req)) {
+    const overlayScript = fs.readFileSync(path.join(__dirname, 'overlay.js'), 'utf8');
+    html = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);
+  }
+  return res.send(html);
+}
+app.get(['/blog', '/blog/'], (req, res) => serveBlogPage(req, res, path.join(CLIENT_DIR, 'blog', 'index.html')));
+app.get('/blog/:slug.html', (req, res) => {
+  const slug = path.basename(req.params.slug).replace(/[^a-z0-9\-_]/gi, '');
+  serveBlogPage(req, res, path.join(CLIENT_DIR, 'blog', `${slug}.html`));
+});
+
+// Overwrite a [data-key] field's content directly inside a self-contained HTML file.
+function writeFieldToFile(filePath, key, value) {
+  if (!/^[a-z][a-z0-9_]{1,63}$/.test(key)) return false;
+  let html = fs.readFileSync(filePath, 'utf8');
+  const reText = new RegExp('(<([a-zA-Z0-9]+)\\b[^>]*?\\bdata-editable="text"\\s+data-key="' + key + '"[^>]*>)([\\s\\S]*?)(<\\/\\2>)');
+  if (reText.test(html)) {
+    html = html.replace(reText, (m, o, t, inner, c) => o + escapeHtml(value) + c);
+  } else {
+    const reImg = new RegExp('<img\\b[^>]*\\bdata-key="' + key + '"[^>]*>');
+    if (!reImg.test(html)) return false;
+    html = html.replace(reImg, (m) => m.replace(/\bsrc="[^"]*"/, 'src="' + escapeHtml(value) + '"'));
+  }
+  fs.writeFileSync(filePath, html, 'utf8');
+  return true;
+}
+function blogSlugFromReferer(req) {
+  const ref = req.headers.referer || '';
+  const m = ref.match(/\/blog\/([a-z0-9\-_]+)\.html(?:[?#]|$)/);
+  return m ? m[1] : null;
+}
 
 app.post('/auth/request-link', authLimiter, async (req, res) => {
   const { email } = req.body;
@@ -664,8 +727,16 @@ app.post('/api/save', isAuthenticated, checkOrigin, (req, res) => {
   if (!isValidContentKey(key)) {
     return res.status(400).json({ error: 'Key nicht erlaubt' });
   }
-  if (typeof value !== 'string' || value.length > 5000) {
+  if (typeof value !== 'string' || value.length > 60000) {
     return res.status(400).json({ error: 'Ungültiger Wert' });
+  }
+  // Blog post edit (from /blog/<slug>.html) -> write the field into that file.
+  const bslug = blogSlugFromReferer(req);
+  if (bslug) {
+    const file = path.join(CLIENT_DIR, 'blog', `${bslug}.html`);
+    if (fs.existsSync(file) && writeFieldToFile(file, key, value)) {
+      return res.json({ ok: true });
+    }
   }
   content[key] = value;
   fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf8');
@@ -690,6 +761,15 @@ app.post('/api/upload-image', isAuthenticated, checkOrigin, (req, res) => {
 
     const relativePath = `assets/uploads/${req.file.filename}`;
     const key = req.body.key;
+
+    // Blog post image edit -> write src into that post's file.
+    const bslug = blogSlugFromReferer(req);
+    if (bslug && key) {
+      const file = path.join(CLIENT_DIR, 'blog', `${bslug}.html`);
+      if (fs.existsSync(file) && writeFieldToFile(file, key, `/${relativePath}`)) {
+        return res.json({ ok: true, path: relativePath });
+      }
+    }
 
     if (key && (isValidContentKey(key) || ALLOWED_IMAGE_KEYS.has(key))) {
       content[key] = relativePath;
@@ -857,6 +937,43 @@ app.delete('/api/delete-page', isAuthenticated, checkOrigin, (req, res) => {
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+// Delete a blog post: remove file, drop from content.blog_posts, rebuild index, clean sitemap/llms.
+app.delete('/api/blog-delete', isAuthenticated, checkOrigin, (req, res) => {
+  const { slug } = req.body;
+  if (!slug || typeof slug !== 'string' || !/^[a-z0-9\-_]+$/.test(slug) || slug.length > 80) {
+    return res.status(400).json({ error: 'Ungültiger Slug' });
+  }
+  const file = path.join(CLIENT_DIR, 'blog', `${slug}.html`);
+  if (!fs.existsSync(file)) return res.status(404).json({ error: 'Artikel nicht gefunden' });
+  try {
+    fs.unlinkSync(file);
+    let c = {};
+    try { c = JSON.parse(fs.readFileSync(contentPath, 'utf8')); } catch {}
+    const posts = (Array.isArray(c.blog_posts) ? c.blog_posts : []).filter(p => p.slug !== slug);
+    c.blog_posts = posts;
+    fs.writeFileSync(contentPath, JSON.stringify(c, null, 2), 'utf8');
+    content.blog_posts = posts;
+    try { require('../generator/blog').rebuildBlogIndex(CLIENT_DIR, config, posts); }
+    catch (e) { console.error('[blog-delete] index', e.message); }
+    const sitemapPath = path.join(CLIENT_DIR, 'sitemap.xml');
+    if (fs.existsSync(sitemapPath)) {
+      let s = fs.readFileSync(sitemapPath, 'utf8');
+      s = s.replace(new RegExp(`\\s*<url>[\\s\\S]*?<loc>[^<]*\\/blog\\/${escapeRegex(slug)}\\.html<\\/loc>[\\s\\S]*?<\\/url>`, 'g'), '');
+      fs.writeFileSync(sitemapPath, s, 'utf8');
+    }
+    const llmsPath = path.join(CLIENT_DIR, 'llms.txt');
+    if (fs.existsSync(llmsPath)) {
+      let l = fs.readFileSync(llmsPath, 'utf8');
+      l = l.replace(new RegExp(`\\n## Blog & Ratgeber:[\\s\\S]*?\\/blog\\/${escapeRegex(slug)}\\.html[\\s\\S]*?(?=\\n## |$)`, 'g'), '');
+      fs.writeFileSync(llmsPath, l, 'utf8');
+    }
+    return res.json({ ok: true });
+  } catch (e) {
+    console.error('[blog-delete]', e.message);
+    return res.status(500).json({ error: 'Löschen fehlgeschlagen' });
+  }
+});
 
 app.use(express.static(CLIENT_DIR));
 

@@ -703,11 +703,35 @@
     }
   });
 
+  function initBlogDelete() {
+    const btn = document.querySelector('[data-blog-delete]');
+    if (!btn) return;
+    const slug = document.body.getAttribute('data-blog-slug');
+    if (!slug) return;
+    btn.style.display = 'block';
+    btn.addEventListener('click', async () => {
+      if (!confirm('Diesen Artikel wirklich löschen? Das kann nicht rückgängig gemacht werden.')) return;
+      btn.disabled = true; btn.textContent = 'Wird gelöscht …';
+      try {
+        const res = await fetch('/api/blog-delete', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug }),
+        });
+        if (res.ok) { window.location.href = '/blog/'; return; }
+        const j = await res.json().catch(() => ({}));
+        alert('Fehler: ' + (j.error || 'Löschen fehlgeschlagen'));
+      } catch (e) { alert('Netzwerkfehler.'); }
+      btn.disabled = false; btn.textContent = '🗑 Artikel löschen';
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('studio-edit-mode');
     initToolbar();
     initEditableElements();
     initSectionDeleteButtons();
+    initBlogDelete();
     setTimeout(() => {
       if (window.ScrollTrigger) window.ScrollTrigger.refresh();
       if (window.gsap) window.gsap.utils.toArray('.animate-on-scroll').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
