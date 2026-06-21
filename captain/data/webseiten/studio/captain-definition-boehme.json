@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "dockerfilePath": "./Dockerfile",
+  "imageName": "img-captain-studio-boehme-energia:latest",
+  "containerPort": 3000,
+  "serviceUpdatePolicy": "always",
+  "optionalSslIsUsed": true,
+  "forceSsl": true,
+  "volumes": [
+    {
+      "hostPath": "/captain/data/webseiten/studio",
+      "containerPath": "/app"
+    }
+  ],
+  "envVars": [
+    {
+      "key": "CLIENT_DIR",
+      "value": "/app/clients/boehme-energia"
+    },
+    {
+      "key": "NODE_ENV",
+      "value": "production"
+    },
+    {
+      "key": "SITE_URL",
+      "value": "https://boehme.boehme-energie.com"
+    },
+    {
+      "key": "EDITOR_EMAIL",
+      "value": "mail@panoart360.de"
+    }
+  ]
+}
