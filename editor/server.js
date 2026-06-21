@@ -433,7 +433,11 @@ app.post('/auth/request-link', authLimiter, async (req, res) => {
     });
   } catch (err) {
     console.error('E-Mail-Fehler:', err.message);
-    return res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden' });
+    // Admin-Fallback (kein SMTP konfiguriert): den einmal gültigen Magic-Link in
+    // die Server-Logs schreiben. Nur der Admin mit Server-/CapRover-Zugriff sieht
+    // die Logs; der Link erscheint NICHT in der HTTP-Antwort an den Browser.
+    console.log(`\n[studio] ====== MAGIC-LINK (1 Stunde gültig) für ${email} ======\n[studio] ${magicLink}\n[studio] =========================================================\n`);
+    return res.status(200).json({ message: 'Link erstellt. Falls keine E-Mail ankommt: Link in den Server-Logs (CapRover → Logs) öffnen.' });
   }
 
   return res.status(200).json({ message: 'Link wurde gesendet' });
