@@ -63,8 +63,8 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 /* CRITICAL: only lift content layers, never .hero-bg / .hero-scrim */
 .hero>.nav,.hero>.hero-center,.hero>.hero-bottom{position:relative;z-index:2;width:100%}
 
-.nav{display:flex;justify-content:center;padding:18px 20px 0}
-.navpill{display:flex;align-items:center;gap:26px;width:100%;max-width:1180px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 12px 10px 20px}
+.nav{display:flex;justify-content:center;padding:22px 26px 0}
+.navpill{display:flex;align-items:center;gap:26px;width:100%;max-width:1280px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 14px 11px 24px}
 .brand{display:flex;align-items:center;flex:none}
 .brand-logo{height:30px;width:auto;display:block}
 @media(max-width:560px){.brand-logo{height:25px}}
@@ -75,15 +75,15 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 .burger{display:none;width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);cursor:pointer;color:#fff}
 .burger svg{margin:auto}
 
-.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px 96px;max-width:920px;margin:0 auto}
+.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 26px 96px;max-width:1180px;margin:0 auto}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.26);color:#fff;border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:600;margin-bottom:26px}
-.hero h1{color:#fff;font-size:clamp(2.5rem,6vw,5rem);text-shadow:0 2px 34px rgba(0,0,0,.5);margin-bottom:22px}
+.hero h1{color:#fff;font-size:clamp(2.4rem,5.6vw,4.7rem);text-shadow:0 2px 34px rgba(0,0,0,.5);margin-bottom:22px;white-space:nowrap}
 .hero h1 .ch{display:inline-block;opacity:0;animation:chIn .7s cubic-bezier(.2,.7,.2,1) forwards}
 .hero h1 .sp{display:inline-block;width:.28em}
 .hero-sub{color:rgba(255,255,255,.9);font-size:clamp(1rem,1.5vw,1.22rem);max-width:680px;margin-bottom:34px;font-weight:500}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 
-.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;padding:0 26px 30px;margin-top:auto}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;width:100%;max-width:1280px;margin:auto auto 0;padding:0 26px 30px}
 .fcard{background:rgba(255,255,255,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.3);border-radius:26px;padding:22px 26px;color:#fff}
 .fcard.left .big{font-size:2.8rem;font-weight:800;line-height:1}
 .fcard.left .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.86;margin:6px 0 12px}
@@ -236,6 +236,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   .def-ill{display:none}
 }
 @media(max-width:560px){
+  .hero h1{white-space:normal;font-size:clamp(2.1rem,8.5vw,2.8rem)}
   .hero{border-radius:24px;height:calc(100vh - 20px)}
   .hero-pad{padding:10px}
   .def,.sol,.tech,.models,.calc,.showcase,.faq{padding:70px 0}
