@@ -63,12 +63,12 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 /* CRITICAL: only lift content layers, never .hero-bg / .hero-scrim */
 .hero>.nav,.hero>.hero-center,.hero>.hero-bottom{position:relative;z-index:2;width:100%}
 
-.nav{display:flex;justify-content:center;padding:22px 26px 0}
-.navpill{display:flex;align-items:center;gap:26px;width:100%;max-width:1280px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 14px 11px 24px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;max-width:1280px;margin:0 auto;padding:22px 26px 0}
+.navpill{display:flex;align-items:center;gap:26px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 14px 11px 26px}
 .brand{display:flex;align-items:center;flex:none}
-.brand-logo{height:30px;width:auto;display:block}
-@media(max-width:560px){.brand-logo{height:25px}}
-.nav-links{display:flex;gap:24px;margin:0 auto;font-size:.92rem;font-weight:500}
+.brand-logo{height:48px;width:auto;display:block}
+@media(max-width:560px){.brand-logo{height:36px}}
+.nav-links{display:flex;gap:24px;font-size:.92rem;font-weight:500}
 .nav-links a{color:rgba(255,255,255,.86)}
 .nav-links a:hover{color:#fff}
 .nav-cta{display:flex;align-items:center;gap:10px}
@@ -219,7 +219,19 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 .drawer .btn{margin-top:18px;justify-content:center}
 
 /* ---------- FOOTER ---------- */
-.foot{text-align:center;padding:0 22px 40px;color:var(--muted);font-size:.78rem;max-width:760px;margin:0 auto}
+.site-footer{background:#fff;border-top:1px solid var(--line);margin-top:24px}
+.foot-inner{display:flex;justify-content:space-between;gap:48px;padding:64px 22px 44px;flex-wrap:wrap}
+.foot-brand{max-width:360px}
+.foot-logo{height:56px;width:auto;margin-bottom:20px}
+.foot-tag{color:var(--muted);font-size:.94rem;line-height:1.65}
+.foot-contact{display:flex;gap:56px;flex-wrap:wrap}
+.foot-col{display:flex;flex-direction:column;gap:9px;font-size:.94rem;color:var(--forest)}
+.foot-col a{transition:color .2s}
+.foot-col a:hover{color:var(--green)}
+.foot-h{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:5px}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;flex-wrap:wrap}
+.foot-bottom .foot-note{max-width:680px}
+@media(max-width:760px){.foot-inner{flex-direction:column;gap:36px;padding:48px 22px 36px}.foot-contact{gap:36px}}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:900px){
@@ -282,10 +294,10 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 
   <!-- NAV -->
   <nav class="nav">
+    <a href="#" class="brand" aria-label="Böhme Energie GmbH">
+      <img src="assets/images/boehme-energie-logo-weiss.png" alt="Böhme Energie GmbH" class="brand-logo">
+    </a>
     <div class="navpill">
-      <a href="#" class="brand" aria-label="Böhme Energie GmbH">
-        <img src="assets/images/boehme-energie-logo-weiss.png" alt="Böhme Energie GmbH" class="brand-logo">
-      </a>
       <div class="nav-links">
         <a href="#was">Contracting</a>
         <a href="#loesungen">Lösungen</a>
@@ -593,7 +605,35 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 </section>
 
 <!-- ============ FOOTER ============ -->
-<p class="foot" data-editable="text" data-key="footer_note">* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen. Markenname &amp; Kontakt sind Platzhalter.</p>
+<footer class="site-footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <img src="assets/images/boehme-energie-schwarz.png" alt="Böhme Energie GmbH" class="foot-logo">
+      <p class="foot-tag">Wärmecontracting für Privat &amp; Gewerbe — geplant, finanziert, gebaut und betrieben. Ein Ansprechpartner für Ihre komplette Wärmeversorgung.</p>
+    </div>
+    <div class="foot-contact">
+      <div class="foot-col">
+        <span class="foot-h">Kontakt</span>
+        <a href="tel:+49372260030">03722 / 60030</a>
+        <a href="mailto:info@boehme-energie.com">info@boehme-energie.com</a>
+      </div>
+      <div class="foot-col">
+        <span class="foot-h">Adresse</span>
+        <span>Böhme Energie GmbH</span>
+        <span>Ringstr. 11</span>
+        <span>09241 Mühlau</span>
+      </div>
+      <div class="foot-col">
+        <span class="foot-h">Öffnungszeiten</span>
+        <span>Mo–Fr 09:00–17:00 Uhr</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Böhme Energie GmbH · Alle Rechte vorbehalten</span>
+    <span class="foot-note" data-editable="text" data-key="footer_note">* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen.</span>
+  </div>
+</footer>
 
 <!-- ============ DRAWER ============ -->
 <div class="scrim" id="scrim"></div>
@@ -609,6 +649,19 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 
 <script>
 (function(){
+  /* ---------- Hero video autoplay ---------- */
+  var hv=document.getElementById('heroVid');
+  if(hv){
+    hv.muted=true;hv.defaultMuted=true;
+    var tryPlay=function(){try{var p=hv.play();if(p&&p.catch)p.catch(function(){});}catch(e){}};
+    tryPlay();
+    hv.addEventListener('loadeddata',tryPlay);
+    hv.addEventListener('canplay',tryPlay);
+    ['click','touchstart','scroll'].forEach(function(ev){
+      document.addEventListener(ev,tryPlay,{once:true,passive:true});
+    });
+  }
+
   /* ---------- Headline stagger ---------- */
   var h1=document.getElementById('heroTitle');
   if(h1){
