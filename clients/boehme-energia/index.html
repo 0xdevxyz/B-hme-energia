@@ -225,17 +225,33 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 .contact-head .pill{background:rgba(255,255,255,.16);color:#fff;margin-bottom:14px}
 .contact-head h2{color:#fff;font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:12px}
 .contact-head p{opacity:.9}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.cf-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.contact-form input,.contact-form textarea{width:100%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:14px 16px;color:#fff;font-family:var(--sans);font-size:.95rem;transition:.2s}
-.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,.7)}
-.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.18)}
-.contact-form textarea{resize:vertical;min-height:120px}
-.cf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none}
-.cf-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px}
-.cf-status{font-size:.92rem;font-weight:600}
+/* Typeform-Style stepped form */
+.tf{position:relative}
+.tf-progress{height:4px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;margin-bottom:30px}
+.tf-progress span{display:block;height:100%;width:20%;background:#fff;border-radius:999px;transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.tf-stage{position:relative;min-height:230px}
+.tf-step{position:absolute;inset:0;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .4s cubic-bezier(.2,.7,.2,1),transform .4s cubic-bezier(.2,.7,.2,1)}
+.tf-step.is-active{position:relative;opacity:1;transform:none;pointer-events:auto}
+.tf-num{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.8);font-weight:700;font-size:.9rem;margin-bottom:14px}
+.tf-q{display:block;color:#fff;font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-bottom:22px;max-width:760px}
+.tf-opt{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6)}
+.tf-input{width:100%;max-width:640px;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.4);border-radius:0;padding:8px 2px;color:#fff;font-family:var(--sans);font-size:clamp(1.1rem,2vw,1.5rem);font-weight:500;transition:border-color .2s}
+.tf-input::placeholder{color:rgba(255,255,255,.5)}
+.tf-input:focus{outline:none;border-bottom-color:#fff}
+textarea.tf-input{resize:none;line-height:1.5}
+.tf-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px}
+.tf-hint{font-size:.82rem;color:rgba(255,255,255,.65)}
+.tf-err{min-height:1.2em;margin-top:10px;font-size:.88rem;font-weight:600;color:#ffd9d0}
+.tf-review{color:rgba(255,255,255,.92);font-size:1rem;line-height:1.8;max-width:640px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:18px 22px;margin-bottom:6px}
+.tf-review b{font-weight:700}
+.tf-status{min-height:1.3em;margin-top:14px;font-size:.95rem;font-weight:600}
+.tf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none}
+.tf-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
+.tf-back{background:transparent;border:none;color:rgba(255,255,255,.8);font-family:var(--sans);font-weight:600;font-size:.9rem;cursor:pointer;padding:6px 0;visibility:hidden}
+.tf-back:hover{color:#fff}
+.tf-count{font-size:.85rem;color:rgba(255,255,255,.65);font-weight:600}
 .contact-box .close-contact{margin-top:22px}
-@media(max-width:760px){.cf-row{grid-template-columns:1fr}.contact-box{padding:32px}}
+@media(max-width:760px){.contact-box{padding:32px 24px}.tf-stage{min-height:260px}}
 
 /* ---------- DRAWER ---------- */
 .scrim{position:fixed;inset:0;background:rgba(16,24,19,.5);opacity:0;pointer-events:none;transition:.3s;z-index:60}
@@ -636,18 +652,47 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
         <h2 data-editable="text" data-key="closing_headline">Bereit für sorgenfreie Wärme?</h2>
         <p data-editable="text" data-key="closing_text">Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
       </div>
-      <form class="contact-form" id="beratungForm" novalidate>
-        <div class="cf-row">
-          <input name="name" placeholder="Name" autocomplete="name" required>
-          <input name="email" type="email" placeholder="E-Mail" autocomplete="email" required>
-          <input name="phone" type="tel" placeholder="Telefon" autocomplete="tel">
+      <form class="tf" id="beratungForm" novalidate>
+        <div class="tf-progress"><span id="tfBar"></span></div>
+        <div class="tf-stage">
+          <div class="tf-step is-active" data-field="name" data-required="1">
+            <span class="tf-num">1 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <label class="tf-q">Wie dürfen wir Sie ansprechen?</label>
+            <input class="tf-input" name="name" type="text" placeholder="Ihr Name" autocomplete="name" maxlength="120">
+            <div class="tf-row"><button type="button" class="btn btn-light tf-ok">OK <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span></button><span class="tf-hint">Enter ↵</span></div>
+            <div class="tf-err"></div>
+          </div>
+          <div class="tf-step" data-field="email" data-required="1" data-type="email">
+            <span class="tf-num">2 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <label class="tf-q">Unter welcher E-Mail erreichen wir Sie?</label>
+            <input class="tf-input" name="email" type="email" placeholder="name@beispiel.de" autocomplete="email" maxlength="160">
+            <div class="tf-row"><button type="button" class="btn btn-light tf-ok">OK <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span></button><span class="tf-hint">Enter ↵</span></div>
+            <div class="tf-err"></div>
+          </div>
+          <div class="tf-step" data-field="phone">
+            <span class="tf-num">3 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <label class="tf-q">Ihre Telefonnummer? <span class="tf-opt">optional</span></label>
+            <input class="tf-input" name="phone" type="tel" placeholder="+49 …" autocomplete="tel" maxlength="60">
+            <div class="tf-row"><button type="button" class="btn btn-light tf-ok">OK <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span></button><span class="tf-hint">Enter ↵ · überspringen mit OK</span></div>
+            <div class="tf-err"></div>
+          </div>
+          <div class="tf-step" data-field="message" data-required="1">
+            <span class="tf-num">4 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <label class="tf-q">Worum geht es? Kurz Ihr Anliegen.</label>
+            <textarea class="tf-input" name="message" rows="2" placeholder="z. B. Wärmecontracting für ein Mehrfamilienhaus in …" maxlength="4000"></textarea>
+            <div class="tf-row"><button type="button" class="btn btn-light tf-ok">OK <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span></button><span class="tf-hint">Shift + Enter = neue Zeile</span></div>
+            <div class="tf-err"></div>
+          </div>
+          <div class="tf-step tf-final" data-final="1">
+            <span class="tf-num">✦</span>
+            <label class="tf-q">Passt alles? Dann senden wir das ab.</label>
+            <div class="tf-review" id="tfReview"></div>
+            <div class="tf-row"><button type="button" class="btn btn-light" id="tfSubmit">Anfrage senden <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button></div>
+            <div class="tf-status" id="tfStatus" aria-live="polite"></div>
+          </div>
         </div>
-        <textarea name="message" placeholder="Ihre Nachricht" rows="4" required></textarea>
-        <input type="text" name="company" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="cf-actions">
-          <button type="submit" class="btn btn-light">Anfrage senden <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
-          <span class="cf-status" id="cfStatus" aria-live="polite"></span>
-        </div>
+        <input type="text" name="company" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="tf-foot"><button type="button" class="tf-back" id="tfBack">↑ Zurück</button><span class="tf-count" id="tfCount"></span></div>
       </form>
       <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
     </div>
@@ -803,22 +848,74 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 (function(){
   var form=document.getElementById('beratungForm');
   if(!form) return;
-  var status=document.getElementById('cfStatus');
-  var btn=form.querySelector('button[type=submit]');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
+  var steps=Array.prototype.slice.call(form.querySelectorAll('.tf-step'));
+  var bar=document.getElementById('tfBar'), back=document.getElementById('tfBack'),
+      count=document.getElementById('tfCount'), review=document.getElementById('tfReview'),
+      submitBtn=document.getElementById('tfSubmit'), status=document.getElementById('tfStatus');
+  var total=steps.length, cur=0, emailRe=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  function val(i){var inp=steps[i].querySelector('.tf-input');return inp?inp.value.trim():'';}
+  function setErr(i,msg){var e=steps[i].querySelector('.tf-err');if(e)e.textContent=msg||'';}
+
+  function validate(i){
+    var s=steps[i];
+    if(s.dataset.final) return true;
+    var v=val(i);
+    if(s.dataset.required && !v){setErr(i,'Bitte ausfüllen, um fortzufahren.');return false;}
+    if(s.dataset.type==='email' && v && !emailRe.test(v)){setErr(i,'Bitte eine gültige E-Mail-Adresse angeben.');return false;}
+    setErr(i,''); return true;
+  }
+
+  function buildReview(){
+    var g=function(n){var el=form.querySelector('[name="'+n+'"]');return el?el.value.trim():'';};
+    var esc=function(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+    review.innerHTML=
+      '<b>Name:</b> '+esc(g('name')||'–')+'<br>'+
+      '<b>E-Mail:</b> '+esc(g('email')||'–')+'<br>'+
+      '<b>Telefon:</b> '+esc(g('phone')||'–')+'<br>'+
+      '<b>Nachricht:</b> '+esc(g('message')||'–');
+  }
+
+  function show(i){
+    steps.forEach(function(s,idx){s.classList.toggle('is-active',idx===i);});
+    cur=i;
+    bar.style.width=((i+1)/total*100)+'%';
+    back.style.visibility=i>0?'visible':'hidden';
+    count.textContent=(i+1)+' / '+total;
+    if(steps[i].dataset.final){buildReview();submitBtn.focus();}
+    else{var inp=steps[i].querySelector('.tf-input');if(inp)setTimeout(function(){inp.focus();},120);}
+  }
+
+  function next(){if(validate(cur)&&cur<total-1)show(cur+1);}
+  function prev(){if(cur>0){setErr(cur,'');show(cur-1);}}
+
+  form.querySelectorAll('.tf-ok').forEach(function(b){b.addEventListener('click',next);});
+  back.addEventListener('click',prev);
+  form.querySelectorAll('.tf-input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+        if(inp.tagName==='TEXTAREA'&&e.shiftKey) return; // Shift+Enter = Zeilenumbruch
+        e.preventDefault(); next();
+      }
+    });
+  });
+
+  submitBtn.addEventListener('click',function(){
     var data=Object.fromEntries(new FormData(form).entries());
     if(!data.name||!data.email||!data.message){status.textContent='⚠️ Bitte Name, E-Mail und Nachricht ausfüllen.';return;}
-    btn.disabled=true; status.textContent='Wird gesendet…';
+    submitBtn.disabled=true; status.textContent='Wird gesendet …';
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
       .then(function(res){
-        if(res.ok){status.textContent='✅ Danke! Wir melden uns zeitnah bei Ihnen.';form.reset();}
-        else{status.textContent='⚠️ '+((res.j&&res.j.error)||'Es ist ein Fehler aufgetreten.');}
+        if(res.ok){
+          form.querySelector('.tf-stage').innerHTML='<div class="tf-step is-active" style="text-align:left"><span class="tf-num">✦ Gesendet</span><label class="tf-q">Danke! Wir melden uns zeitnah bei Ihnen.</label></div>';
+          bar.style.width='100%'; form.querySelector('.tf-foot').style.display='none';
+        } else { status.textContent='⚠️ '+((res.j&&res.j.error)||'Es ist ein Fehler aufgetreten.'); submitBtn.disabled=false; }
       })
-      .catch(function(){status.textContent='⚠️ Netzwerkfehler. Bitte später erneut versuchen.';})
-      .finally(function(){btn.disabled=false;});
+      .catch(function(){status.textContent='⚠️ Netzwerkfehler. Bitte später erneut versuchen.';submitBtn.disabled=false;});
   });
+
+  show(0);
 })();
 </script>
 <script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
