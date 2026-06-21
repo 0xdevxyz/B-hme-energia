@@ -368,18 +368,29 @@ function hasValidSession(req) {
 // [data-editable][data-key] element so saved edits are visible immediately for
 // ALL visitors (anonymous included), with no client-side flash. Text fields are
 // leaf elements (icons/bold live outside the data-key element by template design).
-function hydrateContent(html) {
+// Read the current content fresh from disk so edits (editor saves OR direct
+// file changes, e.g. via the mounted client dir) are reflected immediately,
+// without a redeploy. Falls back to the in-memory copy if the file is unreadable.
+function readLiveContent() {
+  try {
+    return JSON.parse(fs.readFileSync(contentPath, 'utf8'));
+  } catch {
+    return content;
+  }
+}
+
+function hydrateContent(html, data) {
   // Images: replace the src of <img ... data-key="KEY" ...>
   html = html.replace(/<img\b[^>]*\bdata-key="([a-z0-9_]+)"[^>]*>/g, (full, key) => {
-    if (!(key in content) || !content[key]) return full;
-    return full.replace(/\bsrc="[^"]*"/, `src="${escapeHtml(content[key])}"`);
+    if (!(key in data) || !data[key]) return full;
+    return full.replace(/\bsrc="[^"]*"/, `src="${escapeHtml(data[key])}"`);
   });
   // Text: replace the inner content of <tag ... data-editable="text" data-key="KEY" ...>…</tag>
   html = html.replace(
     /(<([a-zA-Z0-9]+)\b[^>]*?\bdata-editable="text"\s+data-key="([a-z0-9_]+)"[^>]*>)([\s\S]*?)(<\/\2>)/g,
     (full, open, tag, key, inner, close) => {
-      if (!(key in content)) return full;
-      return open + escapeHtml(content[key]) + close;
+      if (!(key in data)) return full;
+      return open + escapeHtml(data[key]) + close;
     }
   );
   return html;
@@ -391,7 +402,7 @@ function serveHtmlWithOverlay(req, res, htmlPath) {
   }
   if (!fs.existsSync(htmlPath)) return res.status(404).send('Seite nicht gefunden');
   let html = fs.readFileSync(htmlPath, 'utf8');
-  html = hydrateContent(html);
+  html = hydrateContent(html, readLiveContent());
   if (hasValidSession(req)) {
     const overlayScript = fs.readFileSync(path.join(__dirname, 'overlay.js'), 'utf8');
     html = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);

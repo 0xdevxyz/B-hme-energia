@@ -63,12 +63,12 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 /* CRITICAL: only lift content layers, never .hero-bg / .hero-scrim */
 .hero>.nav,.hero>.hero-center,.hero>.hero-bottom{position:relative;z-index:2;width:100%}
 
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;padding:22px 40px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;max-width:1200px;margin:0 auto;padding:24px 32px 0}
 .nav .navpill{margin-left:auto}
 .navpill{display:flex;align-items:center;gap:26px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:11px 14px 11px 26px}
 .brand{display:flex;align-items:center;flex:none}
-.brand-logo{height:48px;width:auto;display:block}
-@media(max-width:560px){.brand-logo{height:36px}}
+.brand-logo{height:64px;width:auto;display:block}
+@media(max-width:560px){.brand-logo{height:46px}}
 .nav-links{display:flex;gap:24px;font-size:.92rem;font-weight:500}
 .nav-links a{color:rgba(255,255,255,.86)}
 .nav-links a:hover{color:#fff}
@@ -76,12 +76,12 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 .burger{display:none;width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);cursor:pointer;color:#fff}
 .burger svg{margin:auto}
 
-.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 26px 96px;max-width:1180px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.26);color:#fff;border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:600;margin-bottom:26px}
-.hero h1{color:#fff;font-size:clamp(2.4rem,5.6vw,4.7rem);text-shadow:0 2px 34px rgba(0,0,0,.5);margin-bottom:22px;white-space:nowrap}
+.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 26px 72px;max-width:820px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.26);color:#fff;border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:600;margin-bottom:18px}
+.hero h1{color:#fff;font-size:clamp(2.4rem,5.6vw,4.7rem);text-shadow:0 2px 34px rgba(0,0,0,.5);margin-bottom:14px;white-space:nowrap}
 .hero h1 .ch{display:inline-block;opacity:0;animation:chIn .7s cubic-bezier(.2,.7,.2,1) forwards}
 .hero h1 .sp{display:inline-block;width:.28em}
-.hero-sub{color:rgba(255,255,255,.9);font-size:clamp(1rem,1.5vw,1.22rem);max-width:680px;margin-bottom:34px;font-weight:500}
+.hero-sub{color:rgba(255,255,255,.9);font-size:clamp(1rem,1.5vw,1.18rem);max-width:600px;margin-bottom:26px;font-weight:500}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 
 .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;width:100%;max-width:1280px;margin:auto auto 0;padding:0 26px 30px}
@@ -316,7 +316,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <!-- CENTER -->
   <div class="hero-center">
     <span class="hero-badge" data-editable="text" data-key="hero_badge">✦ Wärmecontracting · Privat &amp; Gewerbe</span>
-    <h1 id="heroTitle" data-editable="text" data-key="hero_headline">Wärme, die einfach da ist</h1>
+    <h1 id="heroTitle" data-editable="text" data-key="hero_headline">Wärme als Rundum-Service</h1>
     <p class="hero-sub" data-editable="text" data-key="hero_sub">Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis. Ausgereift, nachhaltig, mit weniger CO₂.</p>
     <div class="hero-ctas">
       <a href="#rechner" class="btn btn-primary">Rate berechnen <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>
