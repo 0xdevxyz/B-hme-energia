@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{page_headline}} – {{businessName}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{canonicalUrl}}">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="{{page_headline}} – {{businessName}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:image" content="{{siteUrl}}/assets/images/hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <script type="application/ld+json">{{schemaOrgJsonLd}}</script>
+  <script type="application/ld+json">{{faqSchemaJsonLd}}</script>
+  <style>
+    /* ── Story template overrides ───────────────────────────── */
+    body { padding-top: 80px; }
+
+    /* Story hero */
+    .story-hero-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(45,212,191,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Stats row */
+    .story-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    /* Warum benefit cards grid */
+    .warum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    /* Inhalt two-column layout */
+    .inhalt-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .inhalt-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-sidebar { display: none; }
+    }
+
+    /* Body text styles */
+    .story-body h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 800;
+      color: var(--grey-900);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 2.5rem 0 1rem;
+    }
+    .story-body p {
+      color: var(--grey-600);
+      font-size: 1.025rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Blockquote */
+    .story-blockquote {
+      border-left: 4px solid var(--mint-dark);
+      background: var(--mint-pale);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      color: var(--grey-700);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* Sticky sidebar */
+    .story-sidebar {
+      position: sticky;
+      top: 88px;
+    }
+
+    /* Prozess steps grid */
+    .prozess-grid-story {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .prozess-grid-story::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 26px;
+        left: calc(16.66% + 26px);
+        right: calc(16.66% + 26px);
+        height: 2px;
+        background: repeating-linear-gradient(
+          to right,
+          var(--grey-200) 0,
+          var(--grey-200) 8px,
+          transparent 8px,
+          transparent 16px
+        );
+        z-index: 0;
+      }
+    }
+
+    /* FAQ details */
+    .faq-detail-story {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      transition: border-color var(--transition);
+    }
+    .faq-detail-story[open] {
+      border-color: var(--mint-dark);
+    }
+    .faq-detail-story summary {
+      padding: 1.1rem 1.5rem;
+      font-weight: 600;
+      color: var(--grey-900);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.975rem;
+      gap: 1rem;
+    }
+    .faq-detail-story summary::-webkit-details-marker { display: none; }
+    .faq-detail-story summary .faq-icon {
+      color: var(--mint-dark);
+      font-size: 1.3rem;
+      font-weight: 300;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq-answer-body-story {
+      padding: 1rem 1.5rem 1.25rem;
+      color: var(--grey-600);
+      line-height: 1.75;
+      font-size: 0.93rem;
+      border-top: 1px solid var(--grey-100);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-name" data-editable="text" data-key="logoName">{{logoName}}</span>
+        <span class="logo-sub" data-editable="text" data-key="businessName">{{businessName}}</span>
+      </a>
+      <nav class="nav-pill" aria-label="Hauptnavigation">
+        <a href="#hero" class="nav-link">Start</a>
+        <a href="#warum" class="nav-link">Vorteile</a>
+        <a href="#inhalt" class="nav-link">Inhalt</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="/" class="nav-link">Startseite</a>
+      </nav>
+      <a href="tel:{{phone}}" class="btn-nav-cta" aria-label="Jetzt anrufen">&#9990; {{phone}}</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO STORY – Dark background, large h1, stats row
+         ============================================================ -->
+    <section id="hero" style="background: var(--dark); padding: 120px 0 80px; position: relative; overflow: hidden;">
+      <div class="story-hero-radial" aria-hidden="true"></div>
+      <div class="container" style="position: relative; z-index: 1;">
+        <div class="anim-fade-up" style="text-align: center; max-width: 860px; margin: 0 auto;">
+
+          <!-- Eyebrow badge -->
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-pill); padding: 6px 18px; margin-bottom: 1.5rem;">
+            <span style="width: 7px; height: 7px; background: var(--mint-dark); border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;" data-editable="text" data-key="page_eyebrow">{{page_eyebrow}}</span>
+          </div>
+
+          <!-- Main headline -->
+          <h1 style="font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 900; color: var(--white); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem;" data-editable="text" data-key="page_headline">{{page_headline}}</h1>
+
+          <!-- Intro paragraph -->
+          <p style="font-size: 1.15rem; color: rgba(255,255,255,0.6); max-width: 620px; margin: 0 auto 2rem; line-height: 1.75;" data-editable="text" data-key="page_intro">{{page_intro}}</p>
+
+          <!-- CTA -->
+          <a href="tel:{{phone}}" class="btn-primary" style="font-size: 1.05rem; padding: 16px 36px;">&#9990; {{phone}}</a>
+
+          <!-- Stats row -->
+          <div class="story-stats-row">
+
+            <div style="text-align: center;">
+              <div style="font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 0.3rem;" data-editable="text" data-key="stat_1_number">{{stat_1_number}}</div>
+              <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.04em;" data-editable="text" data-key="stat_1_label">{{stat_1_label}}</div>
+            </div>
+
+            <div style="width: 1px; height: 52px; background: rgba(255,255,255,0.1); align-self: center;"></div>
+
+            <div style="text-align: center;">
+              <div style="font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 0.3rem;" data-editable="text" data-key="stat_2_number">{{stat_2_number}}</div>
+              <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.04em;" data-editable="text" data-key="stat_2_label">{{stat_2_label}}</div>
+            </div>
+
+            <div style="width: 1px; height: 52px; background: rgba(255,255,255,0.1); align-self: center;"></div>
+
+            <div style="text-align: center;">
+              <div style="font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 0.3rem;" data-editable="text" data-key="stat_3_number">{{stat_3_number}}</div>
+              <div style="font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.04em;" data-editable="text" data-key="stat_3_label">{{stat_3_label}}</div>
+            </div>
+
+          </div>
+
+          <!-- Hero note -->
+          <p style="font-size: 0.82rem; color: rgba(255,255,255,0.28); margin-top: 1.5rem;" data-editable="text" data-key="page_hero_note">{{page_hero_note}}</p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WARUM – Premium 4 benefit cards
+         ============================================================ -->
+    <section id="warum" style="padding: 80px 0; background: var(--grey-50);">
+      <div class="container">
+        <div class="animate-on-scroll" style="text-align: center;">
+          <div class="section-tag" style="display: inline-flex; margin-bottom: 0.75rem;">Ihre Vorteile</div>
+          <h2 class="section-title anim-fade-up" style="text-align: center;">Warum Sie bei uns richtig sind</h2>
+          <p class="section-subtitle anim-fade-up" style="text-align: center; margin: 0 auto;">Erfahren Sie, was uns von anderen unterscheidet – und warum unsere Patienten uns weiterempfehlen.</p>
+        </div>
+
+        <div class="warum-grid">
+
+          <!-- Benefit Card 1 -->
+          <div class="anim-fade-up" style="background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 1.5rem; transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-lg)';this.style.transform='translateY(-4px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+            <div style="width: 48px; height: 48px; background: var(--mint-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--mint-dark); font-size: 1.3rem; margin-bottom: 1rem;">&#10003;</div>
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.5rem;" data-editable="text" data-key="benefit_1">{{benefit_1}}</h3>
+            <p style="font-size: 0.9rem; color: var(--grey-500); line-height: 1.65; margin: 0;" data-editable="text" data-key="benefit_1_text">{{benefit_1_text}}</p>
+          </div>
+
+          <!-- Benefit Card 2 -->
+          <div class="anim-fade-up" style="background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 1.5rem; transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-lg)';this.style.transform='translateY(-4px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+            <div style="width: 48px; height: 48px; background: var(--mint-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--mint-dark); font-size: 1.3rem; margin-bottom: 1rem;">&#9733;</div>
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.5rem;" data-editable="text" data-key="benefit_2">{{benefit_2}}</h3>
+            <p style="font-size: 0.9rem; color: var(--grey-500); line-height: 1.65; margin: 0;" data-editable="text" data-key="benefit_2_text">{{benefit_2_text}}</p>
+          </div>
+
+          <!-- Benefit Card 3 -->
+          <div class="anim-fade-up" style="background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 1.5rem; transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-lg)';this.style.transform='translateY(-4px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+            <div style="width: 48px; height: 48px; background: var(--mint-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--mint-dark); font-size: 1.3rem; margin-bottom: 1rem;">&#9670;</div>
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.5rem;" data-editable="text" data-key="benefit_3">{{benefit_3}}</h3>
+            <p style="font-size: 0.9rem; color: var(--grey-500); line-height: 1.65; margin: 0;" data-editable="text" data-key="benefit_3_text">{{benefit_3_text}}</p>
+          </div>
+
+          <!-- Benefit Card 4 -->
+          <div class="anim-fade-up" style="background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 1.5rem; transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-lg)';this.style.transform='translateY(-4px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+            <div style="width: 48px; height: 48px; background: var(--mint-pale); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--mint-dark); font-size: 1.3rem; margin-bottom: 1rem;">&#9998;</div>
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.5rem;" data-editable="text" data-key="benefit_4">{{benefit_4}}</h3>
+            <p style="font-size: 0.9rem; color: var(--grey-500); line-height: 1.65; margin: 0;" data-editable="text" data-key="benefit_4_text">{{benefit_4_text}}</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INHALT – Main content + sticky sidebar
+         ============================================================ -->
+    <section id="inhalt" style="padding: 80px 0; background: var(--white);">
+      <div class="container">
+        <div class="inhalt-layout">
+
+          <!-- Main article content -->
+          <article class="story-body anim-fade-up">
+
+            <h2 data-editable="text" data-key="page_body_h1">{{pageKeyword}} – Was Sie wissen sollten</h2>
+
+            <p data-editable="text" data-key="page_body_1">{{page_body_1}}</p>
+
+            <p data-editable="text" data-key="page_body_2">{{page_body_2}}</p>
+
+            <p data-editable="text" data-key="page_body_3">{{page_body_3}}</p>
+
+            <h2 data-editable="text" data-key="page_body_h2">Unser Leistungsversprechen für Sie</h2>
+
+            <p data-editable="text" data-key="page_body_4">{{page_body_4}}</p>
+
+            <p data-editable="text" data-key="page_body_5">{{page_body_5}}</p>
+
+            <blockquote class="story-blockquote" data-editable="text" data-key="page_body_quote">{{page_body_quote}}</blockquote>
+
+          </article>
+
+          <!-- Sticky sidebar -->
+          <aside class="story-sidebar">
+            <div style="background: var(--dark); border-radius: var(--radius-lg); padding: 2rem; text-align: center; box-shadow: var(--shadow-lg);">
+              <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem;" data-editable="text" data-key="sidebar_headline">{{sidebar_headline}}</h3>
+              <p style="font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1.5rem;" data-editable="text" data-key="sidebar_text">{{sidebar_text}}</p>
+              <a href="tel:{{phone}}" class="btn-primary" style="width: 100%; justify-content: center; font-size: 0.95rem; padding: 14px 20px; margin-bottom: 0.75rem; display: flex;">
+                &#9990; {{phone}}
+              </a>
+              <a href="/" style="display: block; color: rgba(255,255,255,0.4); font-size: 0.82rem; text-decoration: underline; margin-top: 0.4rem;">Zur Startseite</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROZESS – 3 steps with mint-dark numbered circles
+         ============================================================ -->
+    <section id="prozess" style="padding: 80px 0; background: var(--grey-50);">
+      <div class="container">
+        <div class="animate-on-scroll" style="text-align: center;">
+          <div class="section-tag" style="display: inline-flex; margin-bottom: 0.75rem;">Unser Ablauf</div>
+          <h2 class="section-title anim-fade-up" style="text-align: center;">So arbeiten wir zusammen</h2>
+          <p class="section-subtitle anim-fade-up" style="text-align: center; margin: 0 auto;">Transparent, zuverlässig und auf Ihre Bedürfnisse zugeschnitten – in drei klaren Schritten.</p>
+        </div>
+
+        <div class="prozess-grid-story">
+
+          <!-- Step 1 -->
+          <div class="anim-fade-up" style="text-align: center; position: relative; z-index: 1;">
+            <div style="width: 52px; height: 52px; background: var(--mint-dark); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin: 0 auto 1.25rem; position: relative; z-index: 2; box-shadow: 0 4px 16px rgba(13,148,136,0.3);">1</div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.6rem;" data-editable="text" data-key="step_1_title">{{step_1_title}}</h3>
+            <p style="color: var(--grey-500); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.6rem;" data-editable="text" data-key="step_1_text">{{step_1_text}}</p>
+            <p style="color: var(--grey-400); font-size: 0.85rem; line-height: 1.6;" data-editable="text" data-key="step_1_detail">{{step_1_detail}}</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="anim-fade-up" style="text-align: center; position: relative; z-index: 1;">
+            <div style="width: 52px; height: 52px; background: var(--mint-dark); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin: 0 auto 1.25rem; position: relative; z-index: 2; box-shadow: 0 4px 16px rgba(13,148,136,0.3);">2</div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.6rem;" data-editable="text" data-key="step_2_title">{{step_2_title}}</h3>
+            <p style="color: var(--grey-500); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.6rem;" data-editable="text" data-key="step_2_text">{{step_2_text}}</p>
+            <p style="color: var(--grey-400); font-size: 0.85rem; line-height: 1.6;" data-editable="text" data-key="step_2_detail">{{step_2_detail}}</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="anim-fade-up" style="text-align: center; position: relative; z-index: 1;">
+            <div style="width: 52px; height: 52px; background: var(--mint-dark); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; margin: 0 auto 1.25rem; position: relative; z-index: 2; box-shadow: 0 4px 16px rgba(13,148,136,0.3);">3</div>
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.6rem;" data-editable="text" data-key="step_3_title">{{step_3_title}}</h3>
+            <p style="color: var(--grey-500); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.6rem;" data-editable="text" data-key="step_3_text">{{step_3_text}}</p>
+            <p style="color: var(--grey-400); font-size: 0.85rem; line-height: 1.6;" data-editable="text" data-key="step_3_detail">{{step_3_detail}}</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA BAND
+         ============================================================ -->
+    <section id="cta-band" style="padding: 60px 0; background: var(--dark); text-align: center;">
+      <div class="container">
+        <div class="anim-fade-up">
+          <h2 style="font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--white); margin-bottom: 0.75rem; letter-spacing: -0.02em;" data-editable="text" data-key="page_cta_band_headline">{{page_cta_band_headline}}</h2>
+          <p style="color: rgba(255,255,255,0.55); font-size: 1.05rem; max-width: 560px; margin: 0 auto 2rem; line-height: 1.7;" data-editable="text" data-key="page_cta_band_subtext">{{page_cta_band_subtext}}</p>
+          <a href="tel:{{phone}}" class="btn-primary" style="font-size: 1.05rem; padding: 16px 36px;">&#9990; {{phone}}</a>
+          <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.3);" data-editable="text" data-key="page_cta_band_note">{{page_cta_band_note}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section id="faq" style="padding: 80px 0; background: var(--grey-50);">
+      <div class="container" style="max-width: 780px;">
+        <div class="animate-on-scroll" style="text-align: center; margin-bottom: 2.5rem;">
+          <div class="section-tag" style="display: inline-flex; margin-bottom: 0.75rem;">Häufige Fragen</div>
+          <h2 class="section-title anim-fade-up" style="text-align: center;">Fragen zu {{pageKeyword}}</h2>
+          <p class="section-subtitle anim-fade-up" style="text-align: center; margin: 0 auto;" data-editable="text" data-key="page_faq_intro">{{page_faq_intro}}</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+
+          <details class="faq-detail-story anim-fade-up">
+            <summary data-editable="text" data-key="page_faq_1_q">{{page_faq_1_q}} <span class="faq-icon">+</span></summary>
+            <div class="faq-answer-body-story" data-editable="text" data-key="page_faq_1_a">{{page_faq_1_a}}</div>
+          </details>
+
+          <details class="faq-detail-story anim-fade-up">
+            <summary data-editable="text" data-key="page_faq_2_q">{{page_faq_2_q}} <span class="faq-icon">+</span></summary>
+            <div class="faq-answer-body-story" data-editable="text" data-key="page_faq_2_a">{{page_faq_2_a}}</div>
+          </details>
+
+          <details class="faq-detail-story anim-fade-up">
+            <summary data-editable="text" data-key="page_faq_3_q">{{page_faq_3_q}} <span class="faq-icon">+</span></summary>
+            <div class="faq-answer-body-story" data-editable="text" data-key="page_faq_3_a">{{page_faq_3_a}}</div>
+          </details>
+
+          <details class="faq-detail-story anim-fade-up">
+            <summary data-editable="text" data-key="page_faq_4_q">{{page_faq_4_q}} <span class="faq-icon">+</span></summary>
+            <div class="faq-answer-body-story" data-editable="text" data-key="page_faq_4_a">{{page_faq_4_a}}</div>
+          </details>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 2.5rem;">
+          <p style="color: var(--grey-500); margin-bottom: 1rem; font-size: 0.95rem;" data-editable="text" data-key="page_faq_cta_text">{{page_faq_cta_text}}</p>
+          <a href="tel:{{phone}}" class="btn-primary">&#9990; Jetzt anrufen: {{phone}}</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-name" data-editable="text" data-key="logoName">{{logoName}}</span>
+          <address style="margin-top: 1rem; font-style: normal; font-size: 0.875rem; line-height: 1.8;">
+            <span data-editable="text" data-key="businessName">{{businessName}}</span><br>
+            <span data-editable="text" data-key="address">{{address}}</span><br>
+            &#9990; <a href="tel:{{phone}}" data-editable="text" data-key="phone">{{phone}}</a><br>
+            <a href="mailto:{{email}}" data-editable="text" data-key="email">{{email}}</a>
+          </address>
+        </div>
+        <div class="footer-nav">
+          <h4>Navigation</h4>
+          <a href="/">Startseite</a>
+          <a href="#warum">Vorteile</a>
+          <a href="#inhalt">Inhalt</a>
+          <a href="#faq">FAQ</a>
+          <a href="tel:{{phone}}">Kontakt</a>
+        </div>
+        <div class="footer-nav">
+          <h4>Kontakt</h4>
+          <a href="tel:{{phone}}">{{phone}}</a>
+          <a href="mailto:{{email}}">{{email}}</a>
+          <a href="/">Zur Hauptseite</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-editable="text" data-key="footer_text">{{footer_text}}</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script>
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.anim-fade-up').forEach(function(el) {
+        gsap.fromTo(el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+          }
+        );
+      });
+      var header = document.getElementById('site-header');
+      if (header) {
+        window.addEventListener('scroll', function() {
+          header.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+      }
+    }
+    // FAQ open/close icon toggle
+    document.querySelectorAll('.faq-detail-story').forEach(function(d) {
+      d.addEventListener('toggle', function() {
+        var icon = d.querySelector('.faq-icon');
+        if (icon) icon.textContent = d.open ? '−' : '+';
+      });
+    });
+  </script>
+  <script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
+</body>
+</html>

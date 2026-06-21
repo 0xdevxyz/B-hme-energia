@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{blogTitle}} – {{businessName}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{canonicalUrl}}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{blogTitle}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:image" content="{{siteUrl}}/{{blogImage}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="article:published_time" content="{{blogDateIso}}">
+  <meta property="article:author" content="{{blogAuthor}}">
+
+  <!-- Article Schema.org -->
+  <script type="application/ld+json">{{articleSchemaJsonLd}}</script>
+  <!-- Breadcrumb Schema.org -->
+  <script type="application/ld+json">{{breadcrumbSchemaJsonLd}}</script>
+  <!-- FAQ Schema.org -->
+  <script type="application/ld+json">{{faqSchemaJsonLd}}</script>
+
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    /* STUDIO_OVERLAY_PLACEHOLDER */
+    :root { --color-primary: #1a56db; --color-text: #1a202c; --color-muted: #6b7280; --max-width: 720px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: var(--color-text); line-height: 1.7; background: #fff; }
+    a { color: var(--color-primary); }
+
+    /* Breadcrumb */
+    .breadcrumb { max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem 0; font-size: 0.85rem; color: var(--color-muted); }
+    .breadcrumb a { color: var(--color-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--color-primary); }
+    .breadcrumb span { margin: 0 0.4rem; }
+
+    /* Layout */
+    .blog-layout { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; display: grid; grid-template-columns: 1fr 280px; gap: 3rem; align-items: start; }
+    @media (max-width: 768px) { .blog-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* Article */
+    article header { margin-bottom: 2rem; }
+    article header .post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--color-muted); }
+    article header .post-meta time { font-weight: 500; }
+    article header .post-meta .author { display: flex; align-items: center; gap: 0.35rem; }
+    article header .reading-time { background: #f0f9ff; color: #0369a1; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+    article header h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #111; line-height: 1.25; margin-bottom: 1rem; }
+    article header .hero-image { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; margin-top: 1.5rem; }
+
+    /* Body */
+    .article-body { font-size: 1.05rem; color: #333; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 700; color: #111; margin: 2rem 0 0.75rem; }
+    .article-body h3 { font-size: 1.2rem; font-weight: 700; color: #111; margin: 1.5rem 0 0.5rem; }
+    .article-body p { margin-bottom: 1.2rem; }
+    .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.2rem; }
+    .article-body li { margin-bottom: 0.4rem; }
+    .article-body blockquote { border-left: 4px solid var(--color-primary); padding: 0.75rem 1.25rem; background: #eff6ff; border-radius: 0 8px 8px 0; margin: 1.5rem 0; font-style: italic; color: #1e3a8a; }
+
+    /* Inline CTA */
+    .inline-cta { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .inline-cta p { color: #1e3a8a; font-weight: 600; margin-bottom: 1rem; }
+    .inline-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-primary); color: #fff; text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 700; }
+
+    /* FAQ */
+    .blog-faq { margin: 2.5rem 0; }
+    .blog-faq h2 { font-size: 1.5rem; font-weight: 700; color: #111; margin-bottom: 1rem; }
+    .blog-faq details { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin-bottom: 0.6rem; }
+    .blog-faq details summary { padding: 0.9rem 1.1rem; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+    .blog-faq details div { padding: 0 1.1rem 0.9rem; color: #555; }
+
+    /* Related */
+    .related-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; }
+    .related-posts h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+    .related-posts ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .related-posts li a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+
+    /* Sidebar */
+    .sidebar { position: sticky; top: 72px; }
+    .sidebar-cta { background: linear-gradient(160deg, #1a56db 0%, #1e40af 100%); color: #fff; border-radius: 14px; padding: 1.75rem 1.5rem; text-align: center; }
+    .sidebar-cta h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sidebar-cta p { font-size: 0.9rem; color: #bfdbfe; margin-bottom: 1.25rem; }
+    .sidebar-cta a.tel { display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #fff; color: var(--color-primary); text-decoration: none; padding: 0.75rem 1rem; border-radius: 8px; font-weight: 800; font-size: 1rem; margin-bottom: 0.75rem; }
+    .sidebar-cta a.form { display: block; color: #bfdbfe; font-size: 0.85rem; text-decoration: underline; }
+
+    /* Footer */
+    footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 1.5rem 1rem; font-size: 0.85rem; }
+    footer a { color: #94a3b8; margin: 0 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">{{businessName}}</a>
+    <span>›</span>
+    <a href="/blog/">Ratgeber</a>
+    <span>›</span>
+    <span>{{blogTitle}}</span>
+  </nav>
+
+  <div class="blog-layout">
+    <!-- Main Article -->
+    <main>
+      <article itemscope itemtype="https://schema.org/Article">
+        <header>
+          <div class="post-meta">
+            <time itemprop="datePublished" datetime="{{blogDateIso}}" data-editable="text" data-key="blog_post_date_display">{{blogDate}}</time>
+            <span class="author" itemprop="author">✍ <span data-editable="text" data-key="blog_post_author">{{blogAuthor}}</span></span>
+            <span class="reading-time">⏱ {{readingTime}} Min. Lesezeit</span>
+          </div>
+          <h1 itemprop="headline" data-editable="text" data-key="blog_post_title">{{blogTitle}}</h1>
+          <p style="font-size:1.1rem;color:#555;margin-top:0.75rem;font-style:italic;" itemprop="description" data-editable="text" data-key="blog_post_intro">{{blogIntro}}</p>
+          <img class="hero-image" src="{{blogImage}}" alt="{{blogTitle}}" itemprop="image" loading="eager" width="720" height="405">
+        </header>
+
+        <div class="article-body" itemprop="articleBody" data-editable="text" data-key="blog_post_body">
+          {{blogBody}}
+        </div>
+
+        <!-- Inline CTA (nach Hauptinhalt) -->
+        <div class="inline-cta">
+          <p data-editable="text" data-key="blog_inline_cta_text">{{blog_inline_cta_text}}</p>
+          <a href="tel:{{phone}}">📞 Jetzt anrufen: {{phone}}</a>
+        </div>
+
+        <!-- FAQ -->
+        <div class="blog-faq">
+          <h2>Häufige Fragen zu {{blogKeyword}}</h2>
+          <details>
+            <summary data-editable="text" data-key="blog_faq_1_q">{{blog_faq_1_q}}</summary>
+            <div data-editable="text" data-key="blog_faq_1_a">{{blog_faq_1_a}}</div>
+          </details>
+          <details>
+            <summary data-editable="text" data-key="blog_faq_2_q">{{blog_faq_2_q}}</summary>
+            <div data-editable="text" data-key="blog_faq_2_a">{{blog_faq_2_a}}</div>
+          </details>
+          <details>
+            <summary data-editable="text" data-key="blog_faq_3_q">{{blog_faq_3_q}}</summary>
+            <div data-editable="text" data-key="blog_faq_3_a">{{blog_faq_3_a}}</div>
+          </details>
+        </div>
+
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h2>Weitere Ratgeber-Artikel</h2>
+          <ul id="related-posts-list">
+            {{relatedPostsHtml}}
+          </ul>
+        </div>
+      </article>
+    </main>
+
+    <!-- Sticky Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-cta">
+        <h3 data-editable="text" data-key="blog_sidebar_headline">{{blog_sidebar_headline}}</h3>
+        <p data-editable="text" data-key="blog_sidebar_text">{{blog_sidebar_text}}</p>
+        <a class="tel" href="tel:{{phone}}">📞 {{phone}}</a>
+        <a class="form" href="#kontakt">Nachricht senden</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <p>© {{year}} {{businessName}} –
+      <a href="/">Startseite</a> ·
+      <a href="/blog/">Ratgeber</a>
+    </p>
+  </footer>
+
+</body>
+</html>

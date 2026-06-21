@@ -1,0 +1,18 @@
+name: Deploy Client Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'clients/**'
+      - 'templates/**'
+      - 'generator/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect changed clients
+        run: |
+          git diff --name-only HEAD~1 HEAD | grep '^clients/' | cut -d'/' -f2 | sort -u

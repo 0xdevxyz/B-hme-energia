@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wärmewerk — Wärme als Rundum-Service</title>
+<meta name="description" content="Wärme, die einfach da ist. Wärmecontracting für Privat und Gewerbe — geplant, finanziert, betrieben. Jetzt Rate berechnen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F4F2EC; --forest:#2A3A2F; --forest-2:#33473A; --green:#3C684D; --green-2:#4F7747;
+  --muted:#6E7B70; --ink:#1B2620; --line:rgba(43,60,49,.12);
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--forest);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1320px;margin:0 auto;padding:0 22px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(60,104,77,.1);color:var(--green);border-radius:999px;padding:6px 14px;font-size:.78rem;font-weight:600;width:fit-content}
+.pill svg{width:14px;height:14px}
+
+.btn{display:inline-flex;align-items:center;gap:12px;font-weight:600;font-size:.92rem;padding:8px 8px 8px 22px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:.28s}
+.btn .circ{width:38px;height:38px;border-radius:999px;display:grid;place-items:center;flex:none}
+.btn .circ svg{width:18px;height:18px}
+.btn-primary{background:linear-gradient(100deg,var(--green),var(--green-2));color:#fff;box-shadow:0 14px 30px -14px rgba(60,104,77,.7)}
+.btn-primary .circ{background:linear-gradient(59deg,#567A5E,#78A873)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -14px rgba(60,104,77,.8)}
+.btn-light{background:rgba(255,255,255,.92);color:var(--forest)}
+.btn-light .circ{background:linear-gradient(59deg,#EEE,#CBCBCB)}
+.btn-light:hover{background:#fff;transform:translateY(-2px)}
+.btn-out{background:transparent;color:var(--forest);border-color:var(--line);padding:13px 24px}
+.btn-out:hover{background:#fff}
+
+/* ============ HERO ============ */
+.hero-pad{padding:14px}
+.hero{position:relative;width:100%;height:calc(100vh - 28px);min-height:600px;border-radius:34px;overflow:hidden;display:flex;flex-direction:column;align-items:center;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg svg{width:100%;height:100%}
+.hero-bg .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s} /* real photo drops in here */
+.hero-scrim{position:absolute;inset:0;z-index:1;background:
+  radial-gradient(120% 80% at 50% 42%,rgba(16,24,19,.32),rgba(16,24,19,0) 70%),
+  linear-gradient(180deg,rgba(16,24,19,.62) 0%,rgba(16,24,19,.36) 30%,rgba(16,24,19,.38) 56%,rgba(16,24,19,.76) 100%)}
+.hero>.nav,.hero>.hero-center,.hero>.hero-bottom{position:relative;z-index:2;width:100%}
+
+.nav{display:flex;justify-content:center;padding:18px}
+.navpill{display:flex;align-items:center;gap:24px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 9px 9px 22px;box-shadow:0 8px 30px -16px rgba(0,0,0,.5)}
+.brand{display:flex;align-items:center;gap:9px;color:#fff;font-weight:700;letter-spacing:-.02em;font-size:1.08rem}
+.brand .dot{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,#9ED69E,#4F7747);display:grid;place-items:center}
+.brand .dot svg{width:13px;height:13px;color:#173a23}
+.navlinks{display:flex;gap:24px}
+.navlinks a{color:rgba(255,255,255,.9);font-size:.85rem;font-weight:500;transition:.2s}
+.navlinks a:hover{color:#fff}
+.navpill .btn-nav{background:#fff;color:var(--forest);font-weight:600;font-size:.82rem;padding:8px 8px 8px 18px;border-radius:999px;display:flex;align-items:center;gap:10px}
+.navpill .btn-nav .c{width:30px;height:30px;border-radius:999px;background:rgba(43,60,49,.1);display:grid;place-items:center}
+.navpill .btn-nav .c svg{width:15px;height:15px;color:var(--forest)}
+.burger{display:none;background:rgba(255,255,255,.9);border:none;border-radius:999px;padding:9px;cursor:pointer}
+.burger svg{width:20px;height:20px;color:var(--forest)}
+
+.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px 96px;max-width:920px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:7px 16px;font-size:.82rem;font-weight:500;margin-bottom:22px}
+.badge svg{width:15px;height:15px}
+.hero h1{color:#fff;font-weight:600;font-size:clamp(2.5rem,6vw,5rem);line-height:1.04;letter-spacing:-.03em;margin-bottom:18px;max-width:16ch;text-shadow:0 2px 34px rgba(0,0,0,.5)}
+.hero .sub{color:rgba(255,255,255,.88);font-size:clamp(1rem,1.5vw,1.18rem);max-width:60ch;margin-bottom:30px;line-height:1.5;text-shadow:0 1px 18px rgba(0,0,0,.45)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;padding:0 26px 30px;margin-top:auto}
+.fcard{position:relative;z-index:3;background:rgba(255,255,255,.18);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.3);border-radius:26px;box-shadow:0 20px 50px -24px rgba(0,0,0,.5)}
+.fcard.left{padding:20px 24px;min-width:190px}
+.fcard.left .big{color:#fff;font-size:2.4rem;font-weight:700;letter-spacing:-.03em;line-height:1}
+.fcard.left .lbl{color:rgba(255,255,255,.72);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.fcard.left .mini{margin-top:14px;display:flex;align-items:center;gap:8px;background:#fff;color:var(--forest);border-radius:999px;padding:6px 14px 6px 6px;font-size:.78rem;font-weight:600;width:fit-content}
+.fcard.left .mini .c{width:26px;height:26px;border-radius:999px;background:rgba(43,60,49,.1);display:grid;place-items:center}
+.fcard.left .mini .c svg{width:14px;height:14px}
+.fcard.right{padding:16px 22px;display:flex;align-items:center;gap:14px}
+.avatars{display:flex}
+.avatars .av{width:42px;height:42px;border-radius:999px;overflow:hidden;border:2px solid rgba(255,255,255,.85);margin-left:-12px;background:var(--green);display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem}
+.avatars .av:first-child{margin-left:0}
+.fcard.right .rt{color:#fff;font-size:.86rem;font-weight:600;line-height:1.2}
+.fcard.right .rt small{display:block;color:rgba(255,255,255,.7);font-weight:500;font-size:.72rem;margin-top:2px}
+
+.hero h1 .ch{display:inline-block;opacity:0;transform:translateY(16px);animation:chIn .55s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes chIn{to{opacity:1;transform:none}}
+.anim{opacity:0;animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.animc{opacity:0;animation:pop .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ============ MARQUEE ============ */
+.marquee{overflow:hidden;padding:24px 0;border-bottom:1px solid var(--line)}
+.mtrack{display:inline-flex;white-space:nowrap;animation:scroll 30s linear infinite}
+.mtrack span{display:inline-flex;align-items:center;gap:34px;padding:0 17px;color:var(--muted);font-weight:600;font-size:1.02rem}
+.mtrack i{color:var(--green);font-style:normal}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============ SECTION ============ */
+.section{padding:100px 0;border-bottom:1px solid var(--line)}
+.shead{max-width:62ch;margin-bottom:50px}
+.shead h2{font-size:clamp(2rem,3.8vw,3.1rem);font-weight:600;letter-spacing:-.025em;line-height:1.1;margin:16px 0 12px;color:var(--forest)}
+.shead p{color:var(--muted);font-size:1rem;line-height:1.6}
+
+/* definition */
+.define .box{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:26px;padding:46px;position:relative}
+.define .q{font-size:clamp(1.4rem,2.6vw,2rem);font-weight:600;line-height:1.3;letter-spacing:-.02em;color:var(--forest)}
+.define .q b{color:var(--green)}
+.define .stamp{font-family:var(--sans);font-size:.74rem;color:var(--muted);margin-top:18px}
+.define .ill{aspect-ratio:1;border-radius:20px;overflow:hidden}
+
+/* solution cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcard{background:#fff;border-radius:24px;overflow:hidden;border:1px solid var(--line);transition:.35s}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 26px 50px -28px rgba(43,60,49,.5)}
+.pcard .img{aspect-ratio:4/3;overflow:hidden;position:relative}
+.pcard .img svg,.pcard .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.pcard:hover .img img{transform:scale(1.05)}
+.pcard .tagrow{position:absolute;top:14px;left:14px;z-index:2;display:flex;gap:8px}
+.pcard .tagrow span{background:rgba(255,255,255,.92);backdrop-filter:blur(6px);color:var(--forest);font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:999px}
+.pcard .pb{padding:24px}
+.pcard h3{font-size:1.45rem;font-weight:600;letter-spacing:-.02em;margin-bottom:4px;color:var(--forest)}
+.pcard .type{color:var(--green);font-size:.82rem;font-weight:600;margin-bottom:18px}
+.pstats{display:flex;flex-wrap:wrap;gap:14px;padding-top:16px;border-top:1px solid var(--line)}
+.pstat{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--forest)}
+.pstat svg{width:15px;height:15px;color:var(--muted)}
+
+/* tech grid */
+.tech{background:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tcard{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;gap:16px;align-items:flex-start;transition:.3s}
+.tcard:hover{transform:translateY(-3px);box-shadow:0 18px 36px -24px rgba(43,60,49,.5);background:#fff}
+.tcard .ti{width:46px;height:46px;flex:none;border-radius:12px;background:rgba(60,104,77,.1);color:var(--green);display:grid;place-items:center}
+.tcard .ti svg{width:24px;height:24px}
+.tcard h3{font-size:1.05rem;font-weight:600;margin-bottom:5px;color:var(--forest)}
+.tcard p{font-size:.88rem;color:var(--muted)}
+
+/* models */
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mcard{border:1px solid var(--line);border-radius:22px;padding:30px;background:#fff;transition:.3s}
+.mcard:hover{transform:translateY(-4px);box-shadow:0 24px 46px -28px rgba(43,60,49,.5)}
+.mcard .mn{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-2);margin-bottom:14px}
+.mcard h3{font-size:1.3rem;font-weight:600;margin-bottom:10px;color:var(--forest)}
+.mcard p{font-size:.94rem;color:var(--muted)}
+.mcard .who{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--green);font-weight:600}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;transition:.3s}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 18px 36px -24px rgba(43,60,49,.5)}
+.vcard .vi{width:44px;height:44px;border-radius:12px;background:rgba(60,104,77,.1);color:var(--green);display:grid;place-items:center;margin-bottom:16px}
+.vcard .vi svg{width:23px;height:23px}
+.vcard h3{font-size:1.12rem;font-weight:600;margin-bottom:7px;color:var(--forest)}
+.vcard p{font-size:.9rem;color:var(--muted);line-height:1.55}
+
+/* ============ CALCULATOR ============ */
+.calc{background:linear-gradient(160deg,#EDF1EA,#E4EBE2)}
+.calc .frame{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -40px rgba(43,60,49,.6)}
+.calc .inputs{padding:42px}
+.calc .result{padding:42px;background:linear-gradient(160deg,var(--green),var(--forest-2));color:#fff;display:flex;flex-direction:column}
+.fieldlabel{font-size:.82rem;font-weight:600;color:var(--forest);margin:24px 0 10px;display:flex;justify-content:space-between}
+.fieldlabel:first-of-type{margin-top:0}
+.fieldlabel .val{color:var(--green);font-weight:700}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-width:90px;border:1px solid var(--line);background:var(--cream);color:var(--forest);border-radius:12px;padding:11px 10px;font-family:var(--sans);font-weight:600;font-size:.84rem;cursor:pointer;transition:.2s}
+.seg button.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--green) var(--p,40%),var(--line) var(--p,40%));outline:none;margin-top:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:999px;background:#fff;border:3px solid var(--green);cursor:pointer;box-shadow:0 3px 8px rgba(43,60,49,.3)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:999px;background:#fff;border:3px solid var(--green);cursor:pointer}
+.result .rk{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.result .rmain{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:6px 0 4px}
+.result .rmain small{font-size:1rem;font-weight:500;color:rgba(255,255,255,.7)}
+.result .rrow{display:flex;gap:14px;margin-top:24px}
+.result .rbox{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px}
+.result .rbox .v{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.result .rbox .l{font-size:.74rem;color:rgba(255,255,255,.72);margin-top:2px}
+.result .rcheck{display:flex;align-items:center;gap:8px;margin-top:20px;font-size:.86rem;color:rgba(255,255,255,.9)}
+.result .rcheck svg{width:16px;height:16px;color:#9ED69E}
+.result .btn{margin-top:auto;justify-content:center;width:100%}
+.result .disc{font-size:.68rem;color:rgba(255,255,255,.6);margin-top:14px;line-height:1.4}
+
+/* ablauf showcase */
+.showcase .inner{position:relative;border-radius:30px;overflow:hidden;min-height:540px;display:flex;align-items:flex-end}
+.showcase .inner .bgsvg{position:absolute;inset:0;z-index:0}
+.showcase .inner .bgsvg svg,.showcase .inner .bgsvg img{width:100%;height:100%;object-fit:cover;display:block}
+.showcase .ov{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,28,23,.2),rgba(20,28,23,.55) 60%,rgba(20,28,23,.85))}
+.showcase .content{position:relative;z-index:2;padding:48px;max-width:640px;color:#fff}
+.showcase h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:600;letter-spacing:-.025em;line-height:1.14;margin-bottom:14px}
+.showcase p{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.55;margin-bottom:26px;max-width:48ch}
+.flist{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fl{display:flex;gap:11px;align-items:flex-start;color:#fff;font-size:.92rem}
+.fl .ic{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:grid;place-items:center;flex:none}
+.fl .ic svg{width:16px;height:16px}
+.fl small{display:block;color:rgba(255,255,255,.65);font-size:.78rem;margin-top:2px}
+
+/* faq */
+.faq-list{max-width:840px;margin:0 auto}
+.qitem{border-bottom:1px solid var(--line)}
+.qhead{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:1.15rem;font-weight:600;color:var(--forest)}
+.qhead .ic{flex:none;width:30px;height:30px;border-radius:999px;border:1.5px solid var(--line);display:grid;place-items:center;transition:.3s}
+.qhead .ic svg{width:16px;height:16px;color:var(--green);transition:.3s}
+.qitem.open .ic{background:var(--green);border-color:var(--green)}
+.qitem.open .ic svg{color:#fff;transform:rotate(45deg)}
+.qbody{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.qbody p{padding:0 0 24px;color:var(--muted);font-size:1rem;max-width:72ch}
+
+/* close */
+.close{padding:96px 0;border-bottom:none}
+.close .box{background:linear-gradient(120deg,var(--green),var(--forest-2));border-radius:30px;padding:60px 50px;color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center}
+.close h2{font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.close p{color:rgba(255,255,255,.82);margin-top:12px;max-width:44ch}
+.close .ca{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.close .ca .line{font-size:.82rem;color:rgba(255,255,255,.7)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+.drawer{position:fixed;inset:0 0 0 auto;width:min(82vw,340px);background:var(--forest);color:#fff;z-index:90;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;padding:26px;gap:4px}
+.drawer.open{transform:none}
+.drawer .x{align-self:flex-end;background:none;border:none;color:#fff;cursor:pointer}
+.drawer .x svg{width:24px;height:24px}
+.drawer a{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12);font-weight:500}
+.drawer .btn{margin-top:auto;justify-content:center}
+.scrim{position:fixed;inset:0;background:rgba(20,28,23,.45);z-index:85;opacity:0;pointer-events:none;transition:.3s}
+.scrim.open{opacity:1;pointer-events:auto}
+
+@media(max-width:900px){
+  .navlinks,.navpill .btn-nav{display:none}
+  .hero-bottom{padding:0 14px 18px}
+  .burger{display:block}
+  .fcard.left{padding:16px 18px;min-width:0}
+  .fcard.left .big{font-size:1.9rem}
+  .fcard.right{display:none}
+  .grid3,.tgrid,.mgrid{grid-template-columns:1fr}
+  .define .box{grid-template-columns:1fr}
+  .define .ill{display:none}
+  .calc .frame{grid-template-columns:1fr}
+  .flist{grid-template-columns:1fr}
+  .close .box{grid-template-columns:1fr;padding:40px 28px}
+}
+@media(max-width:560px){
+  .hero{border-radius:24px;height:calc(100vh - 20px)}
+  .section{padding:70px 0}
+  .calc .inputs,.calc .result{padding:28px}
+  .showcase .content{padding:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}.anim,.animc{opacity:1}.hero h1 .ch{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero-pad">
+  <section class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#23413A"/><stop offset=".5" stop-color="#3E5A45"/>
+            <stop offset=".78" stop-color="#C98A56"/><stop offset="1" stop-color="#E8B27C"/>
+          </linearGradient>
+          <radialGradient id="sun" cx="78%" cy="40%" r="34%">
+            <stop offset="0" stop-color="#FFE7C2" stop-opacity=".95"/><stop offset="1" stop-color="#FFE7C2" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C4636"/><stop offset="1" stop-color="#1F3328"/></linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#sky)"/>
+        <rect width="1440" height="900" fill="url(#sun)"/>
+        <circle cx="1124" cy="356" r="74" fill="#FFEBCB" opacity=".9"/>
+        <path d="M0 620 Q360 540 720 600 T1440 580 V900 H0 Z" fill="url(#hill)" opacity=".55"/>
+        <path d="M0 700 Q420 640 860 700 T1440 690 V900 H0 Z" fill="#1B2D23"/>
+        <g opacity=".5" fill="none" stroke="#FFEBCB" stroke-width="2">
+          <path d="M250 250 q40 -18 80 0"/><path d="M235 280 q55 -24 110 0"/><path d="M220 312 q70 -30 140 0"/>
+        </g>
+        <!-- house -->
+        <g>
+          <rect x="560" y="560" width="330" height="220" fill="#15211B"/>
+          <path d="M540 560 L725 470 L910 560 Z" fill="#0F1813"/>
+          <rect x="735" y="500" width="120" height="58" fill="#2A3A2F" stroke="#3C684D" stroke-width="2"/>
+          <g fill="#FFD79A"><rect x="600" y="610" width="56" height="64" rx="3"/><rect x="690" y="610" width="56" height="64" rx="3"/><rect x="792" y="610" width="56" height="74" rx="3"/></g>
+          <rect x="876" y="690" width="58" height="44" rx="6" fill="#243A2E" stroke="#3C684D" stroke-width="2"/>
+          <circle cx="905" cy="712" r="12" fill="none" stroke="#9ED69E" stroke-width="2"/>
+        </g>
+        <g fill="#16241C"><ellipse cx="430" cy="720" rx="70" ry="84"/><rect x="423" y="720" width="14" height="60"/></g>
+        <g fill="#16241C"><ellipse cx="1010" cy="740" rx="48" ry="60"/><rect x="1004" y="740" width="12" height="44"/></g>
+      </svg>
+      <video class="ph" id="heroVid" autoplay muted loop playsinline preload="auto" style="opacity:1"
+        poster="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_224252_bb2c09b1-b1c6-4d4c-9792-c42ba0b2e76c.png">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_230626_be00dece-261b-416a-9241-bea49b160701.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-scrim"></div>
+
+    <nav class="nav">
+      <div class="navpill">
+        <a href="#" class="brand"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9Z"/></svg></span>Wärmewerk</a>
+        <div class="navlinks">
+          <a href="#was">Contracting</a>
+          <a href="#loesungen">Lösungen</a>
+          <a href="#technik">Technologien</a>
+          <a href="#rechner">Rechner</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <a href="#rechner" class="btn-nav">Rate berechnen <span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>
+        <button class="burger" id="burger" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </nav>
+
+    <div class="hero-center">
+      <div class="badge anim" style="animation-delay:.05s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z"/></svg> Wärmecontracting · Privat &amp; Gewerbe</div>
+      <h1 id="heroTitle">Wärme, die einfach da ist</h1>
+      <p class="sub anim" style="animation-delay:.3s">Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis. Ausgereift, nachhaltig, mit weniger CO₂.</p>
+      <div class="hero-cta anim" style="animation-delay:.45s">
+        <a href="#rechner" class="btn btn-primary">Rate berechnen <span class="circ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>
+        <a href="#was" class="btn btn-light">So funktioniert's <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="fcard left animc" style="animation-delay:.5s">
+        <div class="big">0 €</div><div class="lbl">Investitionskosten</div>
+        <div class="mini">Förderung inklusive <span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg></span></div>
+      </div>
+      <div class="fcard right animc" style="animation-delay:.55s">
+        <div class="avatars"><span class="av">SW</span><span class="av">DK</span><span class="av">BH</span></div>
+        <div class="rt">Ihr Team vor Ort<small>Persönliche Beratung in Sachsen</small></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="mtrack">
+    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+  </div>
+</div>
+
+<!-- DEFINITION -->
+<section class="section define" id="was">
+  <div class="wrap">
+    <div class="box reveal">
+      <div>
+        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h0"/></svg> Was ist Wärmecontracting?</span>
+        <p class="q" style="margin-top:18px"><b>Wärmecontracting</b> bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme. Sie sparen Investition und Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</p>
+        <div class="stamp">Stand: Juni 2026</div>
+      </div>
+      <div class="ill">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3C684D"/><stop offset="1" stop-color="#33473A"/></linearGradient></defs>
+          <rect width="400" height="400" fill="url(#g2)"/>
+          <g fill="none" stroke="#9ED69E" stroke-width="2" opacity=".5"><circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="110"/><circle cx="200" cy="200" r="160"/></g>
+          <g fill="#EAF3EA"><rect x="150" y="195" width="100" height="70" rx="4"/><path d="M140 195 L200 150 L260 195 Z"/></g>
+          <g fill="#FFD79A"><rect x="165" y="212" width="22" height="26" rx="2"/><rect x="213" y="212" width="22" height="26" rx="2"/></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="section" id="loesungen">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13"/></svg> Lösungen</span>
+      <h2>Eine Versorgung, passend zu jedem Objekt.</h2>
+      <p>Vom Eigenheim bis zur Liegenschaft: moderne Wärme ins Haus — ohne dass Sie investieren oder sich um Technik kümmern müssen.</p>
+    </div>
+    <div class="grid3">
+      <article class="pcard reveal">
+        <div class="img"><div class="tagrow"><span>Privat</span></div>
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225324_fa82fa9d-721c-493a-b0fa-7691ce2e45cc.png" alt="Modernes Einfamilienhaus mit Wärmepumpe" loading="lazy"></div>
+        <div class="pb"><h3>Einfamilienhaus</h3><div class="type">Wärmepumpe / Fernwärme</div>
+          <div class="pstats">
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> ~140 m²</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg> 1 Einheit</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12Z"/></svg> −60 % CO₂*</span>
+          </div></div>
+      </article>
+      <article class="pcard reveal">
+        <div class="img"><div class="tagrow"><span>Privat</span><span>WEG</span></div>
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225332_865ea2e2-650b-47f6-b284-2b4c910b6390.png" alt="Modernes Mehrfamilienhaus" loading="lazy"></div>
+        <div class="pb"><h3>Mehrfamilienhaus</h3><div class="type">BHKW + Brennwert</div>
+          <div class="pstats">
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> ~900 m²</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 21h18M5 21V5l7-2v18M19 21V9l-7-2"/></svg> 12 Einheiten</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12Z"/></svg> −55 % CO₂*</span>
+          </div></div>
+      </article>
+      <article class="pcard reveal">
+        <div class="img"><div class="tagrow"><span>Gewerbe</span><span>Kommune</span></div>
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225339_b36dc6bb-8c20-40fe-9c0d-bc2171f13ec9.png" alt="Modernes Gewerbeobjekt mit Solar" loading="lazy"></div>
+        <div class="pb"><h3>Gewerbe &amp; Liegenschaft</h3><div class="type">Contracting / Nahwärme</div>
+          <div class="pstats">
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> 3.500 m²+</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg> Wärme+Kälte</span>
+            <span class="pstat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12Z"/></svg> −50 % CO₂*</span>
+          </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIES -->
+<section class="section tech" id="technik">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg> Technologien</span>
+      <h2>Bewährte Technik, passend zu Ihrem Objekt.</h2>
+      <p>Wir kombinieren ausgereifte Systeme zur effizientesten Lösung — vom Einfamilienhaus bis zur Liegenschaft.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div><div><h3>Wärmepumpe</h3><p>Erneuerbare Wärme aus Luft, Wasser oder Erde — ideal bei niedrigen Vorlauftemperaturen.</p></div></div>
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div><div><h3>Fernwärme</h3><p>Gebrauchsfertige Lieferung aus dem Netz — umweltfreundlich, effizient, wartungsarm.</p></div></div>
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10v4M11 10v4M15 10v4"/></svg></div><div><h3>BHKW</h3><p>Erzeugt Strom und Wärme zugleich — hoher Wirkungsgrad durch Kraft-Wärme-Kopplung.</p></div></div>
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M12 14v6M9 17l3 3 3-3M12 2v2"/></svg></div><div><h3>Solarthermie</h3><p>Sonnenwärme mit Pufferspeicher — clever kombinierbar mit weiteren Quellen.</p></div></div>
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9Z"/></svg></div><div><h3>Pelletkessel</h3><p>Nachwachsende Rohstoffe, gut förderfähig im Bestand — nachhaltig und stabil.</p></div></div>
+      <div class="tcard reveal"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/></svg></div><div><h3>Brennwerttechnik</h3><p>Effiziente Gas-Brennwertsysteme, optional mit Biomethan — solide kombinierbar.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section class="section" id="modelle">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Vertragsmodelle</span>
+      <h2>Drei Modelle — Sie wählen das passende.</h2>
+    </div>
+    <div class="mgrid">
+      <div class="mcard reveal"><div class="mn">Modell 01</div><h3>Wärmeservice</h3><p>Wir investieren in die Anlage, sichern die Brennstoffversorgung und führen den Betrieb. Abrechnung nach Verbrauch zu vereinbarten Preisen.</p><div class="who">Wir investieren · wir betreiben</div></div>
+      <div class="mcard reveal"><div class="mn">Modell 02</div><h3>Anlagenpacht</h3><p>Sie bleiben Eigentümer der Anlage, wir pachten sie und übernehmen die professionelle Betriebsführung samt Wärmelieferung.</p><div class="who">Sie besitzen · wir betreiben</div></div>
+      <div class="mcard reveal"><div class="mn">Modell 03</div><h3>Energieanlagen-Contracting</h3><p>Wir übernehmen die Betriebsführung und optimieren Ihre Anlage energetisch — für dauerhaft niedrigere Kosten, ohne Ihren Aufwand.</p><div class="who">Sie besitzen · wir optimieren</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VORTEILE -->
+<section class="section tech" id="vorteile">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Vorteile</span>
+      <h2>Warum sich Wärmecontracting lohnt.</h2>
+      <p>Komfortabel, nachhaltig und planbar — für Nutzer und Umwelt zugleich.</p>
+    </div>
+    <div class="vgrid">
+      <div class="vcard reveal"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12Z"/><path d="M12 12c0-3 2-5 2-5"/></svg></div><h3>Nachhaltigkeit</h3><p>Moderne Technik und Abwärmenutzung senken den CO₂-Ausstoß spürbar und schonen die Umwelt.</p></div>
+      <div class="vcard reveal"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div><h3>Effizienz</h3><p>Hohe Nutzungsgrade und optimierte Anlagen sparen große Mengen Energie ein.</p></div>
+      <div class="vcard reveal"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Komfort</h3><p>Keine Sorge um Wartung oder Brennstoff — stets zuverlässige, konstante Wärme.</p></div>
+      <div class="vcard reveal"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>Vielseitigkeit</h3><p>Ob Einfamilienhaus, Mehrfamilienhaus, Wohnung oder Altbau — überall einsetzbar.</p></div>
+      <div class="vcard reveal"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M15 9.5a3 3 0 0 0-3-1.5c-2 0-3 1-3 2.5S10 13 12 13s3 .8 3 2.5S13.5 18 12 18a3 3 0 0 1-3-1.5M12 6v2M12 16v2"/></svg></div><h3>Kostenersparnis</h3><p>Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, ganz ohne Investition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section calc" id="rechner">
+  <div class="wrap">
+    <div class="shead reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="pill" style="margin:0 auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M8 14h2M14 10h2M14 14h2M8 18h8"/></svg> Wärme-Rechner</span>
+      <h2>In 60 Sekunden zur unverbindlichen Schätzung.</h2>
+      <p style="margin:0 auto">Geben Sie ein paar Eckdaten ein — Sie erhalten sofort eine grobe Orientierung für Ihre monatliche Wärme-Rate und die CO₂-Einsparung.</p>
+    </div>
+
+    <div class="frame reveal">
+      <div class="inputs">
+        <div class="fieldlabel">Objekttyp</div>
+        <div class="seg" id="typ">
+          <button data-v="efh" class="on">Einfamilienhaus</button>
+          <button data-v="mfh">Mehrfamilienhaus</button>
+          <button data-v="gew">Gewerbe</button>
+        </div>
+
+        <div class="fieldlabel">Beheizte Fläche <span class="val" id="flVal">140 m²</span></div>
+        <input type="range" id="flaeche" min="50" max="2000" step="10" value="140">
+
+        <div class="fieldlabel">Dämmstandard</div>
+        <div class="seg" id="daemm">
+          <button data-v="150">Altbau</button>
+          <button data-v="95" class="on">Saniert</button>
+          <button data-v="55">Neubau</button>
+        </div>
+
+        <div class="fieldlabel">Aktuelles Heizsystem</div>
+        <div class="seg" id="alt">
+          <button data-v="0.32" class="on">Ölheizung</button>
+          <button data-v="0.20">Gasheizung</button>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="rk">Geschätzte Wärme-Rate*</div>
+        <div class="rmain"><span id="rate">ca. 165 – 210</span> <small>€ / Monat</small></div>
+        <div class="rrow">
+          <div class="rbox"><div class="v" id="co2">−60 %</div><div class="l">CO₂ pro Jahr*</div></div>
+          <div class="rbox"><div class="v" id="kg">3,1 t</div><div class="l">CO₂-Einsparung / Jahr*</div></div>
+        </div>
+        <div class="rcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> 0 € Investition · Wartung &amp; Förderung inklusive</div>
+        <a href="#kontakt" class="btn btn-light" style="margin-top:24px">Unverbindliches Angebot anfragen <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>
+        <div class="disc">* Unverbindliche Beispielrechnung auf Basis typischer Richtwerte. Kein verbindliches Angebot. Ihr konkreter Preis hängt von Objekt, Technik und Laufzeit ab und wird individuell ermittelt.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABLAUF / SHOWCASE -->
+<section class="section" id="ablauf">
+  <div class="wrap">
+    <div class="showcase">
+      <div class="inner reveal">
+        <div class="bgsvg"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225343_f066b07a-f4a8-4890-a6e3-390f2fa87561.png" alt="Techniker an der Wärmepumpe" loading="lazy"></div>
+        <div class="ov"></div>
+        <div class="content">
+          <span class="badge" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z"/></svg> So funktioniert Wärmecontracting</span>
+          <h2>Ein Ansprechpartner. Von der Analyse bis zum Betrieb.</h2>
+          <p>Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, errichtet und betrieben.</p>
+          <div class="flist">
+            <div class="fl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span><div>Bedarfsanalyse<small>Objekt, Verbrauch &amp; Ziele vor Ort</small></div></div>
+            <div class="fl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11 12 14l8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div>Konzept &amp; Finanzierung<small>Technik + Förderung optimal ausgelegt</small></div></div>
+            <div class="fl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2v6h6"/><path d="M4 22V4a2 2 0 0 1 2-2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg></span><div>Umsetzung &amp; Bau<small>Koordiniert, termintreu, sauber</small></div></div>
+            <div class="fl"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg></span><div>Service &amp; Betrieb<small>24/7 über die ganze Laufzeit</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="shead reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="pill" style="margin:0 auto">FAQ</span>
+      <h2>Häufige Fragen zum Wärmecontracting</h2>
+    </div>
+    <div class="faq-list">
+      <div class="qitem reveal"><button class="qhead">Was kostet Wärmecontracting?<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qbody"><p>Der Preis besteht meist aus einem Grundpreis für Anlage und Bereitstellung sowie einem verbrauchsabhängigen Arbeitspreis. Die genaue Höhe hängt von Objekt, Technik und Laufzeit ab und wird individuell berechnet — der Rechner oben gibt eine erste Orientierung.</p></div></div>
+      <div class="qitem reveal"><button class="qhead">Wem gehört die Heizungsanlage?<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qbody"><p>Das hängt vom Modell ab. Beim Wärmeservice gehört die Anlage uns. Bei der Anlagenpacht bleiben Sie Eigentümer, und wir übernehmen nur den Betrieb.</p></div></div>
+      <div class="qitem reveal"><button class="qhead">Lohnt sich das für ein Einfamilienhaus?<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qbody"><p>Ja, besonders wenn Sie eine moderne Heizung ohne hohe Einmalinvestition möchten. Statt der Anschaffung zahlen Sie eine planbare Rate inklusive Wartung und Service; Fördermittel werden berücksichtigt.</p></div></div>
+      <div class="qitem reveal"><button class="qhead">Welche Vertragslaufzeiten sind üblich?<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="qbody"><p>Contracting-Verträge laufen typischerweise über mehrere Jahre, häufig 10 bis 15 Jahre, damit sich die Investition in die Anlage über die Laufzeit verteilt. Die konkrete Laufzeit wird vertraglich vereinbart.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" id="kontakt">
+  <div class="wrap">
+    <div class="box reveal">
+      <div><h2>Bereit für sorgenfreie Wärme?</h2><p>Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p></div>
+      <div class="ca">
+        <a href="tel:+49000000000" class="btn btn-light">Beratung buchen <span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>
+        <span class="line">☎ +49 (0) XXX XXXXXXX · info@waermewerk.de</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <button class="x" id="closeDrawer" aria-label="Schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <a href="#was">Contracting</a><a href="#loesungen">Lösungen</a><a href="#technik">Technologien</a><a href="#rechner">Rechner</a><a href="#faq">FAQ</a>
+  <a href="#rechner" class="btn btn-primary" style="padding-left:22px">Rate berechnen <span class="circ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>
+</aside>
+
+<p style="text-align:center;color:var(--muted);font-size:.72rem;padding:36px 22px 30px">* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen. Markenname &amp; Kontakt sind Platzhalter.</p>
+
+<script>
+// drawer
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+const o=()=>{drawer.classList.add('open');scrim.classList.add('open')},c=()=>{drawer.classList.remove('open');scrim.classList.remove('open')};
+document.getElementById('burger').onclick=o;document.getElementById('closeDrawer').onclick=c;scrim.onclick=c;
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',c));
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.grid3,.tgrid,.mgrid').forEach(g=>[...g.children].forEach((ch,i)=>ch.style.transitionDelay=(i*.09)+'s'));
+
+// faq
+document.querySelectorAll('.qhead').forEach(h=>h.addEventListener('click',()=>{
+  const it=h.parentElement,bd=h.nextElementSibling,open=it.classList.contains('open');
+  document.querySelectorAll('.qitem').forEach(i=>{i.classList.remove('open');i.querySelector('.qbody').style.maxHeight=null});
+  if(!open){it.classList.add('open');bd.style.maxHeight=bd.scrollHeight+'px'}
+}));
+
+// ===== CALCULATOR =====
+const state={typ:'efh',flaeche:140,daemm:95,alt:0.32};
+const grund={efh:28,mfh:120,gew:240};
+const fmtE=n=>Math.round(n/5)*5;
+function segWire(id,key,parse){
+  document.querySelectorAll('#'+id+' button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); state[key]=parse(b.dataset.v); calc();
+  }));
+}
+segWire('typ','typ',v=>v); segWire('daemm','daemm',v=>+v); segWire('alt','alt',v=>+v);
+const fl=document.getElementById('flaeche');
+fl.addEventListener('input',()=>{
+  state.flaeche=+fl.value;
+  document.getElementById('flVal').textContent=state.flaeche.toLocaleString('de-DE')+' m²';
+  fl.style.setProperty('--p',((state.flaeche-50)/(2000-50)*100)+'%');
+  calc();
+});
+function calc(){
+  const bedarf=state.flaeche*state.daemm;            // kWh/a
+  const arbeit=0.11;                                  // €/kWh (Richtwert)
+  const monat=(bedarf*arbeit)/12 + grund[state.typ];
+  const lo=fmtE(monat*0.88), hi=fmtE(monat*1.12);
+  document.getElementById('rate').textContent='ca. '+lo.toLocaleString('de-DE')+' – '+hi.toLocaleString('de-DE');
+  const contract=0.08;                                // kg CO₂/kWh (moderne Lösung)
+  const saved=bedarf*(state.alt-contract)/1000;       // t/a
+  const pct=Math.round((state.alt-contract)/state.alt*100);
+  document.getElementById('co2').textContent='−'+pct+' %';
+  document.getElementById('kg').textContent=saved.toFixed(1).replace('.',',')+' t';
+}
+fl.style.setProperty('--p',((140-50)/(2000-50)*100)+'%');
+calc();
+
+// Staggered per-letter headline (EcoVolta StaggeredFade)
+(function(){const ht=document.getElementById('heroTitle');if(!ht)return;const t=ht.textContent;ht.textContent='';
+[...t].forEach((ch,i)=>{const s=document.createElement('span');s.className='ch';s.textContent=ch===' '?'\u00A0':ch;s.style.animationDelay=(0.2+i*0.03)+'s';ht.appendChild(s);});})();
+</script>
+</body>
+</html>

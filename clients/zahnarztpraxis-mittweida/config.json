@@ -1,0 +1,35 @@
+{
+  "businessName": "Zahnarztpraxis Georg Benedix",
+  "city": "Mittweida",
+  "district": "Mittweida",
+  "industry": "Zahnarzt",
+  "mainKeyword": "Zahnarzt Mittweida",
+  "keywords": [
+    "Zahnarzt Mittweida",
+    "Zahnarztpraxis Mittweida",
+    "Zahnarzt Dr. Benedix Mittweida",
+    "Zahnarzt Mittweida Weberstraße"
+  ],
+  "phone": "03727 3117",
+  "email": "mail@zahnarztpraxis-mittweida.de",
+  "address": "Weberstraße 15, 09648 Mittweida",
+  "zip": "09648",
+  "lat": "50.9857",
+  "lng": "12.9791",
+  "services": [
+    "Zahnvorsorge & Prophylaxe",
+    "Zahnersatz & Prothetik",
+    "Ästhetische Zahnmedizin"
+  ],
+  "openingHours": "Mo 07:00-12:00 13:00-18:00, Di 07:00-12:00 13:00-16:30, Mi 07:00-13:30, Do 07:00-12:00 13:00-18:00, Fr 07:00-11:30",
+  "openingHoursFormatted": "Montag 07:00–12:00 & 13:00–18:00 | Dienstag 07:00–12:00 & 13:00–16:30 | Mittwoch 07:00–13:30 | Donnerstag 07:00–12:00 & 13:00–18:00 | Freitag 07:00–11:30",
+  "rating": "5.0",
+  "reviewCount": "14",
+  "editorEmail": "georg_benedix@web.de",
+  "siteUrl": "https://zahnarztpraxis-mittweida.de",
+  "author": "Dr. med. dent. Georg Benedix",
+  "authorTitle": "Zahnarzt & Praxisinhaber",
+  "foundingYear": "1990",
+  "certifications": ["Kassenzahnarzt", "Privatpatientenbehandlung"],
+  "googleMapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2507.5!2d12.9791!3d50.9857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zV2ViZXJzdHJhw59lIDE1LCAwOTY0OCBNaXR0d2VpZGE!5e0!3m2!1sde!2sde!4v1"
+}
