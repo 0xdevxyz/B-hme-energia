@@ -1,10 +1,10 @@
-# Reputations-Checkliste für Wärmewerk
+# Reputations-Checkliste für Böhme Energie GmbH
 
 Diese Maßnahmen erhöhen Ihre Sichtbarkeit in Google und AI-Suchen (ChatGPT, Gemini etc.):
 
 ## Sofort erledigen
 - [ ] Google Business Profile vollständig ausfüllen: https://business.google.com
-- [ ] Alle Informationen exakt wie auf der Website: "Wärmewerk", "Beispielstraße 1, 09648 Deutschland", "+49 (0) XXX XXXXXXX"
+- [ ] Alle Informationen exakt wie auf der Website: "Böhme Energie GmbH", "Ringstr. 11, 09241 Mühlau", "03722 / 60030"
 - [ ] Öffnungszeiten eintragen: Mo-Fr 09:00-17:00
 - [ ] Mindestens 3 Fotos hochladen
 
@@ -21,6 +21,6 @@ Diese Maßnahmen erhöhen Ihre Sichtbarkeit in Google und AI-Suchen (ChatGPT, Ge
 
 ## NAP-Konsistenz (kritisch für Local SEO)
 Name, Adresse und Telefonnummer müssen überall IDENTISCH sein:
-- Name: Wärmewerk
-- Adresse: Beispielstraße 1, 09648 Deutschland
-- Telefon: +49 (0) XXX XXXXXXX
+- Name: Böhme Energie GmbH
+- Adresse: Ringstr. 11, 09241 Mühlau
+- Telefon: 03722 / 60030

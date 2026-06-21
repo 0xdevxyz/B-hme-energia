@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wärmewerk — Wärme als Rundum-Service</title>
+<title>Böhme Energie GmbH — Wärme als Rundum-Service</title>
 <meta name="description" content="Wärme, die einfach da ist. Wärmecontracting für Privat und Gewerbe — geplant, finanziert, betrieben. Jetzt Rate berechnen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,9 +64,10 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 .hero>.nav,.hero>.hero-center,.hero>.hero-bottom{position:relative;z-index:2;width:100%}
 
 .nav{display:flex;justify-content:center;padding:18px 20px 0}
-.navpill{display:flex;align-items:center;gap:26px;width:100%;max-width:1180px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 12px 10px 22px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.12rem;color:#fff;letter-spacing:-.02em}
-.brand .flame{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(140deg,var(--green),var(--green-2));color:#fff;flex:none}
+.navpill{display:flex;align-items:center;gap:26px;width:100%;max-width:1180px;background:rgba(18,26,21,.42);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 12px 10px 20px}
+.brand{display:flex;align-items:center;flex:none}
+.brand-logo{height:30px;width:auto;display:block}
+@media(max-width:560px){.brand-logo{height:25px}}
 .nav-links{display:flex;gap:24px;margin:0 auto;font-size:.92rem;font-weight:500}
 .nav-links a{color:rgba(255,255,255,.86)}
 .nav-links a:hover{color:#fff}
@@ -281,9 +282,8 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <!-- NAV -->
   <nav class="nav">
     <div class="navpill">
-      <a href="#" class="brand">
-        <span class="flame"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-1-.5-2-1-3 2 1 4 3 4 6a6 6 0 1 1-12 0c0-5 5-7 6-12z" fill="currentColor" stroke="none"/></svg></span>
-        <span data-editable="text" data-key="brand_name">Wärmewerk</span>
+      <a href="#" class="brand" aria-label="Böhme Energie GmbH">
+        <img src="assets/images/boehme-energie-logo-weiss.png" alt="Böhme Energie GmbH" class="brand-logo">
       </a>
       <div class="nav-links">
         <a href="#was">Contracting</a>
@@ -584,8 +584,8 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
         <p data-editable="text" data-key="closing_text">Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
       </div>
       <div class="close-right">
-        <a href="mailto:info@waermewerk.de" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
-        <div class="close-contact" data-editable="text" data-key="closing_contact">☎ +49 (0) XXX XXXXXXX · info@waermewerk.de</div>
+        <a href="mailto:info@boehme-energie.com" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+        <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
       </div>
     </div>
   </div>
