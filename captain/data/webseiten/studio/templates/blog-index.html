@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratgeber & Tipps – {{businessName}} in {{city}}</title>
+  <meta name="description" content="Ratgeber & Tipps von {{businessName}} in {{city}} – {{industry}}. Fachwissen, Tipps und Antworten auf Ihre Fragen.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{siteUrl}}/blog/">
+
+  <!-- ItemList Schema.org -->
+  <script type="application/ld+json">{{itemListSchemaJsonLd}}</script>
+  <!-- Breadcrumb Schema.org -->
+  <script type="application/ld+json">{{breadcrumbSchemaJsonLd}}</script>
+
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    /* STUDIO_OVERLAY_PLACEHOLDER */
+    :root { --color-primary: #1a56db; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; color: #1a202c; background: #fff; }
+
+    /* Header */
+    .blog-header { background: linear-gradient(135deg, #1e3a8a 0%, #1a56db 100%); color: #fff; padding: 3.5rem 1rem 3rem; text-align: center; }
+    .blog-header .breadcrumb { font-size: 0.85rem; color: #bfdbfe; margin-bottom: 1rem; }
+    .blog-header .breadcrumb a { color: #bfdbfe; text-decoration: none; }
+    .blog-header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .blog-header p { font-size: 1.05rem; color: #bfdbfe; max-width: 540px; margin: 0 auto; }
+
+    /* Grid */
+    .blog-grid { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 2rem; }
+
+    /* Card */
+    .blog-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 14px rgba(0,0,0,.07); transition: transform .15s, box-shadow .15s; display: flex; flex-direction: column; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.11); }
+    .blog-card-image { aspect-ratio: 16/9; overflow: hidden; background: #e5e7eb; }
+    .blog-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-meta { font-size: 0.78rem; color: #9ca3af; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .blog-card-title { font-size: 1.05rem; font-weight: 700; color: #111; margin-bottom: 0.5rem; line-height: 1.4; }
+    .blog-card-title a { color: inherit; text-decoration: none; }
+    .blog-card-title a:hover { color: var(--color-primary); }
+    .blog-card-teaser { font-size: 0.9rem; color: #555; line-height: 1.55; flex: 1; }
+    .blog-card-cta { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--color-primary); text-decoration: none; }
+
+    /* CTA Band */
+    .blog-cta { background: linear-gradient(135deg, #1a56db, #1e40af); color: #fff; text-align: center; padding: 3rem 1rem; }
+    .blog-cta h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .blog-cta p { color: #bfdbfe; margin-bottom: 1.5rem; }
+    .blog-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: var(--color-primary); text-decoration: none; padding: 0.8rem 2rem; border-radius: 8px; font-weight: 800; font-size: 1rem; }
+
+    /* Footer */
+    footer { background: #1e293b; color: #94a3b8; text-align: center; padding: 1.5rem 1rem; font-size: 0.85rem; }
+    footer a { color: #94a3b8; margin: 0 0.5rem; }
+
+    /* Empty state */
+    .blog-empty { text-align: center; padding: 4rem 1rem; color: #9ca3af; grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="blog-header">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">{{businessName}}</a> › <span>Ratgeber</span>
+    </nav>
+    <h1>Ratgeber & Tipps</h1>
+    <p>Fachwissen von {{businessName}} in {{city}} – {{industry}}</p>
+  </header>
+
+  <!-- Blog Grid -->
+  <div class="blog-grid" id="blog-posts-grid">
+    {{blogCardsHtml}}
+  </div>
+
+  <!-- CTA Band -->
+  <section class="blog-cta">
+    <h2>Fragen? Wir beraten Sie persönlich.</h2>
+    <p>{{businessName}} in {{city}} – erreichbar per Telefon oder Kontaktformular.</p>
+    <a href="tel:{{phone}}">📞 Jetzt anrufen: {{phone}}</a>
+  </section>
+
+  <footer>
+    <p>© {{year}} {{businessName}} –
+      <a href="/">Startseite</a> ·
+      <a href="/blog/">Ratgeber</a>
+    </p>
+  </footer>
+
+</body>
+</html>

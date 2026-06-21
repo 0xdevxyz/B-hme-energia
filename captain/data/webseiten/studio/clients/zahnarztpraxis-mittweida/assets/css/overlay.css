@@ -1,0 +1,149 @@
+/* ============================================================
+   OVERLAY.CSS – Studio visual overlay editor styles
+   ============================================================ */
+
+/* ── Studio Toolbar ─────────────────────────────────────────── */
+#studio-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #1a56db;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 16px;
+  font-size: 14px;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#studio-toolbar .toolbar-brand {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+#studio-toolbar .toolbar-sep {
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+#studio-toolbar .toolbar-status {
+  margin-left: auto;
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#studio-toolbar .toolbar-status.unsaved {
+  color: #fde68a;
+}
+
+/* ── Toolbar Buttons ────────────────────────────────────────── */
+#studio-toolbar .toolbar-btn {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+#studio-toolbar .toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+#studio-toolbar .toolbar-btn:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+#studio-toolbar .toolbar-btn.btn-danger {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+#studio-toolbar .toolbar-btn.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+
+/* ── Editable Elements ──────────────────────────────────────── */
+[data-editable]:hover {
+  outline: 2px solid #1a56db;
+  outline-offset: 2px;
+  cursor: text;
+}
+
+[data-editable].is-editing {
+  outline: 2px solid #1a56db;
+  outline-offset: 2px;
+  background-color: rgba(26, 86, 219, 0.04);
+}
+
+/* ── Image Editable ─────────────────────────────────────────── */
+[data-editable="image"] {
+  position: relative;
+  display: block;
+}
+
+[data-editable="image"]:hover {
+  cursor: pointer;
+  outline: 2px solid #1a56db;
+  outline-offset: 2px;
+}
+
+[data-editable="image"]:hover .img-edit-overlay {
+  display: flex;
+}
+
+/* ── Image Edit Overlay ─────────────────────────────────────── */
+.img-edit-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.img-edit-icon {
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Edit Mode Body Offset ──────────────────────────────────── */
+body.studio-edit-mode {
+  padding-top: 48px;
+}
+
+/* ── Field Active State ─────────────────────────────────────── */
+[data-editable][contenteditable="true"] {
+  outline: 2px solid #1a56db;
+  outline-offset: 2px;
+  cursor: text;
+  min-height: 1em;
+}
+
+/* ── Toolbar Page-mode indicator ────────────────────────────── */
+#studio-toolbar .toolbar-page {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+}

@@ -1,0 +1,8 @@
+node_modules/
+.env
+clients/*/assets/uploads/
+clients/*/.env
+clients/*/sessions.json
+data/updates/*.md
+*.log
+.DS_Store

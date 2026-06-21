@@ -1,0 +1,32 @@
+{
+  "name": "studio",
+  "version": "1.0.0",
+  "description": "White-Label Standalone Website Template System mit Visual Overlay Editor & GEO/LLMO Optimization",
+  "bin": {
+    "studio": "./cli/studio.js"
+  },
+  "scripts": {
+    "start": "node editor/server.js",
+    "dev": "nodemon editor/server.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^12.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "express-rate-limit": "^7.2.0",
+    "inquirer": "^8.2.6",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^8.0.7",
+    "sharp": "^0.33.3",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

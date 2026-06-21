@@ -1,0 +1,6 @@
+{
+  "enabledCssSnippets": [],
+  "plugins": {
+    "obsidian-git": true
+  }
+}
