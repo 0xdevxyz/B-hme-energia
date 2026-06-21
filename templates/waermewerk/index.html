@@ -253,6 +253,16 @@ textarea.tf-input{resize:none;line-height:1.5}
 .contact-box .close-contact{margin-top:22px}
 @media(max-width:760px){.contact-box{padding:32px 24px}.tf-stage{min-height:260px}}
 
+/* ---------- BERATUNG VOLLBILD-OVERLAY ---------- */
+.bov{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(150deg,var(--green),var(--forest-2));opacity:0;visibility:hidden;transition:opacity .35s cubic-bezier(.2,.7,.2,1),visibility .35s;overflow-y:auto}
+.bov.show{opacity:1;visibility:visible}
+.bov-inner{width:100%;max-width:720px;margin:auto}
+.bov-eyebrow{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.8);font-weight:600;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:24px}
+.bov-close{position:fixed;top:22px;right:26px;width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);color:#fff;cursor:pointer;display:grid;place-items:center;transition:.2s;z-index:2}
+.bov-close:hover{background:rgba(255,255,255,.24);transform:rotate(90deg)}
+body.bov-open{overflow:hidden}
+@media(max-width:560px){.bov-close{top:14px;right:14px;width:42px;height:42px}}
+
 /* ---------- DRAWER ---------- */
 .scrim{position:fixed;inset:0;background:rgba(16,24,19,.5);opacity:0;pointer-events:none;transition:.3s;z-index:60}
 .scrim.show{opacity:1;pointer-events:auto}
@@ -350,7 +360,7 @@ textarea.tf-input{resize:none;line-height:1.5}
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
-        <a href="#kontakt" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+        <a href="#kontakt" data-beratung class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
         <button class="burger" id="openDrawer" aria-label="Menü öffnen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
     </div>
@@ -646,12 +656,24 @@ textarea.tf-input{resize:none;line-height:1.5}
 <!-- ============ CLOSING CTA ============ -->
 <section class="close" id="kontakt">
   <div class="wrap">
-    <div class="contact-box reveal">
-      <div class="contact-head">
-        <span class="pill">Beratung buchen</span>
+    <div class="close-box reveal">
+      <div>
         <h2 data-editable="text" data-key="closing_headline">Bereit für sorgenfreie Wärme?</h2>
         <p data-editable="text" data-key="closing_text">Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
       </div>
+      <div class="close-right">
+        <button type="button" class="btn btn-light" data-beratung>Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+        <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BERATUNG OVERLAY (Vollbild) ============ -->
+<div class="bov" id="beratungOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="bov-close" id="bovClose" aria-label="Schließen"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="bov-inner">
+      <span class="bov-eyebrow">Kostenlose Erstberatung</span>
       <form class="tf" id="beratungForm" novalidate>
         <div class="tf-progress"><span id="tfBar"></span></div>
         <div class="tf-stage">
@@ -694,10 +716,8 @@ textarea.tf-input{resize:none;line-height:1.5}
         <input type="text" name="company" class="tf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="tf-foot"><button type="button" class="tf-back" id="tfBack">↑ Zurück</button><span class="tf-count" id="tfCount"></span></div>
       </form>
-      <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
-    </div>
   </div>
-</section>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
@@ -739,7 +759,7 @@ textarea.tf-input{resize:none;line-height:1.5}
   <a href="#technik">Technologien</a>
   <a href="#rechner">Rechner</a>
   <a href="#faq">FAQ</a>
-  <a href="#kontakt" class="btn btn-primary">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+  <a href="#kontakt" data-beratung class="btn btn-primary">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
 </aside>
 
 <script>
@@ -899,6 +919,24 @@ textarea.tf-input{resize:none;line-height:1.5}
       }
     });
   });
+
+  /* ----- Vollbild-Overlay öffnen/schließen ----- */
+  var overlay=document.getElementById('beratungOverlay'), bovClose=document.getElementById('bovClose');
+  function openBov(){
+    overlay.classList.add('show'); overlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('bov-open'); show(0);
+    var fi=steps[0].querySelector('.tf-input'); if(fi) setTimeout(function(){fi.focus();},260);
+  }
+  function closeBov(){
+    overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true');
+    document.body.classList.remove('bov-open');
+  }
+  document.querySelectorAll('[data-beratung]').forEach(function(b){
+    b.addEventListener('click',function(e){e.preventDefault();openBov();});
+  });
+  if(bovClose) bovClose.addEventListener('click',closeBov);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeBov();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('show'))closeBov();});
 
   submitBtn.addEventListener('click',function(){
     var data=Object.fromEntries(new FormData(form).entries());
