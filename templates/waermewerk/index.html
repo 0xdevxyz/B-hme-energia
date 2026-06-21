@@ -116,7 +116,7 @@ h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800;color:var(--fore
 .pcard-img{position:relative;aspect-ratio:4/3;overflow:hidden}
 .pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .pcard:hover .pcard-img img{transform:scale(1.06)}
-.pcard-tags{position:absolute;top:14px;left:14px;display:flex;gap:6px;flex-wrap:wrap}
+.pcard-tags{position:absolute;top:14px;left:14px;display:flex;gap:6px;flex-wrap:wrap;z-index:3}
 .tag{background:rgba(255,255,255,.92);color:var(--forest);border-radius:999px;padding:4px 11px;font-size:.72rem;font-weight:600}
 .pcard-body{padding:22px 24px 26px}
 .pcard-body h3{font-size:1.3rem;margin-bottom:4px}
@@ -283,7 +283,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
     <div class="navpill">
       <a href="#" class="brand">
         <span class="flame"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-1-.5-2-1-3 2 1 4 3 4 6a6 6 0 1 1-12 0c0-5 5-7 6-12z" fill="currentColor" stroke="none"/></svg></span>
-        Wärmewerk
+        <span data-editable="text" data-key="brand_name">Wärmewerk</span>
       </a>
       <div class="nav-links">
         <a href="#was">Contracting</a>
@@ -301,9 +301,9 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 
   <!-- CENTER -->
   <div class="hero-center">
-    <span class="hero-badge">✦ Wärmecontracting · Privat &amp; Gewerbe</span>
-    <h1 id="heroTitle">Wärme, die einfach da ist</h1>
-    <p class="hero-sub">Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis. Ausgereift, nachhaltig, mit weniger CO₂.</p>
+    <span class="hero-badge" data-editable="text" data-key="hero_badge">✦ Wärmecontracting · Privat &amp; Gewerbe</span>
+    <h1 id="heroTitle" data-editable="text" data-key="hero_headline">Wärme, die einfach da ist</h1>
+    <p class="hero-sub" data-editable="text" data-key="hero_sub">Wir planen, finanzieren, bauen und betreiben Ihre Wärmeversorgung — Sie genießen nur das Ergebnis. Ausgereift, nachhaltig, mit weniger CO₂.</p>
     <div class="hero-ctas">
       <a href="#rechner" class="btn btn-primary">Rate berechnen <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>
       <a href="#was" class="btn btn-light">So funktioniert's <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
@@ -313,15 +313,15 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <!-- BOTTOM GLASS CARDS -->
   <div class="hero-bottom">
     <div class="fcard left">
-      <div class="big">0 €</div>
-      <div class="lbl">Investitionskosten</div>
-      <span class="minipill">Förderung inklusive <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+      <div class="big" data-editable="text" data-key="hero_stat_value">0 €</div>
+      <div class="lbl" data-editable="text" data-key="hero_stat_label">Investitionskosten</div>
+      <span class="minipill" data-editable="text" data-key="hero_stat_pill">Förderung inklusive <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
     </div>
     <div class="fcard right">
       <div class="avatars"><span>SW</span><span>DK</span><span>BH</span></div>
       <div>
-        <div class="rt">Ihr Team vor Ort</div>
-        <div class="rs">Persönliche Beratung in Sachsen</div>
+        <div class="rt" data-editable="text" data-key="hero_team_title">Ihr Team vor Ort</div>
+        <div class="rs" data-editable="text" data-key="hero_team_sub">Persönliche Beratung in Sachsen</div>
       </div>
     </div>
   </div>
@@ -341,9 +341,9 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <div class="wrap">
     <div class="def-box reveal">
       <div>
-        <span class="pill">Was ist Wärmecontracting?</span>
-        <p class="big"><b>Wärmecontracting</b> bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme. Sie sparen Investition und Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</p>
-        <span class="stamp">Stand: Juni 2026</span>
+        <span class="pill" data-editable="text" data-key="def_pill">Was ist Wärmecontracting?</span>
+        <p class="big" data-editable="text" data-key="def_text"><b>Wärmecontracting</b> bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme. Sie sparen Investition und Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</p>
+        <span class="stamp" data-editable="text" data-key="def_stamp">Stand: Juni 2026</span>
       </div>
       <div class="def-ill">
         <svg width="240" height="240" viewBox="0 0 240 240" fill="none" aria-hidden="true">
@@ -365,53 +365,53 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="sol" id="loesungen">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Lösungen</span>
-      <h2>Für jedes Objekt die passende Wärme.</h2>
-      <p>Vom Einfamilienhaus bis zur Gewerbeliegenschaft — wir planen die Technik, die wirklich zu Ihnen passt.</p>
+      <span class="pill" data-editable="text" data-key="sol_pill">Lösungen</span>
+      <h2 data-editable="text" data-key="sol_headline">Für jedes Objekt die passende Wärme.</h2>
+      <p data-editable="text" data-key="sol_sub">Vom Einfamilienhaus bis zur Gewerbeliegenschaft — wir planen die Technik, die wirklich zu Ihnen passt.</p>
     </div>
     <div class="grid3">
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Privat</span></div>
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225324_fa82fa9d-721c-493a-b0fa-7691ce2e45cc.png" alt="Einfamilienhaus" loading="lazy">
+          <img data-editable="image" data-key="sol_1_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225324_fa82fa9d-721c-493a-b0fa-7691ce2e45cc.png" alt="Einfamilienhaus" loading="lazy">
         </div>
         <div class="pcard-body">
-          <h3>Einfamilienhaus</h3>
-          <div class="ptype">Wärmepumpe / Fernwärme</div>
+          <h3 data-editable="text" data-key="sol_1_title">Einfamilienhaus</h3>
+          <div class="ptype" data-editable="text" data-key="sol_1_type">Wärmepumpe / Fernwärme</div>
           <div class="pstats">
-            <div class="pstat"><b>~140 m²</b><span>Fläche</span></div>
-            <div class="pstat"><b>1 Einheit</b><span>Haushalt</span></div>
-            <div class="pstat"><b>−60 % CO₂*</b><span>Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_1_stat_1">~140 m²</b><span data-editable="text" data-key="sol_1_stat_1_label">Fläche</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_1_stat_2">1 Einheit</b><span data-editable="text" data-key="sol_1_stat_2_label">Haushalt</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_1_stat_3">−60 % CO₂*</b><span data-editable="text" data-key="sol_1_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Privat</span><span class="tag">WEG</span></div>
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225332_865ea2e2-650b-47f6-b284-2b4c910b6390.png" alt="Mehrfamilienhaus" loading="lazy">
+          <img data-editable="image" data-key="sol_2_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225332_865ea2e2-650b-47f6-b284-2b4c910b6390.png" alt="Mehrfamilienhaus" loading="lazy">
         </div>
         <div class="pcard-body">
-          <h3>Mehrfamilienhaus</h3>
-          <div class="ptype">BHKW + Brennwert</div>
+          <h3 data-editable="text" data-key="sol_2_title">Mehrfamilienhaus</h3>
+          <div class="ptype" data-editable="text" data-key="sol_2_type">BHKW + Brennwert</div>
           <div class="pstats">
-            <div class="pstat"><b>~900 m²</b><span>Fläche</span></div>
-            <div class="pstat"><b>12 Einheiten</b><span>Wohnungen</span></div>
-            <div class="pstat"><b>−55 % CO₂*</b><span>Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_2_stat_1">~900 m²</b><span data-editable="text" data-key="sol_2_stat_1_label">Fläche</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_2_stat_2">12 Einheiten</b><span data-editable="text" data-key="sol_2_stat_2_label">Wohnungen</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_2_stat_3">−55 % CO₂*</b><span data-editable="text" data-key="sol_2_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Gewerbe</span><span class="tag">Kommune</span></div>
-          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225339_b36dc6bb-8c20-40fe-9c0d-bc2171f13ec9.png" alt="Gewerbe &amp; Liegenschaft" loading="lazy">
+          <img data-editable="image" data-key="sol_3_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225339_b36dc6bb-8c20-40fe-9c0d-bc2171f13ec9.png" alt="Gewerbe &amp; Liegenschaft" loading="lazy">
         </div>
         <div class="pcard-body">
-          <h3>Gewerbe &amp; Liegenschaft</h3>
-          <div class="ptype">Contracting / Nahwärme</div>
+          <h3 data-editable="text" data-key="sol_3_title">Gewerbe &amp; Liegenschaft</h3>
+          <div class="ptype" data-editable="text" data-key="sol_3_type">Contracting / Nahwärme</div>
           <div class="pstats">
-            <div class="pstat"><b>3.500 m²+</b><span>Fläche</span></div>
-            <div class="pstat"><b>Wärme+Kälte</b><span>Versorgung</span></div>
-            <div class="pstat"><b>−50 % CO₂*</b><span>Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_3_stat_1">3.500 m²+</b><span data-editable="text" data-key="sol_3_stat_1_label">Fläche</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_3_stat_2">Wärme+Kälte</b><span data-editable="text" data-key="sol_3_stat_2_label">Versorgung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_3_stat_3">−50 % CO₂*</b><span data-editable="text" data-key="sol_3_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
@@ -423,17 +423,17 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="tech" id="technik">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Technologien</span>
-      <h2>Bewährte Technik, sinnvoll kombiniert.</h2>
-      <p>Wir wählen aus dem vollen Spektrum moderner Wärmeerzeugung — abgestimmt auf Objekt, Bedarf und Förderung.</p>
+      <span class="pill" data-editable="text" data-key="tech_pill">Technologien</span>
+      <h2 data-editable="text" data-key="tech_headline">Bewährte Technik, sinnvoll kombiniert.</h2>
+      <p data-editable="text" data-key="tech_sub">Wir wählen aus dem vollen Spektrum moderner Wärmeerzeugung — abgestimmt auf Objekt, Bedarf und Förderung.</p>
     </div>
     <div class="tgrid">
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg></div><h3>Wärmepumpe</h3><p>Erneuerbare Wärme aus Luft, Wasser oder Erde — ideal bei niedrigen Vorlauftemperaturen.</p></div>
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 18h16M6 18V9l6-4 6 4v9M10 18v-5h4v5"/></svg></div><h3>Fernwärme</h3><p>Gebrauchsfertige Lieferung aus dem Netz — umweltfreundlich, effizient, wartungsarm.</p></div>
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 6V4M16 6V4M9 12h6"/></svg></div><h3>BHKW</h3><p>Erzeugt Strom und Wärme zugleich — hoher Wirkungsgrad durch Kraft-Wärme-Kopplung.</p></div>
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div><h3>Solarthermie</h3><p>Sonnenwärme mit Pufferspeicher — clever kombinierbar mit weiteren Quellen.</p></div>
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2C9 6 7 8 7 13a5 5 0 0 0 10 0c0-2-1-3-2-5"/><path d="M12 22v-4"/></svg></div><h3>Pelletkessel</h3><p>Nachwachsende Rohstoffe, gut förderfähig im Bestand — nachhaltig und stabil.</p></div>
-      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div><h3>Brennwerttechnik</h3><p>Effiziente Gas-Brennwertsysteme, optional mit Biomethan — solide kombinierbar.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg></div><h3 data-editable="text" data-key="tech_1_title">Wärmepumpe</h3><p data-editable="text" data-key="tech_1_text">Erneuerbare Wärme aus Luft, Wasser oder Erde — ideal bei niedrigen Vorlauftemperaturen.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 18h16M6 18V9l6-4 6 4v9M10 18v-5h4v5"/></svg></div><h3 data-editable="text" data-key="tech_2_title">Fernwärme</h3><p data-editable="text" data-key="tech_2_text">Gebrauchsfertige Lieferung aus dem Netz — umweltfreundlich, effizient, wartungsarm.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 6V4M16 6V4M9 12h6"/></svg></div><h3 data-editable="text" data-key="tech_3_title">BHKW</h3><p data-editable="text" data-key="tech_3_text">Erzeugt Strom und Wärme zugleich — hoher Wirkungsgrad durch Kraft-Wärme-Kopplung.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div><h3 data-editable="text" data-key="tech_4_title">Solarthermie</h3><p data-editable="text" data-key="tech_4_text">Sonnenwärme mit Pufferspeicher — clever kombinierbar mit weiteren Quellen.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2C9 6 7 8 7 13a5 5 0 0 0 10 0c0-2-1-3-2-5"/><path d="M12 22v-4"/></svg></div><h3 data-editable="text" data-key="tech_5_title">Pelletkessel</h3><p data-editable="text" data-key="tech_5_text">Nachwachsende Rohstoffe, gut förderfähig im Bestand — nachhaltig und stabil.</p></div>
+      <div class="tcard reveal"><div class="icon-tile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div><h3 data-editable="text" data-key="tech_6_title">Brennwerttechnik</h3><p data-editable="text" data-key="tech_6_text">Effiziente Gas-Brennwertsysteme, optional mit Biomethan — solide kombinierbar.</p></div>
     </div>
   </div>
 </section>
@@ -442,14 +442,14 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="models" id="modelle">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Vertragsmodelle</span>
-      <h2>Das Modell, das zu Ihnen passt.</h2>
-      <p>Ob Sie investieren wollen oder nicht — wir haben die passende Form der Zusammenarbeit.</p>
+      <span class="pill" data-editable="text" data-key="models_pill">Vertragsmodelle</span>
+      <h2 data-editable="text" data-key="models_headline">Das Modell, das zu Ihnen passt.</h2>
+      <p data-editable="text" data-key="models_sub">Ob Sie investieren wollen oder nicht — wir haben die passende Form der Zusammenarbeit.</p>
     </div>
     <div class="mgrid">
-      <div class="mcard reveal"><span class="mlabel">MODELL 01</span><h3>Wärmeservice</h3><p>Wir investieren in die Anlage, sichern die Brennstoffversorgung und führen den Betrieb. Abrechnung nach Verbrauch zu vereinbarten Preisen.</p><div class="mfoot">Wir investieren · wir betreiben</div></div>
-      <div class="mcard reveal"><span class="mlabel">MODELL 02</span><h3>Anlagenpacht</h3><p>Sie bleiben Eigentümer der Anlage, wir pachten sie und übernehmen die professionelle Betriebsführung samt Wärmelieferung.</p><div class="mfoot">Sie besitzen · wir betreiben</div></div>
-      <div class="mcard reveal"><span class="mlabel">MODELL 03</span><h3>Energieanlagen-Contracting</h3><p>Wir übernehmen die Betriebsführung und optimieren Ihre Anlage energetisch — für dauerhaft niedrigere Kosten, ohne Ihren Aufwand.</p><div class="mfoot">Sie besitzen · wir optimieren</div></div>
+      <div class="mcard reveal"><span class="mlabel" data-editable="text" data-key="model_1_label">MODELL 01</span><h3 data-editable="text" data-key="model_1_title">Wärmeservice</h3><p data-editable="text" data-key="model_1_text">Wir investieren in die Anlage, sichern die Brennstoffversorgung und führen den Betrieb. Abrechnung nach Verbrauch zu vereinbarten Preisen.</p><div class="mfoot" data-editable="text" data-key="model_1_foot">Wir investieren · wir betreiben</div></div>
+      <div class="mcard reveal"><span class="mlabel" data-editable="text" data-key="model_2_label">MODELL 02</span><h3 data-editable="text" data-key="model_2_title">Anlagenpacht</h3><p data-editable="text" data-key="model_2_text">Sie bleiben Eigentümer der Anlage, wir pachten sie und übernehmen die professionelle Betriebsführung samt Wärmelieferung.</p><div class="mfoot" data-editable="text" data-key="model_2_foot">Sie besitzen · wir betreiben</div></div>
+      <div class="mcard reveal"><span class="mlabel" data-editable="text" data-key="model_3_label">MODELL 03</span><h3 data-editable="text" data-key="model_3_title">Energieanlagen-Contracting</h3><p data-editable="text" data-key="model_3_text">Wir übernehmen die Betriebsführung und optimieren Ihre Anlage energetisch — für dauerhaft niedrigere Kosten, ohne Ihren Aufwand.</p><div class="mfoot" data-editable="text" data-key="model_3_foot">Sie besitzen · wir optimieren</div></div>
     </div>
   </div>
 </section>
@@ -458,16 +458,16 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="tech" id="vorteile">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Vorteile</span>
-      <h2>Warum Wärmecontracting?</h2>
-      <p>Weniger Aufwand, weniger Risiko, weniger CO₂ — und planbare Kosten über die gesamte Laufzeit.</p>
+      <span class="pill" data-editable="text" data-key="vorteile_pill">Vorteile</span>
+      <h2 data-editable="text" data-key="vorteile_headline">Warum Wärmecontracting?</h2>
+      <p data-editable="text" data-key="vorteile_sub">Weniger Aufwand, weniger Risiko, weniger CO₂ — und planbare Kosten über die gesamte Laufzeit.</p>
     </div>
     <div class="vgrid">
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12z"/><path d="M12 12c2-1 3-3 3-5"/></svg></div><h3>Nachhaltigkeit</h3><p>Moderne Technik und Abwärmenutzung senken den CO₂-Ausstoß spürbar und schonen die Umwelt.</p></div>
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/></svg></div><h3>Effizienz</h3><p>Hohe Nutzungsgrade und optimierte Anlagen sparen große Mengen Energie ein.</p></div>
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-4h4v4"/></svg></div><h3>Komfort</h3><p>Keine Sorge um Wartung oder Brennstoff — stets zuverlässige, konstante Wärme.</p></div>
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h3>Vielseitigkeit</h3><p>Ob Einfamilienhaus, Mehrfamilienhaus, Wohnung oder Altbau — überall einsetzbar.</p></div>
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5A2.5 2 0 0 1 14.5 9M14.5 14.5A2.5 2 0 0 1 9.5 14"/></svg></div><h3>Kostenersparnis</h3><p>Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, ganz ohne Investition.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12z"/><path d="M12 12c2-1 3-3 3-5"/></svg></div><h3 data-editable="text" data-key="vorteil_1_title">Nachhaltigkeit</h3><p data-editable="text" data-key="vorteil_1_text">Moderne Technik und Abwärmenutzung senken den CO₂-Ausstoß spürbar und schonen die Umwelt.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/></svg></div><h3 data-editable="text" data-key="vorteil_2_title">Effizienz</h3><p data-editable="text" data-key="vorteil_2_text">Hohe Nutzungsgrade und optimierte Anlagen sparen große Mengen Energie ein.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-4h4v4"/></svg></div><h3 data-editable="text" data-key="vorteil_3_title">Komfort</h3><p data-editable="text" data-key="vorteil_3_text">Keine Sorge um Wartung oder Brennstoff — stets zuverlässige, konstante Wärme.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h3 data-editable="text" data-key="vorteil_4_title">Vielseitigkeit</h3><p data-editable="text" data-key="vorteil_4_text">Ob Einfamilienhaus, Mehrfamilienhaus, Wohnung oder Altbau — überall einsetzbar.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5A2.5 2 0 0 1 14.5 9M14.5 14.5A2.5 2 0 0 1 9.5 14"/></svg></div><h3 data-editable="text" data-key="vorteil_5_title">Kostenersparnis</h3><p data-editable="text" data-key="vorteil_5_text">Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, ganz ohne Investition.</p></div>
     </div>
   </div>
 </section>
@@ -476,9 +476,9 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="calc" id="rechner">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Wärme-Rechner</span>
-      <h2>In 60 Sekunden zur unverbindlichen Schätzung.</h2>
-      <p>Geben Sie ein paar Eckdaten ein — Sie erhalten sofort eine grobe Orientierung für Ihre monatliche Wärme-Rate und die CO₂-Einsparung.</p>
+      <span class="pill" data-editable="text" data-key="calc_pill">Wärme-Rechner</span>
+      <h2 data-editable="text" data-key="calc_headline">In 60 Sekunden zur unverbindlichen Schätzung.</h2>
+      <p data-editable="text" data-key="calc_sub">Geben Sie ein paar Eckdaten ein — Sie erhalten sofort eine grobe Orientierung für Ihre monatliche Wärme-Rate und die CO₂-Einsparung.</p>
     </div>
     <div class="frame reveal">
       <div class="inputs">
@@ -530,17 +530,17 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="showcase" id="ablauf">
   <div class="wrap">
     <div class="inner reveal">
-      <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225343_f066b07a-f4a8-4890-a6e3-390f2fa87561.png" alt="Techniker bei der Wärmeanlage" loading="lazy">
+      <img class="bg" data-editable="image" data-key="showcase_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225343_f066b07a-f4a8-4890-a6e3-390f2fa87561.png" alt="Techniker bei der Wärmeanlage" loading="lazy">
       <div class="ov"></div>
       <div class="content">
-        <span class="badge-light">So funktioniert Wärmecontracting</span>
-        <h2>Ein Ansprechpartner. Von der Analyse bis zum Betrieb.</h2>
-        <p>Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, errichtet und betrieben.</p>
+        <span class="badge-light" data-editable="text" data-key="showcase_badge">So funktioniert Wärmecontracting</span>
+        <h2 data-editable="text" data-key="showcase_headline">Ein Ansprechpartner. Von der Analyse bis zum Betrieb.</h2>
+        <p data-editable="text" data-key="showcase_text">Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, errichtet und betrieben.</p>
         <div class="flist">
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><div><h4>Bedarfsanalyse</h4><small>Objekt, Verbrauch &amp; Ziele vor Ort</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M8 20h8M9 16v4M15 16v4"/></svg></div><div><h4>Konzept &amp; Finanzierung</h4><small>Technik + Förderung optimal ausgelegt</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7l3 3M3 21l3-1 11-11-2-2L4 18z"/></svg></div><div><h4>Umsetzung &amp; Bau</h4><small>Koordiniert, termintreu, sauber</small></div></div>
-          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 2h-5l-.4 2.6a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.6h5l.4-2.6a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg></div><div><h4>Service &amp; Betrieb</h4><small>24/7 über die ganze Laufzeit</small></div></div>
+          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_1_title">Bedarfsanalyse</h4><small data-editable="text" data-key="showcase_step_1_text">Objekt, Verbrauch &amp; Ziele vor Ort</small></div></div>
+          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M8 20h8M9 16v4M15 16v4"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_2_title">Konzept &amp; Finanzierung</h4><small data-editable="text" data-key="showcase_step_2_text">Technik + Förderung optimal ausgelegt</small></div></div>
+          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 7l3 3M3 21l3-1 11-11-2-2L4 18z"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_3_title">Umsetzung &amp; Bau</h4><small data-editable="text" data-key="showcase_step_3_text">Koordiniert, termintreu, sauber</small></div></div>
+          <div class="fstep"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 2h-5l-.4 2.6a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.6h5l.4-2.6a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg></div><div><h4 data-editable="text" data-key="showcase_step_4_title">Service &amp; Betrieb</h4><small data-editable="text" data-key="showcase_step_4_text">24/7 über die ganze Laufzeit</small></div></div>
         </div>
       </div>
     </div>
@@ -551,25 +551,25 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <section class="faq" id="faq">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">FAQ</span>
-      <h2>Häufige Fragen zum Wärmecontracting</h2>
+      <span class="pill" data-editable="text" data-key="faq_pill">FAQ</span>
+      <h2 data-editable="text" data-key="faq_headline">Häufige Fragen zum Wärmecontracting</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q">Was kostet Wärmecontracting? <span class="faq-ic">+</span></button>
-        <div class="faq-a"><p>Der Preis besteht meist aus einem Grundpreis für Anlage und Bereitstellung sowie einem verbrauchsabhängigen Arbeitspreis. Die genaue Höhe hängt von Objekt, Technik und Laufzeit ab und wird individuell berechnet — der Rechner oben gibt eine erste Orientierung.</p></div>
+        <button class="faq-q"><span data-editable="text" data-key="faq_1_q">Was kostet Wärmecontracting?</span> <span class="faq-ic">+</span></button>
+        <div class="faq-a"><p data-editable="text" data-key="faq_1_a">Der Preis besteht meist aus einem Grundpreis für Anlage und Bereitstellung sowie einem verbrauchsabhängigen Arbeitspreis. Die genaue Höhe hängt von Objekt, Technik und Laufzeit ab und wird individuell berechnet — der Rechner oben gibt eine erste Orientierung.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Wem gehört die Heizungsanlage? <span class="faq-ic">+</span></button>
-        <div class="faq-a"><p>Das hängt vom Modell ab. Beim Wärmeservice gehört die Anlage uns. Bei der Anlagenpacht bleiben Sie Eigentümer, und wir übernehmen nur den Betrieb.</p></div>
+        <button class="faq-q"><span data-editable="text" data-key="faq_2_q">Wem gehört die Heizungsanlage?</span> <span class="faq-ic">+</span></button>
+        <div class="faq-a"><p data-editable="text" data-key="faq_2_a">Das hängt vom Modell ab. Beim Wärmeservice gehört die Anlage uns. Bei der Anlagenpacht bleiben Sie Eigentümer, und wir übernehmen nur den Betrieb.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Lohnt sich das für ein Einfamilienhaus? <span class="faq-ic">+</span></button>
-        <div class="faq-a"><p>Ja, besonders wenn Sie eine moderne Heizung ohne hohe Einmalinvestition möchten. Statt der Anschaffung zahlen Sie eine planbare Rate inklusive Wartung und Service; Fördermittel werden berücksichtigt.</p></div>
+        <button class="faq-q"><span data-editable="text" data-key="faq_3_q">Lohnt sich das für ein Einfamilienhaus?</span> <span class="faq-ic">+</span></button>
+        <div class="faq-a"><p data-editable="text" data-key="faq_3_a">Ja, besonders wenn Sie eine moderne Heizung ohne hohe Einmalinvestition möchten. Statt der Anschaffung zahlen Sie eine planbare Rate inklusive Wartung und Service; Fördermittel werden berücksichtigt.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">Welche Vertragslaufzeiten sind üblich? <span class="faq-ic">+</span></button>
-        <div class="faq-a"><p>Contracting-Verträge laufen typischerweise über mehrere Jahre, häufig 10 bis 15 Jahre, damit sich die Investition in die Anlage über die Laufzeit verteilt. Die konkrete Laufzeit wird vertraglich vereinbart.</p></div>
+        <button class="faq-q"><span data-editable="text" data-key="faq_4_q">Welche Vertragslaufzeiten sind üblich?</span> <span class="faq-ic">+</span></button>
+        <div class="faq-a"><p data-editable="text" data-key="faq_4_a">Contracting-Verträge laufen typischerweise über mehrere Jahre, häufig 10 bis 15 Jahre, damit sich die Investition in die Anlage über die Laufzeit verteilt. Die konkrete Laufzeit wird vertraglich vereinbart.</p></div>
       </div>
     </div>
   </div>
@@ -580,19 +580,19 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <div class="wrap">
     <div class="close-box reveal">
       <div>
-        <h2>Bereit für sorgenfreie Wärme?</h2>
-        <p>Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
+        <h2 data-editable="text" data-key="closing_headline">Bereit für sorgenfreie Wärme?</h2>
+        <p data-editable="text" data-key="closing_text">Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
       </div>
       <div class="close-right">
         <a href="mailto:info@waermewerk.de" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
-        <div class="close-contact">☎ +49 (0) XXX XXXXXXX · info@waermewerk.de</div>
+        <div class="close-contact" data-editable="text" data-key="closing_contact">☎ +49 (0) XXX XXXXXXX · info@waermewerk.de</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<p class="foot">* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen. Markenname &amp; Kontakt sind Platzhalter.</p>
+<p class="foot" data-editable="text" data-key="footer_note">* Beispiel-/Richtwerte — im Projekt durch belegbare Zahlen ersetzen. Markenname &amp; Kontakt sind Platzhalter.</p>
 
 <!-- ============ DRAWER ============ -->
 <div class="scrim" id="scrim"></div>
@@ -695,5 +695,6 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   flUpd();
 })();
 </script>
+<script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
 </body>
 </html>

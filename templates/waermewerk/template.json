@@ -1,0 +1,6 @@
+{
+  "name": "waermewerk",
+  "title": "Wärmewerk — Glassmorphism Landing (editor-ready)",
+  "description": "Wärmecontracting one-pager: video hero, glass cards, Wärme-Rechner, 9 sections. Fully wired for the overlay editor (data-editable + content.json).",
+  "files": ["index.html", "content.json", "config.json"]
+}

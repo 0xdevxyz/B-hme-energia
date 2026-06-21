@@ -1,0 +1,16 @@
+{
+  "businessName": "Wärmewerk",
+  "industry": "Wärmecontracting",
+  "city": "Sachsen",
+  "district": "Sachsen",
+  "mainKeyword": "Wärmecontracting",
+  "keywords": ["Wärmecontracting", "Wärmepumpe", "Fernwärme", "Nachhaltige Wärmeversorgung"],
+  "phone": "+49 (0) XXX XXXXXXX",
+  "email": "info@waermewerk.de",
+  "address": "Beispielstraße 1, 00000 Musterstadt",
+  "zip": "00000",
+  "services": ["Vollcontracting", "Betriebsführung", "Nahwärmenetz"],
+  "editorEmail": "mail@panoart360.de",
+  "siteUrl": "https://example.com",
+  "foundingYear": "2024"
+}

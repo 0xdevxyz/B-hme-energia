@@ -557,12 +557,20 @@ const ALLOWED_CONTENT_KEYS = new Set([
   'logoName', 'businessName', 'address', 'phone', 'email',
 ]);
 
+// Generic key validation: any safe slug key is editable, so new templates
+// work without editing this whitelist. The legacy set stays as an allow-list
+// for keys that don't match the slug pattern.
+const CONTENT_KEY_PATTERN = /^[a-z][a-z0-9_]{1,63}$/;
+function isValidContentKey(key) {
+  return typeof key === 'string' && (CONTENT_KEY_PATTERN.test(key) || ALLOWED_CONTENT_KEYS.has(key));
+}
+
 app.post('/api/save', isAuthenticated, checkOrigin, (req, res) => {
   const { key, value } = req.body;
   if (!key || typeof key !== 'string' || key.trim() === '') {
     return res.status(400).json({ error: 'Ungültiger Key' });
   }
-  if (!ALLOWED_CONTENT_KEYS.has(key)) {
+  if (!isValidContentKey(key)) {
     return res.status(400).json({ error: 'Key nicht erlaubt' });
   }
   if (typeof value !== 'string' || value.length > 5000) {
@@ -592,7 +600,7 @@ app.post('/api/upload-image', isAuthenticated, checkOrigin, (req, res) => {
     const relativePath = `assets/uploads/${req.file.filename}`;
     const key = req.body.key;
 
-    if (key && ALLOWED_IMAGE_KEYS.has(key)) {
+    if (key && (isValidContentKey(key) || ALLOWED_IMAGE_KEYS.has(key))) {
       content[key] = relativePath;
       fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf8');
     }

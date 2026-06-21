@@ -51,10 +51,13 @@ program
   .description('White-Label Website Template System CLI')
   .version('1.0.0');
 
+const TEMPLATES_DIR = path.join(ROOT, 'templates');
+
 program
   .command('create <clientname>')
   .description('Neues Kundenprojekt anlegen')
-  .action((clientname) => {
+  .option('-t, --template <name>', 'Editor-fertiges Template aus templates/<name>/ klonen (z. B. waermewerk)')
+  .action((clientname, opts) => {
     validateClientname(clientname);
     const clientDir = path.join(CLIENTS_DIR, clientname);
     if (fs.existsSync(clientDir)) {
@@ -63,6 +66,29 @@ program
     }
     fs.mkdirSync(clientDir, { recursive: true });
     fs.mkdirSync(path.join(clientDir, 'assets', 'uploads'), { recursive: true });
+
+    // Template-based onboarding: clone an editor-ready template (index.html + content.json + config.json)
+    if (opts && opts.template) {
+      const tplName = path.basename(opts.template);
+      const tplDir = path.join(TEMPLATES_DIR, tplName);
+      if (!fs.existsSync(path.join(tplDir, 'index.html'))) {
+        err(`Template "${tplName}" nicht gefunden (erwartet: templates/${tplName}/index.html).`);
+        process.exit(1);
+      }
+      for (const file of ['index.html', 'content.json', 'config.json']) {
+        const src = path.join(tplDir, file);
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, path.join(clientDir, file));
+          ok(`${file} aus Template "${tplName}" kopiert`);
+        }
+      }
+      log(`Kundenprojekt "${clientname}" aus Template "${tplName}" angelegt (editor-fertig).`);
+      ok(`Ordner: clients/${clientname}/`);
+      warn(`Nächster Schritt: clients/${clientname}/config.json + content.json anpassen.`);
+      warn(`Editor: <domain>/?edit  (Texte/Bilder per Klick bearbeiten)`);
+      writeUpdateLog(clientname, `Projekt erstellt via studio create --template ${tplName}`);
+      return;
+    }
 
     const exampleConfig = path.join(EXAMPLE_DIR, 'config.json');
     if (fs.existsSync(exampleConfig)) {
