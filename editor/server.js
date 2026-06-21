@@ -1,4 +1,6 @@
-require('dotenv').config({ path: require('path').join(process.env.CLIENT_DIR || '.', '.env') });
+// override: true — damit Werte aus der client-spezifischen .env (z. B. SMTP-Zugang)
+// die im Docker-Image gebackenen ENV-Defaults (SMTP_HOST=localhost etc.) überschreiben.
+require('dotenv').config({ path: require('path').join(process.env.CLIENT_DIR || '.', '.env'), override: true });
 
 const express = require('express');
 const rateLimit = require('express-rate-limit');
