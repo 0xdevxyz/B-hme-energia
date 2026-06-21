@@ -219,6 +219,24 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 .close-right{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
 .close-contact{font-size:.95rem;opacity:.92;font-weight:500}
 
+/* ---------- KONTAKTFORMULAR (full width) ---------- */
+.contact-box{background:linear-gradient(150deg,var(--green),var(--forest-2));color:#fff;border-radius:30px;padding:48px}
+.contact-head{max-width:680px;margin-bottom:26px}
+.contact-head .pill{background:rgba(255,255,255,.16);color:#fff;margin-bottom:14px}
+.contact-head h2{color:#fff;font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:12px}
+.contact-head p{opacity:.9}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.contact-form input,.contact-form textarea{width:100%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:14px 16px;color:#fff;font-family:var(--sans);font-size:.95rem;transition:.2s}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:rgba(255,255,255,.7)}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.18)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.cf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none}
+.cf-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px}
+.cf-status{font-size:.92rem;font-weight:600}
+.contact-box .close-contact{margin-top:22px}
+@media(max-width:760px){.cf-row{grid-template-columns:1fr}.contact-box{padding:32px}}
+
 /* ---------- DRAWER ---------- */
 .scrim{position:fixed;inset:0;background:rgba(16,24,19,.5);opacity:0;pointer-events:none;transition:.3s;z-index:60}
 .scrim.show{opacity:1;pointer-events:auto}
@@ -316,7 +334,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
-        <a href="#rechner" class="btn btn-light">Rate berechnen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+        <a href="#kontakt" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
         <button class="burger" id="openDrawer" aria-label="Menü öffnen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
     </div>
@@ -612,15 +630,26 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 <!-- ============ CLOSING CTA ============ -->
 <section class="close" id="kontakt">
   <div class="wrap">
-    <div class="close-box reveal">
-      <div>
+    <div class="contact-box reveal">
+      <div class="contact-head">
+        <span class="pill">Beratung buchen</span>
         <h2 data-editable="text" data-key="closing_headline">Bereit für sorgenfreie Wärme?</h2>
         <p data-editable="text" data-key="closing_text">Sagen Sie uns kurz, um welches Objekt es geht — wir melden uns mit einem unverbindlichen Wärmekonzept.</p>
       </div>
-      <div class="close-right">
-        <a href="mailto:info@boehme-energie.com" class="btn btn-light">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
-        <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
-      </div>
+      <form class="contact-form" id="beratungForm" novalidate>
+        <div class="cf-row">
+          <input name="name" placeholder="Name" autocomplete="name" required>
+          <input name="email" type="email" placeholder="E-Mail" autocomplete="email" required>
+          <input name="phone" type="tel" placeholder="Telefon" autocomplete="tel">
+        </div>
+        <textarea name="message" placeholder="Ihre Nachricht" rows="4" required></textarea>
+        <input type="text" name="company" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cf-actions">
+          <button type="submit" class="btn btn-light">Anfrage senden <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+          <span class="cf-status" id="cfStatus" aria-live="polite"></span>
+        </div>
+      </form>
+      <div class="close-contact" data-editable="text" data-key="closing_contact">☎ 03722 / 60030 · info@boehme-energie.com</div>
     </div>
   </div>
 </section>
@@ -665,7 +694,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   <a href="#technik">Technologien</a>
   <a href="#rechner">Rechner</a>
   <a href="#faq">FAQ</a>
-  <a href="#rechner" class="btn btn-primary">Rate berechnen <span class="circ"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></a>
+  <a href="#kontakt" class="btn btn-primary">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
 </aside>
 
 <script>
@@ -768,6 +797,28 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
   }
   fl.addEventListener('input',flUpd);
   flUpd();
+})();
+</script>
+<script>
+(function(){
+  var form=document.getElementById('beratungForm');
+  if(!form) return;
+  var status=document.getElementById('cfStatus');
+  var btn=form.querySelector('button[type=submit]');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=Object.fromEntries(new FormData(form).entries());
+    if(!data.name||!data.email||!data.message){status.textContent='⚠️ Bitte Name, E-Mail und Nachricht ausfüllen.';return;}
+    btn.disabled=true; status.textContent='Wird gesendet…';
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){
+        if(res.ok){status.textContent='✅ Danke! Wir melden uns zeitnah bei Ihnen.';form.reset();}
+        else{status.textContent='⚠️ '+((res.j&&res.j.error)||'Es ist ein Fehler aufgetreten.');}
+      })
+      .catch(function(){status.textContent='⚠️ Netzwerkfehler. Bitte später erneut versuchen.';})
+      .finally(function(){btn.disabled=false;});
+  });
 })();
 </script>
 <script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>

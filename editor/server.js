@@ -129,6 +129,14 @@ const pageCreateLimiter = rateLimit({
   message: { error: 'Limit erreicht: max. 10 neue Seiten pro Stunde' },
 });
 
+const contactLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut.' },
+});
+
 const ALLOWED_SECTION_TYPES = new Set([
   'testimonials', 'faq-extra', 'cta-band', 'blog-teaser', 'before-after', 'process-steps',
 ]);
@@ -504,6 +512,51 @@ app.get('/auth/logout', (req, res) => {
 
 app.get('/api/me', isAuthenticated, (req, res) => {
   res.json({ email: req.user.email });
+});
+
+// Public contact form ("Beratung buchen"). No auth (anonymous visitors), but
+// origin-checked, rate-limited and honeypot-protected. Sends via configured SMTP.
+app.post('/api/contact', contactLimiter, checkOrigin, async (req, res) => {
+  const { name, email, phone, message, company } = req.body || {};
+  // Honeypot: bots fill hidden 'company' field -> silently accept, don't send.
+  if (company) return res.json({ ok: true });
+
+  const str = (v) => (typeof v === 'string' ? v.trim() : '');
+  const n = str(name), e = str(email), p = str(phone), m = str(message);
+
+  if (!n || !e || !m) {
+    return res.status(400).json({ error: 'Bitte Name, E-Mail und Nachricht ausfüllen.' });
+  }
+  if (n.length > 120 || e.length > 160 || p.length > 60 || m.length > 4000) {
+    return res.status(400).json({ error: 'Eingabe zu lang.' });
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) {
+    return res.status(400).json({ error: 'Bitte eine gültige E-Mail-Adresse angeben.' });
+  }
+
+  const recipient = process.env.CONTACT_EMAIL || editorEmail;
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to: recipient,
+      replyTo: e,
+      subject: `Neue Beratungsanfrage – ${businessName}`,
+      text: `Name: ${n}\nE-Mail: ${e}\nTelefon: ${p || '-'}\n\nNachricht:\n${m}`,
+      html: `
+        <div style="font-family:system-ui,sans-serif;max-width:560px;">
+          <h2 style="color:#2A3A2F;">Neue Beratungsanfrage</h2>
+          <p><strong>Name:</strong> ${escapeHtml(n)}</p>
+          <p><strong>E-Mail:</strong> ${escapeHtml(e)}</p>
+          <p><strong>Telefon:</strong> ${escapeHtml(p || '-')}</p>
+          <p><strong>Nachricht:</strong></p>
+          <p style="white-space:pre-wrap;background:#f4f2ec;padding:12px 16px;border-radius:8px;">${escapeHtml(m)}</p>
+        </div>`,
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Kontakt-Mail-Fehler:', err.message);
+    return res.status(500).json({ error: 'Konnte nicht gesendet werden. Bitte später erneut versuchen.' });
+  }
 });
 
 const ALLOWED_CONTENT_KEYS = new Set([
