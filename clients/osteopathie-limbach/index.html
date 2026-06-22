@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praxis für Osteopathie & Chiropraktik in Limbach-Oberfrohna | Christoph Uhlmann</title>
+<meta name="description" content="Ihre Osteopathiepraxis für Limbach-Oberfrohna: Osteopathie, Chiropraktik & Akutbehandlung — auch für Säuglinge und Schwangere. Jetzt Termin vereinbaren: 03722 40 93 165.">
+<meta name="keywords" content="Osteopathie Limbach, Chiropraktik Limbach-Oberfrohna, Osteopathie Chemnitz, Osteopathie für Säuglinge, Osteopathie Schwangerschaft, Heilpraktiker Limbach">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://osteopathie-limbach.de/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Praxis für Osteopathie & Chiropraktik in Limbach-Oberfrohna">
+<meta property="og:description" content="Ganzheitliche Osteopathie und Chiropraktik — auch für Säuglinge und Schwangere. Jetzt Termin vereinbaren.">
+<meta property="og:locale" content="de_DE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sage:#999f79; --sage-2:#a9b17f; --sage-dk:#7c8460; --sage-soft:#eef0e6;
+  --cream:#f7f6f1; --ink:#2c322a; --soft:#5d6557; --muted:#828a78;
+  --white:#fff; --line:rgba(44,50,42,.12);
+  --head:'Quicksand',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+  --shadow:0 24px 50px -28px rgba(44,50,42,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+section{position:relative}
+h1,h2,h3,h4{font-family:var(--head);line-height:1.12;letter-spacing:-.01em;font-weight:700;color:var(--ink)}
+
+/* ---------- buttons / pills ---------- */
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(153,159,121,.16);color:var(--sage-dk);border-radius:999px;padding:7px 16px;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;width:fit-content}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:600;font-size:.96rem;padding:15px 26px;border-radius:12px;border:1px solid transparent;cursor:pointer;transition:.25s;white-space:nowrap}
+.btn svg{flex:none}
+.btn-primary{background:var(--sage);color:#fff;box-shadow:0 14px 28px -14px rgba(124,132,96,.85)}
+.btn-primary:hover{background:var(--sage-2);transform:translateY(-2px)}
+.btn-light{background:rgba(255,255,255,.92);color:var(--ink)}
+.btn-light:hover{background:#fff;transform:translateY(-2px)}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn-out{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-out:hover{border-color:var(--sage);color:var(--sage-dk)}
+
+.sec-head{max-width:680px;margin:0 auto 52px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.sec-head h2{font-size:clamp(1.8rem,3.6vw,2.7rem)}
+.sec-head p{color:var(--soft);font-size:1.06rem}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- HERO ---------- */
+.hero-pad{padding:12px}
+.hero{position:relative;display:flex;flex-direction:column;min-height:min(88vh,760px);border-radius:28px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(38,44,34,.55) 0%,rgba(38,44,34,.28) 34%,rgba(38,44,34,.42) 62%,rgba(38,44,34,.78) 100%)}
+.hero>.nav,.hero>.hero-center{position:relative;z-index:2;width:100%}
+
+.nav{display:flex;justify-content:center;padding:16px 16px 0}
+.navpill{display:flex;align-items:center;gap:24px;width:100%;max-width:1180px;background:rgba(255,255,255,.14);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:9px 12px 9px 20px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff}
+.brand .logo{width:42px;height:42px;border-radius:50%;background:#fff;padding:4px;object-fit:contain;flex:none}
+.brand .bt{font-family:var(--head);font-weight:700;font-size:1.05rem;line-height:1.1}
+.brand .bs{font-size:.7rem;opacity:.85;letter-spacing:.06em;text-transform:uppercase}
+.nav-links{display:flex;gap:22px;margin:0 auto;font-size:.92rem;font-weight:500}
+.nav-links a{color:rgba(255,255,255,.9);padding:6px 2px;transition:.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.nav-cta .btn{padding:11px 20px;font-size:.9rem}
+.burger{display:none;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);cursor:pointer;color:#fff}
+.burger svg{margin:auto}
+
+.hero-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 22px 72px;max-width:880px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:8px 18px;font-size:.82rem;font-weight:600;margin-bottom:24px}
+.hero h1{color:#fff;font-size:clamp(2.2rem,5.4vw,4rem);text-shadow:0 2px 30px rgba(0,0,0,.4);margin-bottom:20px;font-weight:600}
+.hero-sub{color:rgba(255,255,255,.92);font-size:clamp(1rem,1.6vw,1.18rem);max-width:640px;margin-bottom:34px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- MARQUEE ---------- */
+.marquee{overflow:hidden;padding:20px 0;background:var(--white);border-bottom:1px solid var(--line)}
+.marquee-track{display:flex;width:max-content;animation:scroll 32s linear infinite;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.marquee-track span{display:inline-flex;align-items:center;font-family:var(--head);font-size:1.02rem;font-weight:600;color:var(--sage-dk);padding:0 4px}
+.marquee-track i{color:var(--sage);font-style:normal;padding:0 20px;font-size:.7rem}
+
+/* ---------- INTRO ---------- */
+.intro{padding:90px 0}
+.intro-box{display:grid;grid-template-columns:.55fr 1fr;gap:48px;align-items:center}
+.intro-logo{display:grid;place-items:center}
+.intro-logo img{width:min(300px,80%)}
+.intro-text h2{font-size:clamp(1.6rem,3vw,2.3rem);margin:16px 0 18px}
+.intro-text p{color:var(--soft);font-size:1.06rem}
+
+/* ---------- LEISTUNGEN ---------- */
+.services{padding:90px 0;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.scard{background:var(--cream);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+.scard:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.scard-img{aspect-ratio:4/3;overflow:hidden}
+.scard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.scard:hover .scard-img img{transform:scale(1.06)}
+.scard-body{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1}
+.scard-body h3{font-size:1.18rem;margin-bottom:10px}
+.scard-body p{color:var(--soft);font-size:.94rem;flex:1}
+
+/* ---------- OSTEOPATHIE ---------- */
+.osteo{padding:96px 0}
+.osteo-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start}
+.osteo-intro h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:16px 0 18px}
+.osteo-intro p{color:var(--soft);font-size:1.04rem}
+.quote{margin-top:28px;background:var(--sage-soft);border-left:4px solid var(--sage);border-radius:0 16px 16px 0;padding:24px 26px}
+.quote p{font-family:var(--head);font-size:1.08rem;font-weight:600;color:var(--ink);font-style:italic;margin:0}
+.quote cite{display:block;margin-top:12px;font-style:normal;font-weight:600;color:var(--sage-dk);font-size:.9rem}
+
+.acc{display:flex;flex-direction:column;gap:12px}
+.acc-item{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.acc-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;background:none;border:none;cursor:pointer;font-family:var(--head);font-weight:600;font-size:1.02rem;color:var(--ink);text-align:left}
+.acc-ic{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;background:var(--sage-soft);color:var(--sage-dk);flex:none;font-size:1.3rem;line-height:1;transition:transform .3s}
+.acc-item.open .acc-ic{transform:rotate(45deg)}
+.acc-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.7,.2,1)}
+.acc-a p{padding:0 22px 22px;color:var(--soft);font-size:.96rem}
+
+/* ---------- CHIROPRAKTIK ---------- */
+.chiro{padding:96px 0;background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.chiro-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.chiro-media{border-radius:24px;overflow:hidden;aspect-ratio:5/4;box-shadow:var(--shadow)}
+.chiro-media img{width:100%;height:100%;object-fit:cover}
+.chiro-text h2{font-size:clamp(1.7rem,3vw,2.4rem);margin:16px 0 16px}
+.chiro-text>p{color:var(--soft);font-size:1.04rem;margin-bottom:26px}
+.steps{display:flex;flex-direction:column;gap:16px;margin-bottom:28px}
+.step{display:flex;gap:16px;align-items:flex-start}
+.step .num{width:38px;height:38px;border-radius:11px;background:var(--sage);color:#fff;font-family:var(--head);font-weight:700;display:grid;place-items:center;flex:none}
+.step h4{font-size:1.04rem;margin-bottom:2px}
+.step p{color:var(--soft);font-size:.94rem}
+.adv{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:24px 26px}
+.adv h4{font-size:1.05rem;margin-bottom:14px}
+.adv ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.adv li{display:flex;gap:11px;align-items:flex-start;color:var(--soft);font-size:.96rem}
+.adv li svg{flex:none;color:var(--sage);margin-top:3px}
+
+/* ---------- ÜBER MICH / TIMELINE ---------- */
+.about{padding:96px 0}
+.timeline{max-width:780px;margin:0 auto;position:relative;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl{position:relative;padding-bottom:30px}
+.tl:last-child{padding-bottom:0}
+.tl::before{content:"";position:absolute;left:-32px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--white);border:4px solid var(--sage)}
+.tl .yr{display:inline-block;font-family:var(--head);font-weight:700;color:var(--sage-dk);font-size:.92rem;margin-bottom:4px}
+.tl p{color:var(--ink);font-size:1.02rem;font-weight:500}
+
+/* ---------- KONTAKT ---------- */
+.contact{padding:96px 0;background:var(--white);border-top:1px solid var(--line)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cinfo{display:flex;flex-direction:column;gap:26px}
+.cblock{display:flex;gap:16px;align-items:flex-start}
+.cblock .ci{width:46px;height:46px;border-radius:13px;background:var(--sage-soft);color:var(--sage-dk);display:grid;place-items:center;flex:none}
+.cblock .cl{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;margin-bottom:3px}
+.cblock .cv{font-family:var(--head);font-weight:700;font-size:1.25rem;color:var(--ink)}
+.cblock .cv a:hover{color:var(--sage-dk)}
+.cblock .cn{color:var(--soft);font-size:.94rem;margin-top:6px;white-space:pre-line}
+.cmap{border-radius:18px;overflow:hidden;border:1px solid var(--line);height:230px}
+.cmap iframe{width:100%;height:100%;border:0;display:block}
+.booking-card{background:linear-gradient(150deg,var(--sage),var(--sage-dk));color:#fff;border-radius:20px;padding:28px}
+.booking-card h4{color:#fff;font-size:1.25rem;margin-bottom:8px}
+.booking-card p{opacity:.92;font-size:.96rem;margin-bottom:18px}
+
+.cform{background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:34px}
+.cform h3{font-size:1.4rem;margin-bottom:6px}
+.cform .lead{color:var(--soft);font-size:.96rem;margin-bottom:24px}
+.field{margin-bottom:18px}
+.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+.field input,.field textarea{width:100%;font-family:var(--body);font-size:1rem;padding:13px 15px;border:1px solid var(--line);border-radius:11px;background:var(--white);color:var(--ink);transition:border-color .2s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--sage)}
+.field textarea{resize:vertical;min-height:120px}
+.cform .btn{width:100%}
+.formhint{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+
+/* ---------- CLOSING ---------- */
+.closing{padding:0 0 96px}
+.closing-box{background:linear-gradient(150deg,var(--ink),#3b4337);color:#fff;border-radius:26px;padding:clamp(36px,6vw,64px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
+.closing-box h2{color:#fff;font-size:clamp(1.7rem,3.4vw,2.6rem)}
+.closing-box p{opacity:.88;max-width:560px;font-size:1.06rem}
+.closing-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--ink);color:rgba(255,255,255,.75);padding:48px 22px 40px}
+.foot-inner{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+.foot .fnote{font-size:.86rem}
+.foot .flinks{display:flex;gap:18px;font-size:.86rem}
+.foot .flinks a:hover{color:#fff}
+
+/* ---------- floating booking ---------- */
+.fab{position:fixed;right:20px;bottom:20px;z-index:50;background:var(--sage);color:#fff;border-radius:999px;padding:14px 22px;font-family:var(--body);font-weight:600;font-size:.95rem;box-shadow:0 14px 30px -10px rgba(44,50,42,.6);display:inline-flex;align-items:center;gap:9px;transition:.25s}
+.fab:hover{background:var(--sage-2);transform:translateY(-2px)}
+
+/* ---------- DRAWER ---------- */
+.scrim{position:fixed;inset:0;background:rgba(38,44,34,.5);opacity:0;pointer-events:none;transition:.3s;z-index:60}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:300px;max-width:84vw;background:var(--ink);color:#fff;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.7,.2,1);z-index:70;padding:26px;display:flex;flex-direction:column;gap:6px}
+.drawer.show{transform:translateX(0)}
+.drawer .dclose{align-self:flex-end;background:rgba(255,255,255,.12);border:none;color:#fff;width:42px;height:42px;border-radius:999px;cursor:pointer;margin-bottom:12px}
+.drawer a{padding:14px 4px;font-size:1.05rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,.12)}
+.drawer .btn{margin-top:18px}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1000px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-cta .btn{display:none}
+  .burger{display:grid}
+  .navpill{justify-content:space-between;gap:12px}
+  .intro-box,.osteo-grid,.chiro-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .intro-logo{order:-1}
+  .chiro-media{order:-1;aspect-ratio:16/10}
+}
+@media(max-width:600px){
+  .hero-pad{padding:8px}
+  .hero{border-radius:22px;min-height:84vh}
+  .intro,.services,.osteo,.chiro,.about,.contact{padding:64px 0}
+  .grid4{grid-template-columns:1fr}
+  .cform{padding:26px}
+  .hero-ctas{width:100%}
+  .hero-ctas .btn{flex:1}
+  .fab{right:14px;bottom:14px;padding:13px 18px;font-size:.9rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero-pad">
+<header class="hero">
+  <div class="hero-bg">
+    <img src="https://osteopathie-limbach.de/wp-content/uploads/2021/02/osteopathist-treating-a-patient-indoors-2048x1365.jpg" alt="Osteopathische Behandlung in der Praxis" fetchpriority="high">
+  </div>
+  <div class="hero-scrim"></div>
+
+  <nav class="nav">
+    <div class="navpill">
+      <a href="#" class="brand">
+        <img class="logo" src="https://osteopathie-limbach.de/wp-content/uploads/2026/04/LOGO-C.Uhlmann2026.png" alt="Logo Christoph Uhlmann">
+        <span>
+          <span class="bt" data-editable="text" data-key="brand_name">Christoph Uhlmann</span><br>
+          <span class="bs" data-editable="text" data-key="brand_sub">Osteopathie · Chiropraktik</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#osteopathie">Osteopathie</a>
+        <a href="#chiropraktik">Chiropraktik</a>
+        <a href="#ueber-mich">Über mich</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="nav-cta">
+        <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-light" target="_blank" rel="noopener">Termin buchen</a>
+        <button class="burger" id="openDrawer" aria-label="Menü öffnen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero-center">
+    <span class="hero-badge" data-editable="text" data-key="hero_badge">Praxis für Osteopathie &amp; Chiropraktik · Limbach-Oberfrohna</span>
+    <h1 data-editable="text" data-key="hero_headline">Gesundheit zu finden, sollte das Ziel sein.</h1>
+    <p class="hero-sub" data-editable="text" data-key="hero_sub">Ganzheitliche Osteopathie und Chiropraktik in Limbach-Oberfrohna — für Erwachsene, Schwangere, Kinder und Säuglinge. Ich helfe Ihrem Körper, ins Gleichgewicht zurückzufinden.</p>
+    <div class="hero-ctas">
+      <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span data-editable="text" data-key="hero_cta_primary">Online-Termin buchen</span>
+      </a>
+      <a href="tel:+4937224093165" class="btn btn-ghost">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-editable="text" data-key="hero_cta_secondary">03722 40 93 165</span>
+      </a>
+    </div>
+  </div>
+</header>
+</div>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span data-editable="text" data-key="marquee">Osteopathie · Chiropraktik · Akutbehandlung · Säuglinge &amp; Kinder · Schwangerschaft · HWS- &amp; Atlas-Therapie · Heilpraktiker</span>
+    <i>✦</i>
+    <span>Osteopathie · Chiropraktik · Akutbehandlung · Säuglinge &amp; Kinder · Schwangerschaft · HWS- &amp; Atlas-Therapie · Heilpraktiker</span>
+    <i>✦</i>
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-box reveal">
+      <div class="intro-logo">
+        <img src="https://osteopathie-limbach.de/wp-content/uploads/2026/04/LOGO-C.Uhlmann2026.png" alt="Praxislogo Christoph Uhlmann">
+      </div>
+      <div class="intro-text">
+        <span class="pill" data-editable="text" data-key="intro_pill">Willkommen</span>
+        <h2 data-editable="text" data-key="intro_headline">Manuelle Medizin mit Zeit, Erfahrung und Gefühl.</h2>
+        <p data-editable="text" data-key="intro_text">In meiner Praxis am Johannisplatz behandle ich Sie ganzheitlich und individuell. Im Mittelpunkt steht der ganze Mensch — nicht nur das Symptom. Mit fundierter Ausbildung in Osteopathie, Chiropraktik und Physiotherapie suche ich die Ursache Ihrer Beschwerden und unterstütze die Selbstheilungskräfte Ihres Körpers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section class="services" id="leistungen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill" data-editable="text" data-key="services_pill">Leistungen</span>
+      <h2 data-editable="text" data-key="services_headline">Womit ich Ihnen helfen kann</h2>
+      <p data-editable="text" data-key="services_sub">Vier Schwerpunkte — abgestimmt auf Ihre Lebenssituation und Ihre Beschwerden.</p>
+    </div>
+    <div class="grid4">
+      <article class="scard reveal">
+        <div class="scard-img"><img src="https://osteopathie-limbach.de/wp-content/uploads/2021/02/osteopathist-treating-a-patient-indoors-1024x683.jpg" alt="Osteopathie" loading="lazy" data-editable="image" data-key="svc_1_image"></div>
+        <div class="scard-body">
+          <h3 data-editable="text" data-key="svc_1_title">Osteopathie</h3>
+          <p data-editable="text" data-key="svc_1_text">Ganzheitliche manuelle Behandlung von Funktionsstörungen und Bewegungseinschränkungen — für mehr Mobilität und Wohlbefinden.</p>
+        </div>
+      </article>
+      <article class="scard reveal">
+        <div class="scard-img"><img src="https://osteopathie-limbach.de/wp-content/uploads/2021/02/osteopathist-treating-a-kid-by-massaging-his-tummy-1-1024x683.jpg" alt="Osteopathie für Kinder und Säuglinge" loading="lazy" data-editable="image" data-key="svc_2_image"></div>
+        <div class="scard-body">
+          <h3 data-editable="text" data-key="svc_2_title">Osteopathie für Kinder &amp; Säuglinge</h3>
+          <p data-editable="text" data-key="svc_2_text">Sanfte Behandlung bei Schlafproblemen, Koliken, Schädelasymmetrien oder Unruhe — speziell für die Kleinsten.</p>
+        </div>
+      </article>
+      <article class="scard reveal">
+        <div class="scard-img"><img src="https://osteopathie-limbach.de/wp-content/uploads/2021/02/pregnant-woman-receiving-a-back-massage-from-masseur-at-home-1024x683.jpg" alt="Osteopathie in der Schwangerschaft" loading="lazy" data-editable="image" data-key="svc_3_image"></div>
+        <div class="scard-body">
+          <h3 data-editable="text" data-key="svc_3_title">Osteopathie in der Schwangerschaft</h3>
+          <p data-editable="text" data-key="svc_3_text">Unterstützung für einen körperlich angenehmen, schmerzfreien Verlauf — gute Mobilisierung für Mutter und Kind.</p>
+        </div>
+      </article>
+      <article class="scard reveal">
+        <div class="scard-img"><img src="https://osteopathie-limbach.de/wp-content/uploads/2026/03/close-up-physiotherapist-helping-patient-with-pain-1024x683.jpg" alt="Chiropraktik" loading="lazy" data-editable="image" data-key="svc_4_image"></div>
+        <div class="scard-body">
+          <h3 data-editable="text" data-key="svc_4_title">Chiropraktik</h3>
+          <p data-editable="text" data-key="svc_4_text">Gezielte manuelle Behandlung des Bewegungsapparats — Blockaden lösen, Gelenkfunktion wiederherstellen, Schmerzen lindern.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OSTEOPATHIE ============ -->
+<section class="osteo" id="osteopathie">
+  <div class="wrap">
+    <div class="osteo-grid">
+      <div class="osteo-intro reveal">
+        <span class="pill" data-editable="text" data-key="osteo_pill">Osteopathie</span>
+        <h2 data-editable="text" data-key="osteo_headline">Eine ganzheitliche manuelle Medizin</h2>
+        <p data-editable="text" data-key="osteo_text">Der Osteopath sucht und behandelt Funktionsstörungen, die mit Bewegungseinschränkungen einhergehen und in den verschiedenen Geweben des Körpers Gesundheit und Wohlbefinden beeinträchtigen. Grundlage ist ein ganzheitliches Körperverständnis, verbunden mit genauen Kenntnissen der Anatomie. Es wird versucht, dem Körper verloren gegangene Mobilität zurückzugeben und so die Selbstheilungskräfte anzuregen, um ihn ins Gleichgewicht zurückzuführen.</p>
+        <blockquote class="quote">
+          <p>„<span data-editable="text" data-key="osteo_quote">Osteopathie ist … einen Teil des ganzen Systems so zu korrigieren, dass die Lebensflüsse besser fließen und sich der Körper wieder selbst regulieren kann.</span>“</p>
+          <cite data-editable="text" data-key="osteo_quote_author">A.T. Still</cite>
+        </blockquote>
+      </div>
+      <div class="acc reveal">
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_1_q">Ablauf der Behandlung</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_1_a">Am Anfang steht die ausführliche Anamnese, in der ich wertvolle Informationen über Ihre Beschwerden gewinne und abkläre, ob eventuell erst eine schulmedizinische Abklärung erforderlich ist. Danach folgt eine ausführliche körperliche Untersuchung, auf der die Behandlung aufbaut. Die erste Behandlung dauert in der Regel ca. 60 Minuten, jede Folgebehandlung 45–60 Minuten. Die Anzahl der Behandlungen ist individuell unterschiedlich.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_2_q">Konzept der Osteopathie</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_2_a">Die Osteopathie basiert auf der Bewegung und Beweglichkeit des Körpers und seines Gewebes. Eine Mobilitätsstörung einzelner Strukturen beeinflusst deren Funktion — der Körper gleicht das durch Anpassungsketten aus. Erst wenn die Kompensation ausgereizt ist, kann ein kleiner Impuls Beschwerden auslösen, oft an ganz anderer Stelle. Ich versuche, das vorderste Glied der Entstehungskette zu finden, zu behandeln und so die Selbstregulation zu unterstützen.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_3_q">Was Sie mitbringen sollten</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_3_a">Ein großes Badehandtuch, vorhandene Befunde, ggf. eine Liste Ihrer Medikamente sowie das Privatrezept für Osteopathie. Für Säuglingsbehandlungen bringen Sie bitte den Mutterpass, das gelbe Untersuchungsheft und evtl. das Lieblingsspielzeug des Kindes mit. Termine, die Sie nicht wahrnehmen können, sagen Sie bitte 24 h vorher ab.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_4_q">Kostenübernahme</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_4_a">Osteopathie ist eine Privatleistung; die Abrechnung erfolgt direkt mit dem Leistungserbringer. Viele Krankenkassen übernehmen anteilig die Kosten, sofern ein ärztliches Rezept vorliegt — ich erfülle die dafür geforderten Voraussetzungen. Da die Höhe der Erstattung stark variiert, informieren Sie sich bitte vorab bei Ihrer Versicherung.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_5_q">Osteopathie bei Kindern &amp; Säuglingen</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_5_a">Säuglinge erfahren durch die Enge im Mutterleib und die Geburt teils erhebliche Belastungen, die zu Mobilitätseinschränkungen führen können. Mögliche Folgen sind Schlafprobleme, „Schrei-Kinder“, Schädelasymmetrien, Verdauungsstörungen (Koliken), Unruhe oder schlechtes Saugverhalten. Durch osteopathische Behandlungen können frühkindliche und spätere Störungen möglicherweise gelindert werden.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q"><span data-editable="text" data-key="acc_6_q">Osteopathie in der Schwangerschaft</span><span class="acc-ic">+</span></button>
+          <div class="acc-a"><p data-editable="text" data-key="acc_6_a">Die Osteopathie wirkt in der Schwangerschaft unterstützend, um der werdenden Mutter einen körperlich angenehmen und schmerzfreien Verlauf zu ermöglichen. Das Hauptaugenmerk liegt auf einer guten Mobilisierung und Versorgung für die Mutter und damit auch für das Baby.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHIROPRAKTIK ============ -->
+<section class="chiro" id="chiropraktik">
+  <div class="wrap">
+    <div class="chiro-grid">
+      <div class="chiro-media reveal">
+        <img src="https://osteopathie-limbach.de/wp-content/uploads/2026/03/close-up-physiotherapist-helping-patient-with-pain-1536x1024.jpg" alt="Chiropraktische Behandlung" loading="lazy">
+      </div>
+      <div class="chiro-text reveal">
+        <span class="pill" data-editable="text" data-key="chiro_pill">Chiropraktik</span>
+        <h2 data-editable="text" data-key="chiro_headline">Blockaden lösen, Beweglichkeit zurückgeben</h2>
+        <p data-editable="text" data-key="chiro_text">Eine manuelle Behandlungsform, die sich auf Diagnose, Behandlung und Prävention von Funktionsstörungen des Bewegungsapparates konzentriert — insbesondere der Wirbelsäule. Durch gezielte Handgriffe (Justierungen) werden Blockaden gelöst, um Gelenkfunktionen wiederherzustellen, Schmerzen zu lindern und die Selbstheilungskräfte zu fördern.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <div><h4 data-editable="text" data-key="chiro_step_1_title">Untersuchung &amp; Befragung</h4><p data-editable="text" data-key="chiro_step_1_text">Zuerst erfolgt eine umfangreiche Untersuchung und Anamnese.</p></div>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <div><h4 data-editable="text" data-key="chiro_step_2_title">Einschätzung</h4><p data-editable="text" data-key="chiro_step_2_text">Ich entscheide, ob eine Behandlung angebracht ist oder eine ärztliche Abklärung nötig erscheint.</p></div>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <div><h4 data-editable="text" data-key="chiro_step_3_title">Individuelle Therapie</h4><p data-editable="text" data-key="chiro_step_3_text">Falls geeignet, behandle ich Sie anhand meiner Untersuchungserkenntnisse.</p></div>
+          </div>
+        </div>
+        <div class="adv">
+          <h4 data-editable="text" data-key="chiro_adv_title">Ihre Vorteile</h4>
+          <ul>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg><span data-editable="text" data-key="chiro_adv_1">Spart Wartezeit — schneller Therapiebeginn möglich</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg><span data-editable="text" data-key="chiro_adv_2">Akute Gelenkblockaden können zeitnah gelöst werden</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg><span data-editable="text" data-key="chiro_adv_3">Individuelle Untersuchung und Therapie</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg><span data-editable="text" data-key="chiro_adv_4">Abrechnung nach Gebührenordnung für Heilpraktiker möglich</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÜBER MICH ============ -->
+<section class="about" id="ueber-mich">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill" data-editable="text" data-key="about_pill">Über mich</span>
+      <h2 data-editable="text" data-key="about_headline">Ausbildung &amp; Qualifikation</h2>
+      <p data-editable="text" data-key="about_sub">Christoph Uhlmann — Heilpraktiker, Osteopath, Physiotherapeut.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_1_year">2007</span><p data-editable="text" data-key="tl_1_text">Abitur</p></div>
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_2_year">2011</span><p data-editable="text" data-key="tl_2_text">Physiotherapeut</p></div>
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_3_year">2014</span><p data-editable="text" data-key="tl_3_text">Bachelor of Science für Rehabilitations-, Präventions- und Fitnesssport (TU Chemnitz)</p></div>
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_4_year">2015–2021</span><p data-editable="text" data-key="tl_4_text">6-jährige Osteopathieausbildung an der Still Academy (viszeral, parietal, cranial; Säuglings- &amp; Kinderheilkunde, Schwangerschaft, traumasensible Osteopathie u. v. m.)</p></div>
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_5_year">2025</span><p data-editable="text" data-key="tl_5_text">Heilpraktiker</p></div>
+      <div class="tl"><span class="yr" data-editable="text" data-key="tl_6_year">2026</span><p data-editable="text" data-key="tl_6_text">Zertifizierter Therapeut für ganzheitliche Chiropraktik &amp; Manuelle Gelenktherapie · Zertifizierter HWS- und Atlas-Therapeut</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill" data-editable="text" data-key="contact_pill">Kontakt</span>
+      <h2 data-editable="text" data-key="contact_headline">So erreichen Sie mich</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo reveal">
+        <div class="cblock">
+          <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="cl" data-editable="text" data-key="contact_phone_label">Telefon</div>
+            <div class="cv"><a href="tel:+4937224093165" data-editable="text" data-key="contact_phone">03722 40 93 165</a></div>
+            <div class="cn" data-editable="text" data-key="contact_note">Während der Behandlungen bin ich leider nicht telefonisch erreichbar. Sie können gern auf den Anrufbeantworter sprechen oder mir eine E-Mail schreiben — ich melde mich schnellstmöglich.</div>
+          </div>
+        </div>
+        <div class="cblock">
+          <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <div class="cl" data-editable="text" data-key="contact_address_label">Adresse</div>
+            <div class="cv" style="font-size:1.05rem;line-height:1.4" data-editable="text" data-key="contact_address">Johannisplatz 4/2
+09212 Limbach-Oberfrohna</div>
+            <div class="cn" data-editable="text" data-key="contact_address_note">Eingang Bachstraße</div>
+          </div>
+        </div>
+        <div class="cmap">
+          <iframe src="https://www.google.com/maps?q=Johannisplatz+4,+09212+Limbach-Oberfrohna&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort der Praxis"></iframe>
+        </div>
+        <div class="booking-card">
+          <h4 data-editable="text" data-key="contact_booking_title">Lieber direkt einen Termin?</h4>
+          <p data-editable="text" data-key="contact_booking_text">Buchen Sie Ihren Wunschtermin bequem online — rund um die Uhr.</p>
+          <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-light" target="_blank" rel="noopener">Zur Online-Terminbuchung</a>
+        </div>
+      </div>
+
+      <div class="cform reveal">
+        <h3>Terminanfrage</h3>
+        <p class="lead">Schreiben Sie mir — ich melde mich schnellstmöglich zurück.</p>
+        <form id="contactForm">
+          <div class="field"><label for="cf-name">Name *</label><input type="text" id="cf-name" name="name" required></div>
+          <div class="field"><label for="cf-mail">E-Mail-Adresse *</label><input type="email" id="cf-mail" name="email" required></div>
+          <div class="field"><label for="cf-tel">Telefon *</label><input type="tel" id="cf-tel" name="phone" required></div>
+          <div class="field"><label for="cf-msg">Nachricht</label><textarea id="cf-msg" name="message"></textarea></div>
+          <button type="submit" class="btn btn-primary">Absenden</button>
+          <p class="formhint">Mit dem Absenden öffnet sich Ihr E-Mail-Programm mit der vorbereiteten Nachricht.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <div class="wrap">
+    <div class="closing-box reveal">
+      <h2 data-editable="text" data-key="closing_headline">Bereit, etwas für Ihre Gesundheit zu tun?</h2>
+      <p data-editable="text" data-key="closing_text">Vereinbaren Sie jetzt Ihren Termin — online oder telefonisch. Ich freue mich auf Sie.</p>
+      <div class="closing-ctas">
+        <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-primary" target="_blank" rel="noopener">Online-Termin buchen</a>
+        <a href="tel:+4937224093165" class="btn btn-ghost">03722 40 93 165</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="foot-inner">
+    <div class="fnote" data-editable="text" data-key="footer_note">Praxis für Osteopathie und Chiropraktik · Christoph Uhlmann · Johannisplatz 4/2 · 09212 Limbach-Oberfrohna</div>
+    <div class="flinks">
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<!-- floating booking -->
+<a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="fab" target="_blank" rel="noopener">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+  Termin buchen
+</a>
+
+<!-- mobile drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="dclose" id="closeDrawer" aria-label="Menü schließen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <a href="#leistungen">Leistungen</a>
+  <a href="#osteopathie">Osteopathie</a>
+  <a href="#chiropraktik">Chiropraktik</a>
+  <a href="#ueber-mich">Über mich</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-primary" target="_blank" rel="noopener">Online-Termin buchen</a>
+</aside>
+
+<script>
+(function(){
+  /* drawer */
+  var drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+  function openD(){drawer.classList.add('show');scrim.classList.add('show');drawer.setAttribute('aria-hidden','false');}
+  function closeD(){drawer.classList.remove('show');scrim.classList.remove('show');drawer.setAttribute('aria-hidden','true');}
+  document.getElementById('openDrawer').addEventListener('click',openD);
+  document.getElementById('closeDrawer').addEventListener('click',closeD);
+  scrim.addEventListener('click',closeD);
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeD);});
+
+  /* reveal on scroll */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.grid4').forEach(function(grid){
+    Array.prototype.forEach.call(grid.children,function(ch,i){if(ch.classList.contains('reveal'))ch.style.transitionDelay=(i*0.09)+'s';});
+  });
+
+  /* accordion */
+  document.querySelectorAll('.acc-item').forEach(function(item){
+    var q=item.querySelector('.acc-q'),a=item.querySelector('.acc-a');
+    q.addEventListener('click',function(){
+      var open=item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.acc-a').style.maxHeight=null;});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+
+  /* contact form -> mailto fallback */
+  var form=document.getElementById('contactForm');
+  if(form){form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var n=encodeURIComponent(form.name.value),e=encodeURIComponent(form.email.value),
+        t=encodeURIComponent(form.phone.value),m=encodeURIComponent(form.message.value);
+    var body='Name: '+n+'%0D%0AE-Mail: '+e+'%0D%0ATelefon: '+t+'%0D%0A%0D%0ANachricht:%0D%0A'+m;
+    window.location.href='mailto:info@osteopathie-limbach.de?subject='+encodeURIComponent('Terminanfrage Website')+'&body='+body;
+  });}
+})();
+</script>
+<script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
+</body>
+</html>

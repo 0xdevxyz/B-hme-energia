@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://osteopathie-limbach.de/sitemap.xml
