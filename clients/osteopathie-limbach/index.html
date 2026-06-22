@@ -179,6 +179,7 @@ h1,h2,h3,h4{font-family:var(--head);line-height:1.12;letter-spacing:-.01em;font-
 .field textarea{resize:vertical;min-height:120px}
 .cform .btn{width:100%}
 .formhint{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ---------- CLOSING ---------- */
 .closing{padding:0 0 96px}
@@ -498,9 +499,10 @@ h1,h2,h3,h4{font-family:var(--head);line-height:1.12;letter-spacing:-.01em;font-
           <div class="field"><label for="cf-name">Name *</label><input type="text" id="cf-name" name="name" required></div>
           <div class="field"><label for="cf-mail">E-Mail-Adresse *</label><input type="email" id="cf-mail" name="email" required></div>
           <div class="field"><label for="cf-tel">Telefon *</label><input type="tel" id="cf-tel" name="phone" required></div>
-          <div class="field"><label for="cf-msg">Nachricht</label><textarea id="cf-msg" name="message"></textarea></div>
-          <button type="submit" class="btn btn-primary">Absenden</button>
-          <p class="formhint">Mit dem Absenden öffnet sich Ihr E-Mail-Programm mit der vorbereiteten Nachricht.</p>
+          <div class="field"><label for="cf-msg">Nachricht *</label><textarea id="cf-msg" name="message" required></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Firma<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" class="btn btn-primary" id="cf-submit">Absenden</button>
+          <p class="formhint" id="cf-status">Ihre Anfrage wird direkt an die Praxis gesendet. Pflichtfelder sind mit * markiert.</p>
         </form>
       </div>
     </div>
@@ -580,15 +582,41 @@ h1,h2,h3,h4{font-family:var(--head);line-height:1.12;letter-spacing:-.01em;font-
     });
   });
 
-  /* contact form -> mailto fallback */
+  /* contact form -> serverseitiger SMTP-Versand über /api/contact */
   var form=document.getElementById('contactForm');
-  if(form){form.addEventListener('submit',function(ev){
-    ev.preventDefault();
-    var n=encodeURIComponent(form.name.value),e=encodeURIComponent(form.email.value),
-        t=encodeURIComponent(form.phone.value),m=encodeURIComponent(form.message.value);
-    var body='Name: '+n+'%0D%0AE-Mail: '+e+'%0D%0ATelefon: '+t+'%0D%0A%0D%0ANachricht:%0D%0A'+m;
-    window.location.href='mailto:info@osteopathie-limbach.de?subject='+encodeURIComponent('Terminanfrage Website')+'&body='+body;
-  });}
+  if(form){
+    var status=document.getElementById('cf-status'),btn=document.getElementById('cf-submit');
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      status.style.color='';
+      status.textContent='Wird gesendet …';
+      btn.disabled=true;
+      var payload={
+        name:form.name.value,email:form.email.value,phone:form.phone.value,
+        message:form.message.value,company:form.company.value
+      };
+      fetch('/api/contact',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      }).then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});})
+        .then(function(res){
+          if(res.ok&&res.d&&res.d.ok){
+            form.reset();
+            status.style.color='var(--sage-dk)';
+            status.textContent='Vielen Dank! Ihre Nachricht wurde gesendet — ich melde mich schnellstmöglich.';
+          }else{
+            status.style.color='#b3261e';
+            status.textContent=(res.d&&res.d.error)||'Konnte nicht gesendet werden. Bitte rufen Sie uns an: 03722 40 93 165.';
+            btn.disabled=false;
+          }
+        }).catch(function(){
+          status.style.color='#b3261e';
+          status.textContent='Verbindungsfehler. Bitte rufen Sie uns an: 03722 40 93 165.';
+          btn.disabled=false;
+        });
+    });
+  }
 })();
 </script>
 <script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>

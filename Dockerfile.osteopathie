@@ -15,6 +15,7 @@ ENV SMTP_PORT=25
 ENV CLIENT_DIR=/app/clients/osteopathie-limbach
 ENV SITE_URL=https://html.osteopathie-limbach.de
 ENV EDITOR_EMAIL=mail@panoart360.de
+ENV CONTACT_EMAIL=mail@osteopathie-limbach.de
 
 EXPOSE 3000
 
