@@ -15,7 +15,7 @@
    <use xlink:href="#Bitmap" transform="translate(627.969 387.709) scale(72.04 -72.04)"/>
   </g>
   <path d="M 627.969,315.669 L 700.009,315.669 L 700.009,387.709 L 627.969,387.709 L 627.969,315.669 Z" stroke-width="0.096" stroke-linejoin="miter" stroke="none" marker-start="none" marker-end="none" fill="none" id="Shape"/>
-  <text xml:space="preserve" transform="translate(714.285 328.468) scale(1 -1)" kerning="auto" fill="#ffffff" letter-spacing="-0.06em" font-weight="bold" font-size="29.854" stroke="none" stroke-width="0.25" stroke-linecap="round" stroke-linejoin="round" font-family="Open Sans"><tspan x="0" y="0">Georg Benedix</tspan></text>
-  <text xml:space="preserve" transform="translate(714.979 357.925) scale(1 -1)" kerning="auto" fill="#ffffff" font-size="28.203" stroke="none" stroke-width="0.25" stroke-linecap="round" stroke-linejoin="round" font-family="Open Sans"><tspan x="0" y="0">Zahnarztpraxis</tspan></text>
+  <text xml:space="preserve" transform="translate(714.285 328.468) scale(1 -1)" kerning="auto" fill="#ffffff" letter-spacing="-0.06em" font-weight="bold" font-size="29.854" stroke="none" stroke-width="0.25" stroke-linecap="round" stroke-linejoin="round" font-family="Inter, Arial, Helvetica, sans-serif"><tspan x="0" y="0">Georg Benedix</tspan></text>
+  <text xml:space="preserve" transform="translate(714.979 357.925) scale(1 -1)" kerning="auto" fill="#ffffff" font-size="28.203" stroke="none" stroke-width="0.25" stroke-linecap="round" stroke-linejoin="round" font-family="Inter, Arial, Helvetica, sans-serif"><tspan x="0" y="0">Zahnarztpraxis</tspan></text>
  </g>
 </svg>
