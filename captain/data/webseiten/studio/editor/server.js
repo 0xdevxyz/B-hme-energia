@@ -1,4 +1,6 @@
-require('dotenv').config({ path: require('path').join(process.env.CLIENT_DIR || '.', '.env') });
+// override: true — damit Werte aus der client-spezifischen .env (z. B. SMTP-Zugang)
+// die im Docker-Image gebackenen ENV-Defaults (SMTP_HOST=localhost etc.) überschreiben.
+require('dotenv').config({ path: require('path').join(process.env.CLIENT_DIR || '.', '.env'), override: true });
 
 const express = require('express');
 const rateLimit = require('express-rate-limit');
@@ -125,6 +127,14 @@ const pageCreateLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Limit erreicht: max. 10 neue Seiten pro Stunde' },
+});
+
+const contactLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Zu viele Anfragen. Bitte versuchen Sie es in einer Minute erneut.' },
 });
 
 const ALLOWED_SECTION_TYPES = new Set([
@@ -362,19 +372,99 @@ function hasValidSession(req) {
   }
 }
 
+// Server-side hydration: inject the current content.json values into every
+// [data-editable][data-key] element so saved edits are visible immediately for
+// ALL visitors (anonymous included), with no client-side flash. Text fields are
+// leaf elements (icons/bold live outside the data-key element by template design).
+// Read the current content fresh from disk so edits (editor saves OR direct
+// file changes, e.g. via the mounted client dir) are reflected immediately,
+// without a redeploy. Falls back to the in-memory copy if the file is unreadable.
+function readLiveContent() {
+  try {
+    return JSON.parse(fs.readFileSync(contentPath, 'utf8'));
+  } catch {
+    return content;
+  }
+}
+
+function hydrateContent(html, data) {
+  // Images: replace the src of <img ... data-key="KEY" ...>
+  html = html.replace(/<img\b[^>]*\bdata-key="([a-z0-9_]+)"[^>]*>/g, (full, key) => {
+    if (!(key in data) || !data[key]) return full;
+    return full.replace(/\bsrc="[^"]*"/, `src="${escapeHtml(data[key])}"`);
+  });
+  // Text: replace the inner content of <tag ... data-editable="text" data-key="KEY" ...>…</tag>
+  html = html.replace(
+    /(<([a-zA-Z0-9]+)\b[^>]*?\bdata-editable="text"\s+data-key="([a-z0-9_]+)"[^>]*>)([\s\S]*?)(<\/\2>)/g,
+    (full, open, tag, key, inner, close) => {
+      if (!(key in data)) return full;
+      return open + escapeHtml(data[key]) + close;
+    }
+  );
+  return html;
+}
+
+// Inject the newest blog posts into the homepage teaser (marker <!--BLOG_TEASER-->),
+// built from content.blog_posts so it stays current as the customer adds/removes posts.
+function injectBlogTeaser(html, data) {
+  if (html.indexOf('<!--BLOG_TEASER-->') === -1) return html;
+  const posts = Array.isArray(data.blog_posts) ? data.blog_posts : [];
+  let cards;
+  if (posts.length === 0) {
+    cards = '<p style="grid-column:1/-1;text-align:center;color:var(--muted)">Bald finden Sie hier Ratgeber-Artikel.</p>';
+  } else {
+    cards = posts.slice(0, 3).map((p) => {
+      const url = `/blog/${p.slug}.html`;
+      return `<article class="pcard reveal"><div class="pcard-body">`
+        + `<div class="ptype">Ratgeber · ${escapeHtml(p.date || '')}</div>`
+        + `<h3 style="font-size:1.18rem;margin-bottom:8px"><a href="${url}" style="color:inherit">${escapeHtml(p.title || '')}</a></h3>`
+        + `<p>${escapeHtml(p.teaser || '')}</p>`
+        + `<a href="${url}" class="ptype" style="margin-top:14px;font-weight:700">Weiterlesen →</a>`
+        + `</div></article>`;
+    }).join('\n');
+  }
+  return html.replace('<!--BLOG_TEASER-->', cards);
+}
+
 function serveHtmlWithOverlay(req, res, htmlPath) {
   if (req.query.edit !== undefined && !hasValidSession(req)) {
     return res.send(loginPageHtml());
   }
   if (!fs.existsSync(htmlPath)) return res.status(404).send('Seite nicht gefunden');
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  const live = readLiveContent();
+  html = hydrateContent(html, live);
+  html = injectBlogTeaser(html, live);
   if (hasValidSession(req)) {
-    const html = fs.readFileSync(htmlPath, 'utf8');
     const overlayScript = fs.readFileSync(path.join(__dirname, 'overlay.js'), 'utf8');
-    const injected = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);
-    return res.send(injected);
+    html = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);
   }
-  res.sendFile(htmlPath);
+  return res.send(html);
 }
+
+// Optionale 301-Weiterleitungen je Kunde: clients/<kunde>/redirects.json
+// Format: { "/alte-url": "/neue-url" }. Fehlt die Datei, passiert nichts.
+let redirectMap = {};
+try {
+  const rpath = path.join(CLIENT_DIR, 'redirects.json');
+  if (fs.existsSync(rpath)) {
+    redirectMap = JSON.parse(fs.readFileSync(rpath, 'utf8'));
+    console.log('[redirects] ' + Object.keys(redirectMap).length + ' Weiterleitungen geladen');
+  }
+} catch (e) {
+  console.error('[redirects] konnten nicht gelesen werden:', e.message);
+}
+
+app.use((req, res, next) => {
+  if (!redirectMap || typeof redirectMap !== 'object') return next();
+  let key = decodeURIComponent(req.path).replace(/\/+$/, '');
+  if (key === '') key = '/';
+  const target = redirectMap[key];
+  if (typeof target === 'string' && target.startsWith('/')) {
+    return res.redirect(301, target);
+  }
+  return next();
+});
 
 app.get('/', (req, res) => {
   serveHtmlWithOverlay(req, res, path.join(CLIENT_DIR, 'index.html'));
@@ -384,6 +474,45 @@ app.get('/:page.html', (req, res) => {
   const safeName = path.basename(req.params.page).replace(/[^a-z0-9\-_]/gi, '');
   serveHtmlWithOverlay(req, res, path.join(CLIENT_DIR, `${safeName}.html`));
 });
+
+// ---- Blog: served with editor overlay (when authenticated). No global hydration —
+// each post is a self-contained file, so per-post edits are written back into the file.
+function serveBlogPage(req, res, htmlPath) {
+  if (req.query.edit !== undefined && !hasValidSession(req)) return res.send(loginPageHtml());
+  if (!fs.existsSync(htmlPath)) return res.status(404).send('Seite nicht gefunden');
+  let html = fs.readFileSync(htmlPath, 'utf8');
+  if (hasValidSession(req)) {
+    const overlayScript = fs.readFileSync(path.join(__dirname, 'overlay.js'), 'utf8');
+    html = html.replace('/* STUDIO_OVERLAY_PLACEHOLDER */', overlayScript);
+  }
+  return res.send(html);
+}
+app.get(['/blog', '/blog/'], (req, res) => serveBlogPage(req, res, path.join(CLIENT_DIR, 'blog', 'index.html')));
+app.get('/blog/:slug.html', (req, res) => {
+  const slug = path.basename(req.params.slug).replace(/[^a-z0-9\-_]/gi, '');
+  serveBlogPage(req, res, path.join(CLIENT_DIR, 'blog', `${slug}.html`));
+});
+
+// Overwrite a [data-key] field's content directly inside a self-contained HTML file.
+function writeFieldToFile(filePath, key, value) {
+  if (!/^[a-z][a-z0-9_]{1,63}$/.test(key)) return false;
+  let html = fs.readFileSync(filePath, 'utf8');
+  const reText = new RegExp('(<([a-zA-Z0-9]+)\\b[^>]*?\\bdata-editable="text"\\s+data-key="' + key + '"[^>]*>)([\\s\\S]*?)(<\\/\\2>)');
+  if (reText.test(html)) {
+    html = html.replace(reText, (m, o, t, inner, c) => o + escapeHtml(value) + c);
+  } else {
+    const reImg = new RegExp('<img\\b[^>]*\\bdata-key="' + key + '"[^>]*>');
+    if (!reImg.test(html)) return false;
+    html = html.replace(reImg, (m) => m.replace(/\bsrc="[^"]*"/, 'src="' + escapeHtml(value) + '"'));
+  }
+  fs.writeFileSync(filePath, html, 'utf8');
+  return true;
+}
+function blogSlugFromReferer(req) {
+  const ref = req.headers.referer || '';
+  const m = ref.match(/\/blog\/([a-z0-9\-_]+)\.html(?:[?#]|$)/);
+  return m ? m[1] : null;
+}
 
 app.post('/auth/request-link', authLimiter, async (req, res) => {
   const { email } = req.body;
@@ -412,7 +541,11 @@ app.post('/auth/request-link', authLimiter, async (req, res) => {
     });
   } catch (err) {
     console.error('E-Mail-Fehler:', err.message);
-    return res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden' });
+    // Admin-Fallback (kein SMTP konfiguriert): den einmal gültigen Magic-Link in
+    // die Server-Logs schreiben. Nur der Admin mit Server-/CapRover-Zugriff sieht
+    // die Logs; der Link erscheint NICHT in der HTTP-Antwort an den Browser.
+    console.log(`\n[studio] ====== MAGIC-LINK (1 Stunde gültig) für ${email} ======\n[studio] ${magicLink}\n[studio] =========================================================\n`);
+    return res.status(200).json({ message: 'Link erstellt. Falls keine E-Mail ankommt: Link in den Server-Logs (CapRover → Logs) öffnen.' });
   }
 
   return res.status(200).json({ message: 'Link wurde gesendet' });
@@ -466,6 +599,51 @@ app.get('/auth/logout', (req, res) => {
 
 app.get('/api/me', isAuthenticated, (req, res) => {
   res.json({ email: req.user.email });
+});
+
+// Public contact form ("Beratung buchen"). No auth (anonymous visitors), but
+// origin-checked, rate-limited and honeypot-protected. Sends via configured SMTP.
+app.post('/api/contact', contactLimiter, checkOrigin, async (req, res) => {
+  const { name, email, phone, message, company } = req.body || {};
+  // Honeypot: bots fill hidden 'company' field -> silently accept, don't send.
+  if (company) return res.json({ ok: true });
+
+  const str = (v) => (typeof v === 'string' ? v.trim() : '');
+  const n = str(name), e = str(email), p = str(phone), m = str(message);
+
+  if (!n || !e || !m) {
+    return res.status(400).json({ error: 'Bitte Name, E-Mail und Nachricht ausfüllen.' });
+  }
+  if (n.length > 120 || e.length > 160 || p.length > 60 || m.length > 4000) {
+    return res.status(400).json({ error: 'Eingabe zu lang.' });
+  }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) {
+    return res.status(400).json({ error: 'Bitte eine gültige E-Mail-Adresse angeben.' });
+  }
+
+  const recipient = process.env.CONTACT_EMAIL || editorEmail;
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to: recipient,
+      replyTo: e,
+      subject: `Neue Beratungsanfrage – ${businessName}`,
+      text: `Name: ${n}\nE-Mail: ${e}\nTelefon: ${p || '-'}\n\nNachricht:\n${m}`,
+      html: `
+        <div style="font-family:system-ui,sans-serif;max-width:560px;">
+          <h2 style="color:#2A3A2F;">Neue Beratungsanfrage</h2>
+          <p><strong>Name:</strong> ${escapeHtml(n)}</p>
+          <p><strong>E-Mail:</strong> ${escapeHtml(e)}</p>
+          <p><strong>Telefon:</strong> ${escapeHtml(p || '-')}</p>
+          <p><strong>Nachricht:</strong></p>
+          <p style="white-space:pre-wrap;background:#f4f2ec;padding:12px 16px;border-radius:8px;">${escapeHtml(m)}</p>
+        </div>`,
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Kontakt-Mail-Fehler:', err.message);
+    return res.status(500).json({ error: 'Konnte nicht gesendet werden. Bitte später erneut versuchen.' });
+  }
 });
 
 const ALLOWED_CONTENT_KEYS = new Set([
@@ -557,16 +735,32 @@ const ALLOWED_CONTENT_KEYS = new Set([
   'logoName', 'businessName', 'address', 'phone', 'email',
 ]);
 
+// Generic key validation: any safe slug key is editable, so new templates
+// work without editing this whitelist. The legacy set stays as an allow-list
+// for keys that don't match the slug pattern.
+const CONTENT_KEY_PATTERN = /^[a-z][a-z0-9_]{1,63}$/;
+function isValidContentKey(key) {
+  return typeof key === 'string' && (CONTENT_KEY_PATTERN.test(key) || ALLOWED_CONTENT_KEYS.has(key));
+}
+
 app.post('/api/save', isAuthenticated, checkOrigin, (req, res) => {
   const { key, value } = req.body;
   if (!key || typeof key !== 'string' || key.trim() === '') {
     return res.status(400).json({ error: 'Ungültiger Key' });
   }
-  if (!ALLOWED_CONTENT_KEYS.has(key)) {
+  if (!isValidContentKey(key)) {
     return res.status(400).json({ error: 'Key nicht erlaubt' });
   }
-  if (typeof value !== 'string' || value.length > 5000) {
+  if (typeof value !== 'string' || value.length > 60000) {
     return res.status(400).json({ error: 'Ungültiger Wert' });
+  }
+  // Blog post edit (from /blog/<slug>.html) -> write the field into that file.
+  const bslug = blogSlugFromReferer(req);
+  if (bslug) {
+    const file = path.join(CLIENT_DIR, 'blog', `${bslug}.html`);
+    if (fs.existsSync(file) && writeFieldToFile(file, key, value)) {
+      return res.json({ ok: true });
+    }
   }
   content[key] = value;
   fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf8');
@@ -592,7 +786,16 @@ app.post('/api/upload-image', isAuthenticated, checkOrigin, (req, res) => {
     const relativePath = `assets/uploads/${req.file.filename}`;
     const key = req.body.key;
 
-    if (key && ALLOWED_IMAGE_KEYS.has(key)) {
+    // Blog post image edit -> write src into that post's file.
+    const bslug = blogSlugFromReferer(req);
+    if (bslug && key) {
+      const file = path.join(CLIENT_DIR, 'blog', `${bslug}.html`);
+      if (fs.existsSync(file) && writeFieldToFile(file, key, `/${relativePath}`)) {
+        return res.json({ ok: true, path: relativePath });
+      }
+    }
+
+    if (key && (isValidContentKey(key) || ALLOWED_IMAGE_KEYS.has(key))) {
       content[key] = relativePath;
       fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf8');
     }
@@ -758,6 +961,53 @@ app.delete('/api/delete-page', isAuthenticated, checkOrigin, (req, res) => {
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+// Delete a blog post: remove file, drop from content.blog_posts, rebuild index, clean sitemap/llms.
+app.delete('/api/blog-delete', isAuthenticated, checkOrigin, (req, res) => {
+  const { slug } = req.body;
+  if (!slug || typeof slug !== 'string' || !/^[a-z0-9\-_]+$/.test(slug) || slug.length > 80) {
+    return res.status(400).json({ error: 'Ungültiger Slug' });
+  }
+  const file = path.join(CLIENT_DIR, 'blog', `${slug}.html`);
+  if (!fs.existsSync(file)) return res.status(404).json({ error: 'Artikel nicht gefunden' });
+  try {
+    fs.unlinkSync(file);
+    let c = {};
+    try { c = JSON.parse(fs.readFileSync(contentPath, 'utf8')); } catch {}
+    const posts = (Array.isArray(c.blog_posts) ? c.blog_posts : []).filter(p => p.slug !== slug);
+    c.blog_posts = posts;
+    fs.writeFileSync(contentPath, JSON.stringify(c, null, 2), 'utf8');
+    content.blog_posts = posts;
+    try { require('../generator/blog').rebuildBlogIndex(CLIENT_DIR, config, posts); }
+    catch (e) { console.error('[blog-delete] index', e.message); }
+    const sitemapPath = path.join(CLIENT_DIR, 'sitemap.xml');
+    if (fs.existsSync(sitemapPath)) {
+      let s = fs.readFileSync(sitemapPath, 'utf8');
+      s = s.replace(new RegExp(`\\s*<url>[\\s\\S]*?<loc>[^<]*\\/blog\\/${escapeRegex(slug)}\\.html<\\/loc>[\\s\\S]*?<\\/url>`, 'g'), '');
+      fs.writeFileSync(sitemapPath, s, 'utf8');
+    }
+    const llmsPath = path.join(CLIENT_DIR, 'llms.txt');
+    if (fs.existsSync(llmsPath)) {
+      let l = fs.readFileSync(llmsPath, 'utf8');
+      l = l.replace(new RegExp(`\\n## Blog & Ratgeber:[\\s\\S]*?\\/blog\\/${escapeRegex(slug)}\\.html[\\s\\S]*?(?=\\n## |$)`, 'g'), '');
+      fs.writeFileSync(llmsPath, l, 'utf8');
+    }
+    return res.json({ ok: true });
+  } catch (e) {
+    console.error('[blog-delete]', e.message);
+    return res.status(500).json({ error: 'Löschen fehlgeschlagen' });
+  }
+});
+
+// Saubere URLs ohne .html-Endung: /chiropraktik -> chiropraktik.html
+// Greift erst nach allen API-/Auth-/Blog-Routen und nur, wenn die Datei existiert.
+app.get('/:page', (req, res, next) => {
+  const safeName = path.basename(req.params.page).replace(/[^a-z0-9\-_]/gi, '');
+  if (!safeName) return next();
+  const file = path.join(CLIENT_DIR, safeName + '.html');
+  if (!fs.existsSync(file)) return next();
+  return serveHtmlWithOverlay(req, res, file);
+});
 
 app.use(express.static(CLIENT_DIR));
 
