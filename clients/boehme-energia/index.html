@@ -5,9 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Böhme Energie GmbH — Wärme als Rundum-Service</title>
 <meta name="description" content="Wärme, die einfach da ist. Wärmecontracting für Privat und Gewerbe — geplant, finanziert, betrieben. Jetzt Rate berechnen.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Plus Jakarta Sans (Variable, SIL Open Font License 1.1) — lokal gehostet.
+   Keine Anfrage an fonts.googleapis.com / fonts.gstatic.com, daher keine
+   Übermittlung der Besucher-IP an Google (LG München I, 3 O 17493/20). */
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
+<link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 :root{
   --cream:#F4F2EC; --forest:#2A3A2F; --forest-2:#33473A; --green:#3C684D; --green-2:#4F7747;
@@ -176,7 +181,10 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 .result{padding:40px;background:linear-gradient(160deg,var(--green),var(--forest-2));color:#fff;display:flex;flex-direction:column}
 .result .rlabel{font-size:.9rem;opacity:.85}
 .result .rrate{font-size:2.6rem;font-weight:800;line-height:1.05;margin:6px 0 2px}
-.result .runit{opacity:.85;font-size:.95rem;margin-bottom:24px}
+.result .runit{opacity:.85;font-size:.95rem;margin-bottom:14px}
+.result .rtech{display:inline-flex;align-self:flex-start;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;margin-bottom:22px}
+.seg-tech{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg-tech button{flex:none;min-width:0;padding:11px 8px;font-size:.82rem}
 .rboxes{display:flex;gap:14px;margin-bottom:22px}
 .rbox{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:16px}
 .rbox b{display:block;font-size:1.5rem;font-weight:800}
@@ -228,6 +236,8 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:999px;b
 /* Typeform-Style stepped form */
 .tf{position:relative}
 .tf-progress{height:4px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;margin-bottom:30px}
+.tf-privacy{font-size:.78rem;line-height:1.55;opacity:.85;margin-top:14px;max-width:520px}
+.tf-privacy a{text-decoration:underline;text-underline-offset:2px}
 .tf-progress span{display:block;height:100%;width:20%;background:#fff;border-radius:999px;transition:width .45s cubic-bezier(.2,.7,.2,1)}
 .tf-stage{position:relative;min-height:230px}
 .tf-step{position:absolute;inset:0;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .4s cubic-bezier(.2,.7,.2,1),transform .4s cubic-bezier(.2,.7,.2,1)}
@@ -271,6 +281,9 @@ body.bov-open{overflow:hidden}
 .drawer .dclose{align-self:flex-end;background:rgba(255,255,255,.12);border:none;color:#fff;width:42px;height:42px;border-radius:999px;cursor:pointer;margin-bottom:14px}
 .drawer a{padding:14px 4px;font-size:1.05rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,.1)}
 .drawer .btn{margin-top:18px;justify-content:center}
+.drawer-legal{display:flex;gap:20px;margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.drawer-legal a{border:none;padding:6px 0;font-size:.85rem;font-weight:500;opacity:.72;min-height:26px;display:flex;align-items:center}
+.drawer-legal a:hover{opacity:1}
 
 /* ---------- FOOTER ---------- */
 .site-footer{background:#fff;border-top:1px solid var(--line);margin-top:24px}
@@ -280,7 +293,10 @@ body.bov-open{overflow:hidden}
 .foot-tag{color:var(--muted);font-size:.94rem;line-height:1.65}
 .foot-contact{display:flex;gap:56px;flex-wrap:wrap}
 .foot-col{display:flex;flex-direction:column;gap:9px;font-size:.94rem;color:var(--forest)}
-.foot-col a{transition:color .2s}
+.foot-col a,.foot-col .foot-link{transition:color .2s;padding:3px 0;min-height:26px;display:flex;align-items:center}
+.foot-col .foot-link{background:none;border:none;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;text-decoration:none}
+.foot-col .foot-link:hover{color:var(--green)}
+.foot-col .foot-link:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
 .foot-col a:hover{color:var(--green)}
 .foot-h{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:5px}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;flex-wrap:wrap}
@@ -307,6 +323,7 @@ body.bov-open{overflow:hidden}
   .hero-pad{padding:10px}
   .def,.sol,.tech,.models,.calc,.showcase,.faq{padding:70px 0}
   .calc .frame .inputs,.calc .frame .result{padding:28px}
+  .seg-tech{grid-template-columns:repeat(2,1fr)}
   .showcase .content{padding:28px}
   .def-box{padding:30px}
 }
@@ -380,7 +397,7 @@ body.bov-open{overflow:hidden}
   <!-- BOTTOM GLASS CARDS -->
   <div class="hero-bottom">
     <div class="fcard left">
-      <div class="big" data-editable="text" data-key="hero_stat_value">0 €</div>
+      <div class="big" data-editable="text" data-key="hero_stat_value">Gering</div>
       <div class="lbl" data-editable="text" data-key="hero_stat_label">Investitionskosten</div>
       <span class="minipill"><span data-editable="text" data-key="hero_stat_pill">Förderung inklusive</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
     </div>
@@ -398,8 +415,8 @@ body.bov-open{overflow:hidden}
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
-    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> 0 € Investition <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> Geringe Investitionskosten <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
+    <span>Ausgereifte Technik <i>◆</i> Nachhaltig <i>◆</i> CO₂ reduzieren <i>◆</i> Geringe Investitionskosten <i>◆</i> BEG-Förderung <i>◆</i> 24/7 Service <i>◆</i> Planbare Kosten <i>◆</i></span>
   </div>
 </div>
 
@@ -409,7 +426,7 @@ body.bov-open{overflow:hidden}
     <div class="def-box reveal">
       <div>
         <span class="pill" data-editable="text" data-key="def_pill">Was ist Wärmecontracting?</span>
-        <p class="big"><b>Wärmecontracting</b> <span data-editable="text" data-key="def_text">bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme. Sie sparen Investition und Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</span></p>
+        <p class="big"><b>Wärmecontracting</b> <span data-editable="text" data-key="def_text">bedeutet: Wir finanzieren, bauen und betreiben Ihre Heizungsanlage — Sie bezahlen nur die gelieferte Wärme. Sie sparen den größten Teil der Investition und das Betriebsrisiko; Wartung, Reparatur und Brennstoff übernehmen wir.</span></p>
         <span class="stamp" data-editable="text" data-key="def_stamp">Stand: Juni 2026</span>
       </div>
       <div class="def-ill">
@@ -451,7 +468,7 @@ body.bov-open{overflow:hidden}
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Privat</span></div>
-          <img data-editable="image" data-key="sol_1_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225324_fa82fa9d-721c-493a-b0fa-7691ce2e45cc.png" alt="Einfamilienhaus" loading="lazy">
+          <img data-editable="image" data-key="sol_1_image" src="assets/images/loesung-1.webp" alt="Einfamilienhaus" loading="lazy">
         </div>
         <div class="pcard-body">
           <h3 data-editable="text" data-key="sol_1_title">Einfamilienhaus</h3>
@@ -466,7 +483,7 @@ body.bov-open{overflow:hidden}
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Privat</span><span class="tag">WEG</span></div>
-          <img data-editable="image" data-key="sol_2_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225332_865ea2e2-650b-47f6-b284-2b4c910b6390.png" alt="Mehrfamilienhaus" loading="lazy">
+          <img data-editable="image" data-key="sol_2_image" src="assets/images/loesung-2.webp" alt="Mehrfamilienhaus" loading="lazy">
         </div>
         <div class="pcard-body">
           <h3 data-editable="text" data-key="sol_2_title">Mehrfamilienhaus</h3>
@@ -481,7 +498,7 @@ body.bov-open{overflow:hidden}
       <article class="pcard reveal">
         <div class="pcard-img">
           <div class="pcard-tags"><span class="tag">Gewerbe</span><span class="tag">Kommune</span></div>
-          <img data-editable="image" data-key="sol_3_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225339_b36dc6bb-8c20-40fe-9c0d-bc2171f13ec9.png" alt="Gewerbe &amp; Liegenschaft" loading="lazy">
+          <img data-editable="image" data-key="sol_3_image" src="assets/images/loesung-3.webp" alt="Gewerbe &amp; Liegenschaft" loading="lazy">
         </div>
         <div class="pcard-body">
           <h3 data-editable="text" data-key="sol_3_title">Gewerbe &amp; Liegenschaft</h3>
@@ -545,7 +562,7 @@ body.bov-open{overflow:hidden}
       <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/></svg></div><h3 data-editable="text" data-key="vorteil_2_title">Effizienz</h3><p data-editable="text" data-key="vorteil_2_text">Hohe Nutzungsgrade und optimierte Anlagen sparen große Mengen Energie ein.</p></div>
       <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-4h4v4"/></svg></div><h3 data-editable="text" data-key="vorteil_3_title">Komfort</h3><p data-editable="text" data-key="vorteil_3_text">Keine Sorge um Wartung oder Brennstoff — stets zuverlässige, konstante Wärme.</p></div>
       <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h3 data-editable="text" data-key="vorteil_4_title">Vielseitigkeit</h3><p data-editable="text" data-key="vorteil_4_text">Ob Einfamilienhaus, Mehrfamilienhaus, Wohnung oder Altbau — überall einsetzbar.</p></div>
-      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5A2.5 2 0 0 1 14.5 9M14.5 14.5A2.5 2 0 0 1 9.5 14"/></svg></div><h3 data-editable="text" data-key="vorteil_5_title">Kostenersparnis</h3><p data-editable="text" data-key="vorteil_5_text">Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, ganz ohne Investition.</p></div>
+      <div class="vcard reveal"><div class="icon-tile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5A2.5 2 0 0 1 14.5 9M14.5 14.5A2.5 2 0 0 1 9.5 14"/></svg></div><h3 data-editable="text" data-key="vorteil_5_title">Kostenersparnis</h3><p data-editable="text" data-key="vorteil_5_text">Planbare Kosten — oft günstiger als eine alte Öl- oder Gasheizung, bei geringen Investitionskosten.</p></div>
     </div>
   </div>
 </section>
@@ -580,11 +597,24 @@ body.bov-open{overflow:hidden}
             <button data-v="55">Neubau</button>
           </div>
         </div>
-        <div class="field" style="margin-bottom:0">
+        <div class="field">
           <label>Aktuelles Heizsystem</label>
           <div class="seg" id="alt">
-            <button data-v="0.32" class="on">Ölheizung</button>
-            <button data-v="0.20">Gasheizung</button>
+            <button data-v="oel_alt" class="on">Ölheizung</button>
+            <button data-v="gas_alt">Gasheizung</button>
+            <button data-v="holz_alt">Holzheizung</button>
+            <button data-v="strom_alt">Nachtspeicher</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <label>Gewünschte Technik</label>
+          <div class="seg seg-tech" id="tech">
+            <button data-v="luft" class="on">Luftwärmepumpe</button>
+            <button data-v="sole">Solewärmepumpe</button>
+            <button data-v="gas">Gas</button>
+            <button data-v="oel">Öl</button>
+            <button data-v="holz">Holzheizung</button>
+            <button data-v="klima">Klima</button>
           </div>
         </div>
       </div>
@@ -592,11 +622,12 @@ body.bov-open{overflow:hidden}
         <div class="rlabel">Geschätzte Wärme-Rate*</div>
         <div class="rrate"><span id="rate">ca. 165 – 210</span></div>
         <div class="runit">€ / Monat</div>
+        <div class="rtech" id="rtech" aria-live="polite">Luftwärmepumpe</div>
         <div class="rboxes">
-          <div class="rbox"><b id="co2">−60 %</b><span>CO₂ pro Jahr*</span></div>
-          <div class="rbox"><b id="kg">3,1 t</b><span>CO₂-Einsparung / Jahr*</span></div>
+          <div class="rbox"><b id="co2">−60 %</b><span id="co2Lbl">CO₂ pro Jahr*</span></div>
+          <div class="rbox"><b id="kg">3,1 t</b><span id="kgLbl">CO₂-Einsparung / Jahr*</span></div>
         </div>
-        <div class="rcheck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> 0 € Investition · Wartung &amp; Förderung inklusive</div>
+        <div class="rcheck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Geringe Investitionskosten · Wartung &amp; Förderung inklusive</div>
         <a href="#kontakt" class="btn btn-light">Unverbindliches Angebot anfragen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
         <p class="disc">* Unverbindliche Beispielrechnung auf Basis typischer Richtwerte. Kein verbindliches Angebot. Ihr konkreter Preis hängt von Objekt, Technik und Laufzeit ab und wird individuell ermittelt.</p>
       </div>
@@ -608,7 +639,7 @@ body.bov-open{overflow:hidden}
 <section class="showcase" id="ablauf">
   <div class="wrap">
     <div class="inner reveal">
-      <img class="bg" data-editable="image" data-key="showcase_image" src="https://d8j0ntlcm91z4.cloudfront.net/user_37vskBUfwfE0OUpgvwcfoBpdX9r/hf_20260620_225343_f066b07a-f4a8-4890-a6e3-390f2fa87561.png" alt="Techniker bei der Wärmeanlage" loading="lazy">
+      <img class="bg" data-editable="image" data-key="showcase_image" src="assets/images/ablauf-techniker.webp" alt="Techniker bei der Wärmeanlage" loading="lazy">
       <div class="ov"></div>
       <div class="content">
         <span class="badge-light" data-editable="text" data-key="showcase_badge">So funktioniert Wärmecontracting</span>
@@ -616,7 +647,7 @@ body.bov-open{overflow:hidden}
         <p data-editable="text" data-key="showcase_text">Wir nehmen Ihnen die komplette Wärmeversorgung ab — geplant, finanziert, gebaut, betrieben und gewartet.</p>
         <div class="flist">
           <div class="fstep"><div class="fnum">01</div><div><h4 data-editable="text" data-key="showcase_step_1_title">Planung</h4><small data-editable="text" data-key="showcase_step_1_text">Bedarfsanalyse, Konzept &amp; Auslegung – passend zum Objekt</small></div></div>
-          <div class="fstep"><div class="fnum">02</div><div><h4 data-editable="text" data-key="showcase_step_2_title">Finanzierung</h4><small data-editable="text" data-key="showcase_step_2_text">Wir investieren – Sie zahlen 0 €, Förderung inklusive</small></div></div>
+          <div class="fstep"><div class="fnum">02</div><div><h4 data-editable="text" data-key="showcase_step_2_title">Finanzierung</h4><small data-editable="text" data-key="showcase_step_2_text">Wir investieren den größten Teil – Ihre Investitionskosten bleiben gering, Förderung inklusive</small></div></div>
           <div class="fstep"><div class="fnum">03</div><div><h4 data-editable="text" data-key="showcase_step_3_title">Umsetzung</h4><small data-editable="text" data-key="showcase_step_3_text">Bau &amp; Installation, koordiniert und termintreu</small></div></div>
           <div class="fstep"><div class="fnum">04</div><div><h4 data-editable="text" data-key="showcase_step_4_title">Betrieb</h4><small data-editable="text" data-key="showcase_step_4_text">Zuverlässige Wärmelieferung, 24/7 über die Laufzeit</small></div></div>
           <div class="fstep"><div class="fnum">05</div><div><h4 data-editable="text" data-key="showcase_step_5_title">Wartung</h4><small data-editable="text" data-key="showcase_step_5_text">Wartung, Reparatur &amp; Brennstoff – alles inklusive</small></div></div>
@@ -726,6 +757,7 @@ body.bov-open{overflow:hidden}
             <label class="tf-q">Passt alles? Dann senden wir das ab.</label>
             <div class="tf-review" id="tfReview"></div>
             <div class="tf-row"><button type="button" class="btn btn-light" id="tfSubmit">Anfrage senden <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button></div>
+            <p class="tf-privacy">Mit dem Absenden willigen Sie ein, dass wir Ihre Angaben zur Bearbeitung Ihrer Anfrage verwenden. Details und Ihr Widerrufsrecht finden Sie in der <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
             <div class="tf-status" id="tfStatus" aria-live="polite"></div>
           </div>
         </div>
@@ -758,6 +790,12 @@ body.bov-open{overflow:hidden}
         <span class="foot-h">Öffnungszeiten</span>
         <span>Mo–Fr 09:00–17:00 Uhr</span>
       </div>
+      <div class="foot-col">
+        <span class="foot-h">Rechtliches</span>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <button type="button" class="foot-link" id="cookieSettings">Cookie-Einstellungen</button>
+      </div>
     </div>
   </div>
   <div class="wrap foot-bottom">
@@ -777,6 +815,10 @@ body.bov-open{overflow:hidden}
   <a href="/blog/">Ratgeber</a>
   <a href="#faq">FAQ</a>
   <a href="#kontakt" data-beratung class="btn btn-primary">Beratung buchen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+  <div class="drawer-legal">
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+  </div>
 </aside>
 
 <script>
@@ -840,24 +882,54 @@ body.bov-open{overflow:hidden}
   });
 
   /* ---------- Wärme-Rechner ---------- */
-  var state={typ:'efh',flaeche:140,daemm:95,alt:0.32};
+  /* Alle Werte sind Richtwerte für eine grobe Orientierung, kein Angebot.
+     co2 = kg CO₂ je kWh NUTZWÄRME (Emissionsfaktor / Nutzungsgrad bzw. JAZ),
+     arbeit = Arbeitspreis in € je kWh Wärme, grund = Faktor auf den Grundpreis. */
+  var TECH={
+    luft :{name:'Luftwärmepumpe',            arbeit:0.125, co2:0.110, grund:1.00},
+    sole :{name:'Solewärmepumpe',            arbeit:0.115, co2:0.090, grund:1.25},
+    gas  :{name:'Gas-Brennwert',             arbeit:0.120, co2:0.205, grund:0.85},
+    oel  :{name:'Öl-Brennwert',              arbeit:0.135, co2:0.320, grund:0.85},
+    holz :{name:'Holzheizung (Pellets)',     arbeit:0.110, co2:0.035, grund:1.10},
+    klima:{name:'Klima – Heizen & Kühlen',   arbeit:0.140, co2:0.130, grund:0.90}
+  };
+  var ALT={oel_alt:0.360, gas_alt:0.240, holz_alt:0.045, strom_alt:0.380};
+  var state={typ:'efh',flaeche:140,daemm:95,alt:'oel_alt',tech:'luft'};
   var grund={efh:28,mfh:120,gew:240};
   var fmtE=function(n){return Math.round(n/5)*5;};
-  var rate=document.getElementById('rate'),co2=document.getElementById('co2'),kg=document.getElementById('kg');
+  var rate=document.getElementById('rate'),co2=document.getElementById('co2'),kg=document.getElementById('kg'),
+      rtech=document.getElementById('rtech'),co2Lbl=document.getElementById('co2Lbl'),kgLbl=document.getElementById('kgLbl');
   function calc(){
+    var t=TECH[state.tech]||TECH.luft;
     var bedarf=state.flaeche*state.daemm;
-    var arbeit=0.11;
-    var monat=(bedarf*arbeit)/12 + grund[state.typ];
+    var monat=(bedarf*t.arbeit)/12 + grund[state.typ]*t.grund;
     var lo=fmtE(monat*0.88), hi=fmtE(monat*1.12);
     rate.textContent='ca. '+lo.toLocaleString('de-DE')+' – '+hi.toLocaleString('de-DE');
-    var contract=0.08;
-    var saved=bedarf*(state.alt-contract)/1000;
-    var pct=Math.round((state.alt-contract)/state.alt*100);
-    co2.textContent='−'+pct+' %';
-    kg.textContent=saved.toFixed(1).replace('.',',')+' t';
+    rtech.textContent=t.name;
+    var altF=ALT[state.alt]||ALT.oel_alt;
+    var diff=altF-t.co2;
+    var pct=Math.round(diff/altF*100);
+    var tonnen=Math.abs(bedarf*diff)/1000;
+    if(diff>0){
+      co2.textContent='−'+pct+' %';
+      co2Lbl.textContent='CO₂ pro Jahr*';
+      kg.textContent=tonnen.toFixed(1).replace('.',',')+' t';
+      kgLbl.textContent='CO₂-Einsparung / Jahr*';
+    } else if(pct===0){
+      co2.textContent='±0 %';
+      co2Lbl.textContent='CO₂ pro Jahr*';
+      kg.textContent='0,0 t';
+      kgLbl.textContent='CO₂-Veränderung / Jahr*';
+    } else {
+      co2.textContent='+'+Math.abs(pct)+' %';
+      co2Lbl.textContent='CO₂ pro Jahr*';
+      kg.textContent='+'+tonnen.toFixed(1).replace('.',',')+' t';
+      kgLbl.textContent='CO₂-Mehrausstoß / Jahr*';
+    }
   }
   function segBind(id,key,parse){
     var grp=document.getElementById(id);
+    if(!grp) return;
     grp.querySelectorAll('button').forEach(function(b){
       b.addEventListener('click',function(){
         grp.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
@@ -869,7 +941,8 @@ body.bov-open{overflow:hidden}
   }
   segBind('typ','typ');
   segBind('daemm','daemm',parseFloat);
-  segBind('alt','alt',parseFloat);
+  segBind('alt','alt');
+  segBind('tech','tech');
   var fl=document.getElementById('flaeche'),flLbl=document.getElementById('flaecheLbl');
   function flUpd(){
     state.flaeche=+fl.value;
@@ -974,5 +1047,26 @@ body.bov-open{overflow:hidden}
 })();
 </script>
 <script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
+
+<!-- ============ COMPLYO · Cookie-Consent & Rechtssicherheit ============
+     Auto-Blocking muss VOR allen weiteren Skripten laufen, damit einwilligungs-
+     pflichtige Dienste erst nach der Zustimmung geladen werden.
+     Konfiguration (Farben, Texte, Dienste) im Complyo-Dashboard unter site-id.
+     Optional zusätzlich das Barrierefreiheits-Widget (BFSG):
+     <script src="https://api.complyo.de/api/widgets/accessibility.js" data-site-id="boehme-energie" async><\/script>
+============================================================================ -->
+<script src="https://api.complyo.de/public/cookie-blocker.js" data-site-id="boehme-energie"></script>
+<script src="https://api.complyo.de/api/widgets/cookie-compliance.js" data-site-id="boehme-energie" data-complyo-site-id="boehme-energie" async></script>
+<script>
+(function(){
+  var btn=document.getElementById('cookieSettings');
+  if(!btn) return;
+  btn.addEventListener('click',function(){
+    if(window.complyo&&typeof window.complyo.openPreferences==='function'){window.complyo.openPreferences();}
+    else if(window.complyoCookieBanner&&typeof window.complyoCookieBanner.openSettings==='function'){window.complyoCookieBanner.openSettings();}
+    else{window.location.href='/datenschutz.html#cookies';}
+  });
+})();
+</script>
 </body>
 </html>

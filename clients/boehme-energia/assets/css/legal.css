@@ -1,0 +1,36 @@
+/* Rechtsseiten (Impressum / Datenschutz) – Böhme Energie */
+:root{
+  --cream:#F4F2EC; --forest:#2A3A2F; --forest-2:#33473A; --green:#3C684D; --green-2:#4F7747;
+  --muted:#6E7B70; --ink:#1B2620; --line:rgba(43,60,49,.12);
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--cream);color:var(--forest);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:var(--green);text-decoration:underline;text-underline-offset:2px;word-break:break-word}
+a:hover{color:var(--green-2)}
+.lp-head{background:var(--forest)}
+.lp-head .inner{max-width:900px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lp-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.lp-brand img{height:40px;width:auto}
+.lp-back{color:rgba(255,255,255,.92);font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:9px 18px;white-space:nowrap}
+.lp-back:hover{background:rgba(255,255,255,.14);color:#fff}
+.lp-hero{padding:56px 22px 10px}
+.lp-hero .inner{max-width:900px;margin:0 auto}
+.lp-hero .pill{display:inline-flex;align-items:center;background:rgba(60,104,77,.1);color:var(--green);border-radius:999px;padding:6px 14px;font-size:.78rem;font-weight:600;margin-bottom:14px}
+.lp-hero h1{font-size:clamp(1.9rem,4vw,2.6rem);letter-spacing:-.02em;color:var(--ink);line-height:1.15}
+.lp-hero .sub{color:var(--muted);font-size:.95rem;margin-top:10px}
+main{max-width:900px;margin:0 auto;padding:18px 22px 80px}
+main h2{font-size:1.42rem;margin:42px 0 12px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink);letter-spacing:-.01em}
+main h3{font-size:1.06rem;margin:26px 0 8px;color:var(--ink)}
+main p{margin:0 0 14px;color:var(--forest-2)}
+main ul{margin:0 0 16px 22px;color:var(--forest-2)}
+main li{margin:0 0 7px}
+main .box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 26px;margin:0 0 18px}
+main .box p:last-child{margin-bottom:0}
+main .muted{color:var(--muted);font-size:.88rem}
+.lp-foot{background:var(--forest);color:rgba(255,255,255,.72);padding:28px 22px;text-align:center;font-size:.85rem}
+.lp-foot a{color:rgba(255,255,255,.9)}
+.lp-foot .fl{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.lp-foot .foot-link{background:none;border:none;padding:0;font:inherit;color:rgba(255,255,255,.9);text-decoration:underline;cursor:pointer}
+@media(max-width:560px){.lp-hero{padding:38px 18px 6px}main h2{margin:32px 0 10px}}
