@@ -302,7 +302,8 @@ body.bov-open{overflow:hidden}
 .foot-col a:hover{color:var(--green)}
 .foot-h{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:5px}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;flex-wrap:wrap}
-.foot-bottom .foot-note{max-width:680px}
+.foot-bottom .foot-note{max-width:680px;text-align:right}
+.foot-bottom .foot-note a{color:inherit;text-decoration:underline}
 @media(max-width:760px){.foot-inner{flex-direction:column;gap:36px;padding:48px 22px 36px}.foot-contact{gap:36px}}
 
 /* ---------- RESPONSIVE ---------- */
@@ -802,6 +803,7 @@ body.bov-open{overflow:hidden}
   </div>
   <div class="wrap foot-bottom">
     <span>© 2026 Böhme Energie GmbH · Alle Rechte vorbehalten</span>
+    <span class="foot-note">Bild- und Textinhalte dieser Website wurden teilweise mit generativer KI erstellt. Einzelheiten im <a href="/impressum.html#ki">Impressum</a>.</span>
   </div>
 </footer>
 
