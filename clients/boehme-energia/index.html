@@ -477,7 +477,7 @@ body.bov-open{overflow:hidden}
           <div class="pstats">
             <div class="pstat"><b data-editable="text" data-key="sol_1_stat_1">~140 m²</b><span data-editable="text" data-key="sol_1_stat_1_label">Fläche</span></div>
             <div class="pstat"><b data-editable="text" data-key="sol_1_stat_2">1 Einheit</b><span data-editable="text" data-key="sol_1_stat_2_label">Haushalt</span></div>
-            <div class="pstat"><b data-editable="text" data-key="sol_1_stat_3">−60 % CO₂*</b><span data-editable="text" data-key="sol_1_stat_3_label">Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_1_stat_3">−60 % CO₂</b><span data-editable="text" data-key="sol_1_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
@@ -492,7 +492,7 @@ body.bov-open{overflow:hidden}
           <div class="pstats">
             <div class="pstat"><b data-editable="text" data-key="sol_2_stat_1">~900 m²</b><span data-editable="text" data-key="sol_2_stat_1_label">Fläche</span></div>
             <div class="pstat"><b data-editable="text" data-key="sol_2_stat_2">12 Einheiten</b><span data-editable="text" data-key="sol_2_stat_2_label">Wohnungen</span></div>
-            <div class="pstat"><b data-editable="text" data-key="sol_2_stat_3">−55 % CO₂*</b><span data-editable="text" data-key="sol_2_stat_3_label">Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_2_stat_3">−55 % CO₂</b><span data-editable="text" data-key="sol_2_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
@@ -507,7 +507,7 @@ body.bov-open{overflow:hidden}
           <div class="pstats">
             <div class="pstat"><b data-editable="text" data-key="sol_3_stat_1">3.500 m²+</b><span data-editable="text" data-key="sol_3_stat_1_label">Fläche</span></div>
             <div class="pstat"><b data-editable="text" data-key="sol_3_stat_2">Wärme+Kälte</b><span data-editable="text" data-key="sol_3_stat_2_label">Versorgung</span></div>
-            <div class="pstat"><b data-editable="text" data-key="sol_3_stat_3">−50 % CO₂*</b><span data-editable="text" data-key="sol_3_stat_3_label">Einsparung</span></div>
+            <div class="pstat"><b data-editable="text" data-key="sol_3_stat_3">−50 % CO₂</b><span data-editable="text" data-key="sol_3_stat_3_label">Einsparung</span></div>
           </div>
         </div>
       </article>
@@ -620,17 +620,17 @@ body.bov-open{overflow:hidden}
         </div>
       </div>
       <div class="result">
-        <div class="rlabel">Geschätzte Wärme-Rate*</div>
+        <div class="rlabel">Geschätzte Wärme-Rate</div>
         <div class="rrate"><span id="rate">ca. 165 – 210</span></div>
         <div class="runit">€ / Monat</div>
         <div class="rtech" id="rtech" aria-live="polite">Luftwärmepumpe</div>
         <div class="rboxes">
-          <div class="rbox"><b id="co2">−60 %</b><span id="co2Lbl">CO₂ pro Jahr*</span></div>
-          <div class="rbox"><b id="kg">3,1 t</b><span id="kgLbl">CO₂-Einsparung / Jahr*</span></div>
+          <div class="rbox"><b id="co2">−60 %</b><span id="co2Lbl">CO₂ pro Jahr</span></div>
+          <div class="rbox"><b id="kg">3,1 t</b><span id="kgLbl">CO₂-Einsparung / Jahr</span></div>
         </div>
         <div class="rcheck"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg> Geringe Investitionskosten · Wartung &amp; Förderung inklusive</div>
         <a href="#kontakt" class="btn btn-light">Unverbindliches Angebot anfragen <span class="circ"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
-        <p class="disc">* Unverbindliche Beispielrechnung auf Basis typischer Richtwerte. Kein verbindliches Angebot. Ihr konkreter Preis hängt von Objekt, Technik und Laufzeit ab und wird individuell ermittelt.</p>
+        <p class="disc">Unverbindliche Beispielrechnung auf Basis typischer Richtwerte. Kein verbindliches Angebot. Ihr konkreter Preis hängt von Objekt, Technik und Laufzeit ab und wird individuell ermittelt.</p>
       </div>
     </div>
   </div>
@@ -801,7 +801,6 @@ body.bov-open{overflow:hidden}
   </div>
   <div class="wrap foot-bottom">
     <span>© 2026 Böhme Energie GmbH · Alle Rechte vorbehalten</span>
-    <span class="foot-note" data-editable="text" data-key="footer_note">* Beispiel-/Richtwerte, im Projekt durch belegbare Zahlen zu ersetzen.</span>
   </div>
 </footer>
 
@@ -913,19 +912,19 @@ body.bov-open{overflow:hidden}
     var tonnen=Math.abs(bedarf*diff)/1000;
     if(diff>0){
       co2.textContent='−'+pct+' %';
-      co2Lbl.textContent='CO₂ pro Jahr*';
+      co2Lbl.textContent='CO₂ pro Jahr';
       kg.textContent=tonnen.toFixed(1).replace('.',',')+' t';
-      kgLbl.textContent='CO₂-Einsparung / Jahr*';
+      kgLbl.textContent='CO₂-Einsparung / Jahr';
     } else if(pct===0){
       co2.textContent='±0 %';
-      co2Lbl.textContent='CO₂ pro Jahr*';
+      co2Lbl.textContent='CO₂ pro Jahr';
       kg.textContent='0,0 t';
-      kgLbl.textContent='CO₂-Veränderung / Jahr*';
+      kgLbl.textContent='CO₂-Veränderung / Jahr';
     } else {
       co2.textContent='+'+Math.abs(pct)+' %';
-      co2Lbl.textContent='CO₂ pro Jahr*';
+      co2Lbl.textContent='CO₂ pro Jahr';
       kg.textContent='+'+tonnen.toFixed(1).replace('.',',')+' t';
-      kgLbl.textContent='CO₂-Mehrausstoß / Jahr*';
+      kgLbl.textContent='CO₂-Mehrausstoß / Jahr';
     }
   }
   function segBind(id,key,parse){
