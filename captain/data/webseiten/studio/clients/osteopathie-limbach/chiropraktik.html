@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chiropraktik für Patienten aus Chemnitz | Praxis C. Uhlmann, Limbach-Oberfrohna</title>
-<meta name="description" content="Chiropraktiker für Chemnitz gesucht? Praxis für Chiropraktik & Osteopathie in Limbach-Oberfrohna — kurze Anfahrt, Parkplätze vor der Tür, transparente Kosten. ☎ 03722 40 93 165">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<title>Chiropraktik: Ablauf, Kosten und Grenzen | Praxis C. Uhlmann</title>
+<meta name="description" content="Was ist Chiropraktik, wie läuft eine Behandlung ab und was kostet sie? Ablauf, Preise nach GebüH, Kostenübernahme und wann Chiropraktik nicht angezeigt ist. Heilpraktiker Christoph Uhlmann.">
+<!-- STAGING: Freigabe ausstehend. Vor dem Livegang auf "index,follow,max-image-preview:large" aendern. -->
+<meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://osteopathie-limbach.de/chiropraktik">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Chiropraktik für Patienten aus Chemnitz">
-<meta property="og:description" content="Chiropraktik & Osteopathie in Limbach-Oberfrohna — kurze Anfahrt aus Chemnitz, Parkplätze direkt vor der Tür.">
+<meta property="og:title" content="Chiropraktik: Ablauf, Kosten und Grenzen">
+<meta property="og:description" content="Was Chiropraktik ist, wie eine Behandlung abläuft, was sie kostet und wo ihre Grenzen liegen.">
 <meta property="og:locale" content="de_DE">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
@@ -33,7 +34,9 @@ section{position:relative}
 h1,h2,h3,h4{font-family:var(--head);line-height:1.15;letter-spacing:-.01em;font-weight:700;color:var(--ink)}
 p{color:var(--soft)}
 
-.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(153,159,121,.16);color:var(--sage-dk);border-radius:999px;padding:7px 16px;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;width:fit-content}
+.pill{display:inline-flex;align-items:center;gap:12px;color:var(--sage-dk);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;width:fit-content}
+.pill::before{content:"";width:26px;height:1px;background:var(--sage);flex:none}
+.sec-head .pill::after{content:"";width:26px;height:1px;background:var(--sage);flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:600;font-size:.96rem;padding:15px 26px;border-radius:12px;border:1px solid transparent;cursor:pointer;transition:.25s;white-space:nowrap}
 .btn-primary{background:var(--sage);color:#fff;box-shadow:0 14px 28px -14px rgba(124,132,96,.85)}
 .btn-primary:hover{background:var(--sage-2);transform:translateY(-2px)}
@@ -69,7 +72,8 @@ p{color:var(--soft)}
 .hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(38,44,34,.74) 0%,rgba(38,44,34,.38) 52%,rgba(38,44,34,.12) 100%),linear-gradient(180deg,rgba(38,44,34,.15) 0%,rgba(38,44,34,.1) 45%,rgba(38,44,34,.62) 100%)}
 .hero-inner{position:relative;z-index:2;padding:60px clamp(24px,5vw,64px) 48px;max-width:900px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:8px 18px;font-size:.82rem;font-weight:600;margin-bottom:20px}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;color:rgba(255,255,255,.9);font-size:.85rem;font-weight:500;letter-spacing:.03em;margin-bottom:20px;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.hero-badge::before{content:"";width:26px;height:1px;background:rgba(255,255,255,.65);flex:none}
 .hero h1{color:#fff;font-size:clamp(2rem,4.6vw,3.4rem);text-shadow:0 2px 30px rgba(0,0,0,.4);margin-bottom:14px;font-weight:600}
 .hero-sub{color:rgba(255,255,255,.94);font-size:clamp(1rem,1.5vw,1.15rem);max-width:640px;margin-bottom:28px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
@@ -228,6 +232,16 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
   *{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* Hub-Karten fuer das Einzugsgebiet */
+.hubgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+.hubcard{display:block;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:26px 28px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+.hubcard:hover{transform:translateY(-4px);box-shadow:0 24px 50px -28px rgba(44,50,42,.4);border-color:var(--sage)}
+.hubcard h3{font-size:1.15rem;margin-bottom:8px}
+.hubcard p{color:var(--soft);font-size:.95rem;margin:0}
+.hubcard .go{display:inline-block;margin-top:14px;color:var(--sage-dk);font-weight:600;font-size:.92rem}
+@media(max-width:760px){.hubgrid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -242,7 +256,7 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
     <nav class="mainnav" aria-label="Hauptnavigation">
       <a href="/">Home</a>
       <a href="/#osteopathie">Osteopathie</a>
-      <a href="/#chiropraktik" class="on">Chiropraktik</a>
+      <a href="/#chiropraktik">Chiropraktik</a>
       <a href="/#ueber-mich">Über mich</a>
       <a href="/#kontakt">Kontakt</a>
     </nav>
@@ -254,13 +268,13 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
 <div class="hero-pad">
   <section class="hero">
     <div class="hero-bg">
-      <picture><source srcset="assets/images/chiropraktik-chemnitz-hero.webp" type="image/webp"><img src="assets/images/chiropraktik-chemnitz-hero.jpg" width="1800" height="771" alt="Chiropraktische Behandlung der Halswirbelsäule in der Praxis C. Uhlmann" fetchpriority="high"></picture>
+      <picture><source srcset="assets/images/chiropraktik-mobilisation-bws-praxis-uhlmann.webp" type="image/webp"><img src="assets/images/chiropraktik-mobilisation-bws-praxis-uhlmann.jpg" width="1200" height="900" alt="Chiropraktische Mobilisation der Brustwirbelsäule in der Praxis in Limbach-Oberfrohna" fetchpriority="high"></picture>
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="hero-badge">Praxis für Osteopathie &amp; Chiropraktik · Limbach-Oberfrohna</div>
-      <h1>Chiropraktik für Patienten aus Chemnitz</h1>
-      <p class="hero-sub">Keinen freien Termin in Chemnitz gefunden? Wir behandeln Sie in Limbach-Oberfrohna — mit kurzer Anfahrt und Parkplätzen direkt vor der Tür.</p>
+      <h1>Chiropraktik: Ablauf, Kosten und Grenzen</h1>
+      <p class="hero-sub">Was bei einer chiropraktischen Behandlung passiert, was sie kostet und wann sie nicht das richtige Mittel ist.</p>
       <div class="hero-ctas">
         <a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-primary" target="_blank" rel="noopener">Online-Termin buchen</a>
         <a href="tel:+4937224093165" class="btn btn-ghost">03722 40 93 165</a>
@@ -269,102 +283,86 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
   </section>
 </div>
 
-<!-- ============ TRUST ============ -->
-<div class="trustbar">
-  <div class="trustbar-in">
-    <span>⭐ 5,0 von 5 Sternen aus 37 Google-Bewertungen</span>
-    <span>Termin: <a href="tel:+4937224093165">03722 40 93 165</a></span>
-    <span>Chiropraktik &amp; Osteopathie unter einem Dach</span>
-  </div>
-</div>
-
-<!-- ============ LEAD ============ -->
+<!-- ============ WAS IST CHIROPRAKTIK ============ -->
 <section class="lead-sec">
   <div class="wrap">
-    <div class="lead-grid">
-      <div class="lead-txt reveal">
-        <span class="pill">Für Chemnitz &amp; Umland</span>
-        <h2>Ihre Praxis vor den Toren von Chemnitz</h2>
-        <p>Sie suchen einen Chiropraktiker in Chemnitz und finden keinen freien Termin? In unserer Praxis in Limbach-Oberfrohna behandeln wir regelmäßig Patientinnen und Patienten aus Chemnitz und dem gesamten Umland. Die Fahrt dauert von der Chemnitzer Stadtmitte aus je nach Verkehrslage 20–25 Minuten, direkt vor der Tür gibt es Parkplätze.</p>
-        <p>Wir arbeiten chiropraktisch und osteopathisch — je nachdem, was zu Ihrem Beschwerdebild passt. Christoph Uhlmann ist Heilpraktiker, zertifizierter Therapeut für ganzheitliche Chiropraktik und Manuelle Gelenktherapie sowie zertifizierter HWS- und Atlas-Therapeut.</p>
-        <ul class="usp">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Termine rund um die Uhr online buchbar — ohne Warteschleife</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Chiropraktik und Osteopathie unter einem Dach</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Parkplätze direkt vor der Tür, barrierefreier Zugang</li>
-        </ul>
-      </div>
-      <div class="lead-media reveal">
-        <picture><source srcset="assets/images/chiropraktik-untersuchung-praxis-uhlmann.webp" type="image/webp"><img src="assets/images/chiropraktik-untersuchung-praxis-uhlmann.jpg" width="1400" height="1050" alt="Christoph Uhlmann prüft Beweglichkeit und Statik einer Patientin auf der Behandlungsliege in Limbach-Oberfrohna" loading="lazy"></picture>
-      </div>
+    <div class="sec-head reveal">
+      <span class="pill">Grundlagen</span>
+      <h2>Was ist Chiropraktik?</h2>
+    </div>
+    <div class="narrow reveal">
+      <p>Chiropraktik ist eine manuelle Behandlungsform. Im Mittelpunkt steht die Wirbelsäule und ihr Zusammenspiel mit Gelenken, Muskeln und Nervensystem. Ist ein Wirbelgelenk in seiner Beweglichkeit eingeschränkt, kann das Beschwerden auslösen, die weit vom eigentlichen Ort entfernt spürbar sind. Eine Blockade im oberen Rücken kann sich als Nackenschmerz zeigen, eine Blockade im Becken als Ziehen ins Bein.</p>
+      <p>Die Behandlung besteht aus gezielten, meist sehr kurzen Impulsen an einzelnen Wirbelgelenken, ergänzt um Weichteiltechniken an der umliegenden Muskulatur. Ziel ist, die Gelenkfunktion wiederherzustellen und die Muskelspannung zu senken. Das oft beschriebene Knackgeräusch entsteht durch einen Druckausgleich im Gelenk. Es ist kein Maß dafür, ob eine Behandlung gewirkt hat.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ WIE WIR ARBEITEN ============ -->
+<!-- ============ ABGRENZUNG ============ -->
+<section class="vgl">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="pill">Einordnung</span>
+      <h2>Chiropraktik, Chirotherapie, Osteopathie</h2>
+      <p>Drei Begriffe, die oft durcheinandergehen. Der Unterschied liegt weniger in der Technik als im rechtlichen Rahmen und im Blickwinkel.</p>
+    </div>
+    <div class="pricecard reveal">
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th scope="col"></th><th scope="col">Chiropraktik</th><th scope="col">Chirotherapie</th><th scope="col">Osteopathie</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ausgeübt von</b></td><td>überwiegend Heilpraktikern</td><td>Ärztinnen und Ärzten mit Zusatzbezeichnung</td><td>Heilpraktikern, teils Ärzten und Physiotherapeuten</td></tr>
+            <tr><td><b>Blickwinkel</b></td><td>Wirbelsäule, einzelne Gelenke</td><td>Wirbelsäule, ärztliche Diagnostik</td><td>ganzer Körper, Gewebe, Faszien, Organe</td></tr>
+            <tr><td><b>Technik</b></td><td>gezielte, kurze Impulse</td><td>Impulse und Mobilisation</td><td>langsame, lösende Handgriffe</td></tr>
+            <tr><td><b>Abrechnung</b></td><td>GebüH, Privatleistung</td><td>teils Kassenleistung</td><td>GebüH, Privatleistung</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="note reveal">Ich arbeite als Heilpraktiker chiropraktisch und osteopathisch. Welcher Ansatz zu Ihrem Beschwerdebild passt, entscheiden wir gemeinsam beim ersten Termin. Mehr zum osteopathischen Teil finden Sie auf der <a href="/#osteopathie">Startseite unter Osteopathie</a>.</p>
+  </div>
+</section>
+
+<!-- ============ ABLAUF ============ -->
 <section class="work">
   <div class="wrap">
-    <div class="work-grid">
-      <div class="work-media reveal">
-        <picture><source srcset="assets/images/chiropraktik-behandlung-hws-praxis-uhlmann.webp" type="image/webp"><img src="assets/images/chiropraktik-behandlung-hws-praxis-uhlmann.jpg" width="1400" height="1050" alt="Chiropraktische Behandlung der Halswirbelsäule im Behandlungsraum der Praxis C. Uhlmann in Limbach-Oberfrohna" loading="lazy"></picture>
-      </div>
-      <div class="work-txt reveal">
-        <span class="pill">Chiropraktik</span>
-        <h2>Chiropraktische Behandlung — wie wir arbeiten</h2>
-        <p>Chiropraktik ist eine manuelle Behandlungsform. Im Mittelpunkt steht die Wirbelsäule und ihr Zusammenspiel mit Gelenken, Muskeln und Nervensystem. Wenn ein Wirbelgelenk in seiner Beweglichkeit eingeschränkt ist, kann das Beschwerden auslösen, die weit vom eigentlichen Ort entfernt spürbar sind.</p>
-        <div class="steps">
-          <div class="step">
-            <div class="num">1</div>
-            <div><h3>Anamnese und Befund</h3><p>Zu Beginn nehmen wir uns Zeit für Ihre Vorgeschichte: Wann traten die Beschwerden auf, was verstärkt sie, was lindert sie? Danach folgt eine körperliche Untersuchung — wir prüfen Beweglichkeit, Muskelspannung und Statik.</p></div>
-          </div>
-          <div class="step">
-            <div class="num">2</div>
-            <div><h3>Behandlung</h3><p>Die eigentliche chiropraktische Behandlung besteht aus gezielten, meist kurzen Impulsen an einzelnen Wirbelgelenken. Ergänzend arbeiten wir mit Weichteiltechniken an der umliegenden Muskulatur.</p></div>
-          </div>
-          <div class="step">
-            <div class="num">3</div>
-            <div><h3>Nachbesprechung</h3><p>Sie bekommen von uns eine Einschätzung, wie viele Termine sinnvoll sein könnten, und Hinweise für den Alltag.</p></div>
-          </div>
-        </div>
-        <div class="dauer"><b>Dauer:</b> Die Erstbehandlung dauert 40–50 Minuten, jede Folgebehandlung 20–25 Minuten. Für akute Beschwerden halten wir Termine mit 40–50 Minuten frei.</div>
-      </div>
+    <div class="sec-head reveal">
+      <span class="pill">Ablauf</span>
+      <h2>Wie eine Behandlung abläuft</h2>
     </div>
-    <div class="subcard narrow reveal">
-      <h3>Chiropraktik oder Chirotherapie — der Unterschied</h3>
-      <p>Die Begriffe werden oft verwechselt. Chirotherapie ist eine ärztliche Zusatzbezeichnung — sie wird von Ärztinnen und Ärzten mit entsprechender Weiterbildung ausgeübt. Chiropraktik wird in Deutschland überwiegend von Heilpraktikern angeboten. Die Techniken überschneiden sich, der rechtliche Rahmen und die Abrechnung unterscheiden sich. In unserer Praxis behandelt Christoph Uhlmann als Heilpraktiker.</p>
+    <div class="steps reveal">
+      <div class="step"><div class="num">1</div><div><h3>Anamnese und Befund</h3><p>Zu Beginn nehme ich mir Zeit für Ihre Vorgeschichte: Wann traten die Beschwerden auf, was verstärkt sie, was lindert sie? Danach folgt eine körperliche Untersuchung, bei der ich Beweglichkeit, Muskelspannung und Statik prüfe.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Einschätzung</h3><p>Ich entscheide, ob eine chiropraktische Behandlung angebracht ist oder ob der Verdacht auf eine Erkrankung besteht, die zuerst ärztlich abgeklärt gehört. Im zweiten Fall behandle ich nicht, sondern sage Ihnen das offen.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Behandlung</h3><p>Gezielte, meist kurze Impulse an einzelnen Wirbelgelenken, ergänzt um Weichteiltechniken an der umliegenden Muskulatur.</p></div></div>
+      <div class="step"><div class="num">4</div><div><h3>Nachbesprechung</h3><p>Sie bekommen von mir eine Einschätzung, wie viele Termine sinnvoll sein könnten, und Hinweise für den Alltag. Wie viele Behandlungen nötig sind, hängt stark davon ab, wie lange die Beschwerden schon bestehen.</p></div></div>
     </div>
+    <p class="dauer reveal"><b>Dauer:</b> Die Erstbehandlung dauert 40–50 Minuten, jede Folgebehandlung 20–25 Minuten. Für akute Beschwerden halte ich Termine mit 40–50 Minuten frei.</p>
   </div>
 </section>
 
-<!-- ============ WANN SINNVOLL ============ -->
+<!-- ============ HWS ============ -->
 <section class="wann">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Beschwerdebilder</span>
-      <h2>Wann ist Chiropraktik sinnvoll?</h2>
-      <p>Patientinnen und Patienten kommen unter anderem mit:</p>
+      <span class="pill">Schwerpunkt</span>
+      <h2>HWS-Syndrom und Nackenbeschwerden</h2>
     </div>
-    <ul class="checks reveal">
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Rückenschmerzen — akut nach einer falschen Bewegung oder über Monate gewachsen</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Nackenverspannungen und Bewegungseinschränkungen der Halswirbelsäule</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Kopfschmerzen, die vom Nacken ausgehen</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Ischias-Beschwerden und in ein Bein ausstrahlenden Schmerzen</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Blockaden im Becken oder im Bereich der Brustwirbelsäule</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Kiefergelenkbeschwerden (CMD), oft zusammen mit Zähneknirschen</li>
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Beschwerden nach einseitiger Belastung — Schreibtisch, Handwerk, Sport</li>
-    </ul>
+    <div class="narrow reveal">
+      <p>„HWS-Syndrom" ist ein Sammelbegriff, keine eigenständige Diagnose. Gemeint sind Beschwerden, die von der Halswirbelsäule ausgehen: Nackenschmerz, eingeschränkte Kopfdrehung, vom Nacken aufsteigende Kopfschmerzen, manchmal Schwindel oder ein Ziehen in Schulter und Arm. Häufige Auslöser sind lange Bildschirmarbeit, einseitige Belastung, Zugluft oder dauerhaft erhöhte Muskelspannung bei Stress.</p>
+      <p>Chiropraktisch behandle ich dabei die Beweglichkeit der einzelnen Halswirbelgelenke und die umliegende Muskulatur. Weil die Halswirbelsäule empfindlich ist, gehe ich dort besonders sorgfältig vor und arbeite bei Bedarf ohne Impuls, rein mobilisierend. Ich bin zertifizierter HWS- und Atlas-Therapeut.</p>
+    </div>
     <div class="warnbox reveal">
-      <p>Chiropraktik ersetzt keine ärztliche Abklärung. Bei starken oder plötzlich auftretenden Beschwerden, Taubheitsgefühlen, Lähmungserscheinungen oder nach einem Unfall gehört immer zuerst eine ärztliche Untersuchung dazu. Wir sagen Ihnen offen, wenn wir eine Behandlung nicht für angezeigt halten.</p>
-      <p>Für Schwangere und Säuglinge arbeiten wir in der Regel osteopathisch — mit sanften Techniken ohne Impulse. Mehr dazu auf unserer Seite zur <a href="/#osteopathie">Osteopathie</a>.</p>
+      <p>Nackenschmerz mit Taubheitsgefühl, Kraftverlust im Arm, Sehstörungen, starkem Schwindel oder nach einem Unfall gehört zuerst in eine ärztliche Untersuchung, nicht auf die Behandlungsliege. Das gilt ebenso bei Fieber oder ungeklärtem Gewichtsverlust.</p>
     </div>
   </div>
 </section>
 
 <!-- ============ KOSTEN ============ -->
-<section class="kosten">
+<section class="kosten" id="kosten">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="pill">Transparent</span>
-      <h2>Was kostet eine Behandlung?</h2>
+      <h2>Was kostet Chiropraktik?</h2>
+      <p>Die Preise in meiner Praxis in Limbach-Oberfrohna, gültig für Chiropraktik und Osteopathie.</p>
     </div>
     <div class="pricecard reveal">
       <div class="tablewrap">
@@ -381,71 +379,60 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
     <p class="note reveal">Die Abrechnung erfolgt nach der Gebührenordnung für Heilpraktiker (GebüH). Sie erhalten eine Rechnung, die Sie bei Ihrer Kasse oder Zusatzversicherung einreichen können.</p>
 
     <div class="sec-head reveal" style="margin-top:56px">
-      <h2>Welche Krankenkasse übernimmt die Kosten für Chiropraktik?</h2>
+      <h2>Wer übernimmt die Kosten?</h2>
     </div>
     <div class="kk-grid reveal">
       <div class="kk"><h3>Private Krankenversicherung</h3><p>Viele private Versicherer erstatten Behandlungen ganz oder teilweise. Der Umfang hängt vom jeweiligen Tarif ab.</p></div>
       <div class="kk"><h3>Zusatzversicherung Naturheilverfahren</h3><p>Wer eine Heilpraktiker-Zusatzversicherung hat, bekommt die Kosten in der Regel anteilig erstattet. Die Sätze unterscheiden sich je nach Anbieter deutlich.</p></div>
-      <div class="kk"><h3>Gesetzliche Krankenversicherung</h3><p>Chiropraktische Behandlung durch einen Heilpraktiker ist keine Kassenleistung. Einige Kassen bezuschussen naturheilkundliche Verfahren über Bonusprogramme — fragen Sie im Zweifel direkt bei Ihrer Kasse nach.</p></div>
+      <div class="kk"><h3>Gesetzliche Krankenversicherung</h3><p>Chiropraktische Behandlung durch einen Heilpraktiker ist keine Kassenleistung. Einige Kassen bezuschussen naturheilkundliche Verfahren über Bonusprogramme.</p></div>
     </div>
-    <p class="note reveal">Wir empfehlen, die Kostenübernahme vor dem ersten Termin mit Ihrer Versicherung zu klären. Gern stellen wir Ihnen dafür vorab einen Kostenvoranschlag aus.</p>
+    <p class="note reveal">Ich empfehle, die Kostenübernahme vor dem ersten Termin mit Ihrer Versicherung zu klären. Gern stelle ich Ihnen dafür vorab einen Kostenvoranschlag aus.</p>
   </div>
 </section>
 
-<!-- ============ FOTO-BREAK ============ -->
-<div class="fotobreak">
-  <figure class="reveal">
-    <picture><source srcset="assets/images/chiropraktik-mobilisation-bws-praxis-uhlmann.webp" type="image/webp"><img src="assets/images/chiropraktik-mobilisation-bws-praxis-uhlmann.jpg" width="1400" height="1050" alt="Mobilisation der Brustwirbelsäule in Seitenlage in der Praxis für Osteopathie und Chiropraktik in Limbach-Oberfrohna" loading="lazy"></picture>
-    <figcaption>Mobilisation der Brustwirbelsäule — ergänzend arbeiten wir mit Weichteiltechniken an der umliegenden Muskulatur.</figcaption>
-  </figure>
-</div>
-
-<!-- ============ VERGLEICH ============ -->
-<section class="vgl">
+<!-- ============ GRENZEN ============ -->
+<section class="wann">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="pill">Beides unter einem Dach</span>
-      <h2>Chiropraktik oder Osteopathie — was passt zu mir?</h2>
+      <span class="pill">Ehrlich</span>
+      <h2>Wann Chiropraktik nicht das richtige Mittel ist</h2>
+      <p>Es gibt Situationen, in denen ich nicht behandle, sondern zur Ärztin oder zum Arzt schicke:</p>
     </div>
-    <div class="vglcard reveal">
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th scope="col"></th><th scope="col">Chiropraktik</th><th scope="col">Osteopathie</th></tr></thead>
-          <tbody>
-            <tr><td><b>Fokus</b></td><td>Wirbelsäule, einzelne Gelenke</td><td>ganzer Körper, Gewebe, Faszien, Organe</td></tr>
-            <tr><td><b>Technik</b></td><td>gezielte, kurze Impulse</td><td>langsame, lösende Handgriffe</td></tr>
-            <tr><td><b>Typischer Anlass</b></td><td>akute Blockade, klar lokalisierter Schmerz</td><td>länger bestehende, diffuse Beschwerden</td></tr>
-            <tr><td><b>Sitzungsdauer</b></td><td>Erstbehandlung 40–50 Min, Folgetermin 20–25 Min</td><td>45–60 Min</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <ul class="checks reveal">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>starke oder plötzlich einsetzende Beschwerden ohne erkennbaren Auslöser</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Taubheitsgefühle, Kribbeln oder Lähmungserscheinungen</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Beschwerden nach einem Unfall oder Sturz</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Verdacht auf Bandscheibenvorfall mit neurologischen Ausfällen</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>bekannte Osteoporose oder entzündliche Gelenkerkrankungen</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Fieber, ungeklärter Gewichtsverlust, nächtlicher Ruheschmerz</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>frische Operationen an der Wirbelsäule</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg>Tumorerkrankungen in der Vorgeschichte</li>
+    </ul>
+    <div class="warnbox reveal">
+      <p>Chiropraktik ersetzt keine ärztliche Abklärung. Für Schwangere und Säuglinge arbeite ich in der Regel osteopathisch, mit sanften Techniken ohne Impulse. Mehr dazu auf meiner Seite zur <a href="/#osteopathie">Osteopathie</a>.</p>
     </div>
-    <p class="note reveal">In der Praxis ist die Trennung selten scharf. Weil wir beide Verfahren anbieten, entscheiden wir gemeinsam mit Ihnen beim ersten Termin, welcher Ansatz zu Ihrem Beschwerdebild passt — und kombinieren beides, wenn es sinnvoll ist.<br>→ Mehr zu unserem osteopathischen Angebot: <a href="/#osteopathie">Osteopathie</a></p>
   </div>
 </section>
 
-<!-- ============ ANFAHRT ============ -->
-<section class="anf">
+<!-- ============ EINZUGSGEBIET (HUB) ============ -->
+<section class="lead-sec" id="einzugsgebiet">
   <div class="wrap">
-    <div class="anf-grid">
-      <div class="anf-txt reveal">
-        <span class="pill">Anfahrt</span>
-        <h2>Anfahrt aus Chemnitz</h2>
-        <p><b>Praxis für Osteopathie &amp; Chiropraktik — C. Uhlmann</b><br>
-        Johannisplatz 4/2, 09212 Limbach-Oberfrohna<br>
-        Eingang Bachstraße</p>
-        <p><b>Mit dem Auto:</b> Von der Chemnitzer Stadtmitte sind es je nach Verkehrslage 20–25 Minuten.</p>
-        <p><b>Parken:</b> Parkplätze direkt vor der Tür, barrierefreie Parkplätze vorhanden.</p>
-        <p><b>Mit Bus und Bahn:</b> Buslinie <b>526</b> ab Zentralhaltestelle Chemnitz bis Haltestelle <b>Gaswerk, Limbach-Oberfrohna</b> — Fahrtzeit 22 Minuten.</p>
-        <p><b>Barrierefreiheit:</b> Barrierefreie Parkplätze vorhanden, WC in der Praxis, Wickel-/Stillmöglichkeit.</p>
-      </div>
-      <figure class="centrance reveal">
-        <picture><source srcset="assets/images/eingang-bachstrasse.webp" type="image/webp"><img src="assets/images/eingang-bachstrasse.jpg" width="960" height="720" alt="Hauseingang Bachstraße mit Glastür, Zugang zur Praxis am Johannisplatz 4/2 in Limbach-Oberfrohna" loading="lazy"></picture>
-        <figcaption>
-          <span>Eingang Bachstraße — so finden Sie zu uns.</span>
-          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Johannisplatz+4%2C+09212+Limbach-Oberfrohna" target="_blank" rel="noopener noreferrer">Route planen</a>
-        </figcaption>
-      </figure>
+    <div class="sec-head reveal">
+      <span class="pill">Einzugsgebiet</span>
+      <h2>Woher meine Patientinnen und Patienten kommen</h2>
+      <p>Die Praxis liegt am Johannisplatz in Limbach-Oberfrohna. Ein großer Teil der Termine kommt aus dem Umland.</p>
+    </div>
+    <div class="hubgrid reveal">
+      <a class="hubcard" href="/chiropraktik-chemnitz">
+        <h3>Chiropraktik für Chemnitz</h3>
+        <p>Rund 20 bis 25 Minuten aus der Chemnitzer Stadtmitte, Parkplätze direkt vor der Tür, Anbindung mit der Buslinie 526.</p>
+        <span class="go">Zur Seite für Chemnitz →</span>
+      </a>
+      <a class="hubcard" href="/chiropraktik-zwickau">
+        <h3>Chiropraktik für Zwickau</h3>
+        <p>Kurze Anfahrt aus dem Raum Zwickau, kurzfristige Termine auch bei akuten Blockaden.</p>
+        <span class="go">Zur Seite für Zwickau →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -453,37 +440,15 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
 <!-- ============ TERMIN ============ -->
 <section class="termin" id="termin">
   <div class="wrap">
-    <div class="termin-grid">
-      <div class="closing-box reveal">
-        <h2>Termin vereinbaren</h2>
-        <p>Behandlung nur nach Vereinbarung. Rufen Sie uns an — wir finden einen Termin, der zu Ihnen passt.</p>
-        <p><b>Sprechzeiten</b></p>
-        <a class="phone" href="tel:+4937224093165">03722 40 93 165</a>
-        <table class="hours">
-          <tbody>
-            <tr><th scope="row">Montag</th><td>08:00–12:00 · 13:00–15:00</td></tr>
-            <tr><th scope="row">Dienstag</th><td>08:00–12:00 · 13:00–18:00</td></tr>
-            <tr><th scope="row">Mittwoch</th><td>08:00–12:00 · 13:00–15:00</td></tr>
-            <tr><th scope="row">Donnerstag</th><td>08:00–12:00 · 13:00–17:00</td></tr>
-            <tr><th scope="row">Freitag</th><td>08:00–12:00</td></tr>
-          </tbody>
-        </table>
-        <p style="margin-top:18px"><a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-light" target="_blank" rel="noopener">Zur Online-Terminbuchung</a></p>
-      </div>
-      <div class="cform reveal">
-        <h3>Oder schreiben Sie uns</h3>
-        <p class="sub">Wir melden uns schnellstmöglich zurück.</p>
-        <form id="contactForm">
-          <div class="field"><label for="cf-name">Name <span class="req">*</span></label><input type="text" id="cf-name" name="name" required autocomplete="name"></div>
-          <div class="field"><label for="cf-mail">E-Mail-Adresse <span class="req">*</span></label><input type="email" id="cf-mail" name="email" required autocomplete="email"></div>
-          <div class="field"><label for="cf-tel">Telefon <span class="req">*</span></label><input type="tel" id="cf-tel" name="phone" required autocomplete="tel"></div>
-          <div class="field"><label for="cf-msg">Kurze Beschreibung Ihrer Beschwerden <span class="req">*</span></label><textarea id="cf-msg" name="message" required></textarea></div>
-          <div class="check"><input type="checkbox" id="cf-ds" required><label for="cf-ds">Ich habe die <a href="/datenschutz.html">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. <span class="req">*</span></label></div>
-          <div class="hp" aria-hidden="true"><label>Firma<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-          <button type="submit" class="btn btn-primary" id="cf-submit">Absenden</button>
-          <p class="formhint" id="cf-status">Ihre Anfrage wird direkt an die Praxis gesendet. Pflichtfelder sind mit * markiert.</p>
-        </form>
-      </div>
+    <div class="sec-head reveal">
+      <span class="pill">Termin</span>
+      <h2>Termin vereinbaren</h2>
+      <p>Behandlung nur nach Vereinbarung. Rufen Sie mich an, wir finden einen Termin, der zu Ihnen passt.</p>
+    </div>
+    <div class="narrow reveal" style="text-align:center">
+      <p style="font-family:var(--head);font-weight:700;font-size:1.6rem;margin-bottom:10px"><a href="tel:+4937224093165">03722 40 93 165</a></p>
+      <p>Praxis für Osteopathie &amp; Chiropraktik, C. Uhlmann<br>Johannisplatz 4/2, 09212 Limbach-Oberfrohna, Eingang Bachstraße</p>
+      <p style="margin-top:22px"><a href="https://my.lemniscus.de/pss/d44185dd-6bc0-4c9a-9c56-953efe9b4d33" class="btn btn-primary" target="_blank" rel="noopener">Zur Online-Terminbuchung</a></p>
     </div>
   </div>
 </section>
@@ -521,76 +486,11 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Wann ist Chiropraktik sinnvoll?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Typische Anlässe sind Rückenschmerzen, Nackenverspannungen, vom Nacken ausgehende Kopfschmerzen, Ischias-Beschwerden, Blockaden in Becken oder Brustwirbelsäule, Kiefergelenkbeschwerden (CMD) sowie Beschwerden nach einseitiger Belastung. Chiropraktik ersetzt keine ärztliche Abklärung — bei starken oder plötzlichen Beschwerden, Taubheitsgefühlen oder nach einem Unfall gehört zuerst eine ärztliche Untersuchung dazu."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was kostet einmal Chiropraktiker?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "In unserer Praxis in Limbach-Oberfrohna kostet die Erstbehandlung mit Anamnese und Befund 140 € (40–50 Minuten), eine Folgebehandlung 90 € (20–25 Minuten) und eine Akutbehandlung 140 € (40–50 Minuten). Die Abrechnung erfolgt nach der Gebührenordnung für Heilpraktiker (GebüH); Sie erhalten eine Rechnung zur Einreichung bei Ihrer Kasse oder Zusatzversicherung."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Welche Krankenkasse übernimmt die Kosten für Chiropraktik?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Private Krankenversicherungen erstatten Behandlungen je nach Tarif ganz oder teilweise. Heilpraktiker-Zusatzversicherungen übernehmen die Kosten in der Regel anteilig. Für gesetzlich Versicherte ist die chiropraktische Behandlung durch einen Heilpraktiker keine Kassenleistung; einige Kassen bezuschussen naturheilkundliche Verfahren über Bonusprogramme. Die Abrechnung erfolgt nach der Gebührenordnung für Heilpraktiker (GebüH)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Was ist der Unterschied zwischen Chiropraktik und Chirotherapie?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Chirotherapie ist eine ärztliche Zusatzbezeichnung und wird von Ärztinnen und Ärzten mit entsprechender Weiterbildung ausgeübt. Chiropraktik wird in Deutschland überwiegend von Heilpraktikern angeboten. Die Techniken überschneiden sich, der rechtliche Rahmen und die Abrechnung unterscheiden sich."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Chiropraktik oder Osteopathie — was passt zu mir?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Chiropraktik arbeitet mit gezielten, kurzen Impulsen an Wirbelsäule und einzelnen Gelenken — typisch bei akuten Blockaden und klar lokalisiertem Schmerz. Osteopathie betrachtet den ganzen Körper mit langsamen, lösenden Handgriffen — typisch bei länger bestehenden, diffusen Beschwerden. Da unsere Praxis beide Verfahren anbietet, entscheiden wir gemeinsam beim ersten Termin, welcher Ansatz passt, und kombinieren beides, wenn es sinnvoll ist."
-      }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Praxis für Osteopathie & Chiropraktik Christoph Uhlmann",
-  "url": "https://osteopathie-limbach.de/",
-  "telephone": "+49 3722 4093165",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Johannisplatz 4/2",
-    "postalCode": "09212",
-    "addressLocality": "Limbach-Oberfrohna",
-    "addressRegion": "Sachsen",
-    "addressCountry": "DE"
-  },
-  "areaServed": ["Limbach-Oberfrohna", "Chemnitz", "Hohenstein-Ernstthal"],
-  "priceRange": "90–140 €",
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "08:00", "closes": "12:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "13:00", "closes": "15:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "08:00", "closes": "12:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "13:00", "closes": "18:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "08:00", "closes": "12:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "13:00", "closes": "15:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "08:00", "closes": "12:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "13:00", "closes": "17:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "12:00" }
+    {"@type":"Question","name":"Was ist Chiropraktik?","acceptedAnswer":{"@type":"Answer","text":"Chiropraktik ist eine manuelle Behandlungsform, bei der die Wirbelsäule und ihr Zusammenspiel mit Gelenken, Muskeln und Nervensystem im Mittelpunkt stehen. Die Behandlung besteht aus gezielten, meist kurzen Impulsen an einzelnen Wirbelgelenken, ergänzt um Weichteiltechniken an der umliegenden Muskulatur. Ziel ist, die Gelenkfunktion wiederherzustellen und die Muskelspannung zu senken."}},
+    {"@type":"Question","name":"Was kostet eine chiropraktische Behandlung?","acceptedAnswer":{"@type":"Answer","text":"In meiner Praxis in Limbach-Oberfrohna kostet die Erstbehandlung mit Anamnese und Befund 140 € (40 bis 50 Minuten), eine Folgebehandlung 90 € (20 bis 25 Minuten) und eine Akutbehandlung 140 € (40 bis 50 Minuten). Die Abrechnung erfolgt nach der Gebührenordnung für Heilpraktiker (GebüH)."}},
+    {"@type":"Question","name":"Was ist der Unterschied zwischen Chiropraktik und Chirotherapie?","acceptedAnswer":{"@type":"Answer","text":"Chirotherapie ist eine ärztliche Zusatzbezeichnung und wird von Ärztinnen und Ärzten mit entsprechender Weiterbildung ausgeübt. Chiropraktik wird in Deutschland überwiegend von Heilpraktikern angeboten. Die Techniken überschneiden sich, der rechtliche Rahmen und die Abrechnung unterscheiden sich."}},
+    {"@type":"Question","name":"Was hilft bei einem HWS-Syndrom?","acceptedAnswer":{"@type":"Answer","text":"HWS-Syndrom ist ein Sammelbegriff für Beschwerden, die von der Halswirbelsäule ausgehen: Nackenschmerz, eingeschränkte Kopfdrehung, vom Nacken aufsteigende Kopfschmerzen. Chiropraktisch werden die Beweglichkeit der einzelnen Halswirbelgelenke und die umliegende Muskulatur behandelt, bei Bedarf ohne Impuls, rein mobilisierend. Bei Taubheitsgefühl, Kraftverlust im Arm, Sehstörungen, starkem Schwindel oder nach einem Unfall ist zuerst eine ärztliche Untersuchung erforderlich."}},
+    {"@type":"Question","name":"Wann sollte man nicht chiropraktisch behandelt werden?","acceptedAnswer":{"@type":"Answer","text":"Nicht behandelt wird bei starken oder plötzlich einsetzenden Beschwerden ohne erkennbaren Auslöser, bei Taubheitsgefühlen oder Lähmungserscheinungen, nach Unfällen, bei Verdacht auf einen Bandscheibenvorfall mit neurologischen Ausfällen, bei bekannter Osteoporose, entzündlichen Gelenkerkrankungen oder Tumorerkrankungen, bei Fieber und ungeklärtem Gewichtsverlust sowie nach frischen Operationen an der Wirbelsäule."}}
   ]
 }
 </script>
@@ -632,7 +532,7 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
           if(res.ok&&res.d&&res.d.ok){
             form.reset();
             status.style.color='#2e7d32';
-            status.textContent='Vielen Dank! Ihre Nachricht wurde gesendet — wir melden uns schnellstmöglich.';
+            status.textContent='Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns schnellstmöglich.';
           }else{
             status.style.color='#b3261e';
             status.textContent=(res.d&&res.d.error)||'Konnte nicht gesendet werden. Bitte rufen Sie uns an: 03722 40 93 165.';
@@ -647,5 +547,6 @@ mark.todo{background:#fff3bf;color:#5f4b00;padding:1px 6px;border-radius:4px;fon
   }
 })();
 </script>
+<script>/* STUDIO_OVERLAY_PLACEHOLDER */</script>
 </body>
 </html>

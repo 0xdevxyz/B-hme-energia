@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://osteopathie-limbach.de/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://osteopathie-limbach.de/chiropraktik</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://osteopathie-limbach.de/impressum.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://osteopathie-limbach.de/datenschutz.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  <url><loc>https://osteopathie-limbach.de/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://osteopathie-limbach.de/chiropraktik</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://osteopathie-limbach.de/chiropraktik-chemnitz</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://osteopathie-limbach.de/chiropraktik-zwickau</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://osteopathie-limbach.de/impressum.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://osteopathie-limbach.de/datenschutz.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
