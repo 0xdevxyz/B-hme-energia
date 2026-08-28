@@ -73,6 +73,19 @@ setInterval(() => {
 const app = express();
 app.set('trust proxy', 1);
 
+// Kanonischer Host. Nur aktiv, wenn CANONICAL_HOST in der .env des Kunden gesetzt ist,
+// sonst passiert hier nichts und alle anderen Client-Apps bleiben unberuehrt.
+// Leitet abweichende Hostnamen dauerhaft um (alte Subdomain, www-Variante).
+const CANONICAL_HOST = (process.env.CANONICAL_HOST || '').trim().toLowerCase();
+app.use((req, res, next) => {
+  if (!CANONICAL_HOST) return next();
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  const host = (req.hostname || '').toLowerCase();
+  // CapRover-interne Adresse und lokale Entwicklung nie umleiten
+  if (!host || host === CANONICAL_HOST || host === 'localhost' || host.endsWith('.web.loqal.io')) return next();
+  return res.redirect(301, 'https://' + CANONICAL_HOST + req.originalUrl);
+});
+
 app.use(cookieParser());
 app.use(express.json({ limit: '64kb' }));
 app.use(express.urlencoded({ extended: true, limit: '64kb' }));

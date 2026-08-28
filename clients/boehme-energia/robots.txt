@@ -19,4 +19,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://boehme.boehme-energie.com/sitemap.xml
+Sitemap: https://boehme-energie.com/sitemap.xml
