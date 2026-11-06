@@ -256,6 +256,11 @@ function isAuthenticated(req, res, next) {
   }
 }
 
+// www.-Variante der Site-Domain (und umgekehrt): beide werden ausgeliefert.
+function altHost(host) {
+  return host.startsWith('www.') ? host.slice(4) : 'www.' + host;
+}
+
 function checkOrigin(req, res, next) {
   const origin = req.headers.origin || '';
   const referer = req.headers.referer || '';
@@ -264,13 +269,17 @@ function checkOrigin(req, res, next) {
   if (!source) {
     const host = req.headers.host || '';
     const resolvedHost = new URL(resolvedSiteUrl).host;
-    if (host === resolvedHost || host.startsWith('localhost')) {
+    if (host === resolvedHost || host === altHost(resolvedHost) || host.startsWith('localhost')) {
       return next();
     }
     return res.status(403).json({ error: 'Ungültige Anfragequelle' });
   }
 
   const allowedOrigins = [resolvedSiteUrl, 'http://localhost', 'https://localhost'];
+  try {
+    const u = new URL(resolvedSiteUrl);
+    allowedOrigins.push(u.protocol + '//' + altHost(u.host));
+  } catch {}
   if (!allowedOrigins.some(o => source.startsWith(o))) {
     return res.status(403).json({ error: 'Ungültige Anfragequelle' });
   }
