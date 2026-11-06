@@ -275,12 +275,22 @@ function checkOrigin(req, res, next) {
     return res.status(403).json({ error: 'Ungültige Anfragequelle' });
   }
 
-  const allowedOrigins = [resolvedSiteUrl, 'http://localhost', 'https://localhost'];
+  // Exakter Vergleich des Origins (Schema + Host + Port), kein Präfixvergleich:
+  // sonst passiert auch https://domain.tld.evil.example.
+  let sourceOrigin;
+  try {
+    sourceOrigin = new URL(source).origin;
+  } catch {
+    return res.status(403).json({ error: 'Ungültige Anfragequelle' });
+  }
+  const allowedOrigins = new Set();
   try {
     const u = new URL(resolvedSiteUrl);
-    allowedOrigins.push(u.protocol + '//' + altHost(u.host));
+    allowedOrigins.add(u.origin);
+    allowedOrigins.add(u.protocol + '//' + altHost(u.host));
   } catch {}
-  if (!allowedOrigins.some(o => source.startsWith(o))) {
+  const isLocal = /^https?:\/\/localhost(:\d+)?$/.test(sourceOrigin);
+  if (!allowedOrigins.has(sourceOrigin) && !isLocal) {
     return res.status(403).json({ error: 'Ungültige Anfragequelle' });
   }
   next();
